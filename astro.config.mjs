@@ -10,11 +10,7 @@ import starlightGiscus from 'starlight-giscus'
 import starlightSiteGraph from 'starlight-site-graph'
 
 
-// https://astro.build/config
 export default defineConfig({
-
-	// site: 'https://hatanokokosa.github.io',
-	// base: '/hatanokokosa.github.io',
 
 	devToolbar: {
 		enabled: false
@@ -73,7 +69,7 @@ export default defineConfig({
             			kokosa: {
               				name: 'Hatano Kokosa',
               				url: 'https://github.com/hatanokokosa',
-							picture: '/assets/oc.webp'
+							picture: 'https://raw.githubusercontent.com/hatanokokosa/Notebook/refs/heads/main/public/img/oc.webp',
             			},
 					},
 				}),
