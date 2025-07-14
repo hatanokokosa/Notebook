@@ -73,7 +73,7 @@ export default defineConfig({
             			kokosa: {
               				name: 'Hatano Kokosa',
               				url: 'https://github.com/hatanokokosa',
-							picture: '/src/assets/oc.webp'
+							picture: '/assets/oc.webp'
             			},
 					},
 				}),
