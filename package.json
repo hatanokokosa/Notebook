@@ -10,8 +10,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.34.6",
+    "@astrojs/starlight": "latest",
+    "@catppuccin/starlight": "^1.0.1",
+    "@fontsource/baskervville": "^5.2.7",
+    "@fontsource/maple-mono": "^5.2.5",
+    "@fontsource/noto-serif-sc": "^5.2.6",
     "astro": "^5.6.1",
-    "sharp": "^0.34.2"
+    "katex": "^0.16.22",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "sharp": "^0.34.2",
+    "starlight-blog": "^0.24.0",
+    "starlight-giscus": "^0.6.1",
+    "starlight-site-graph": "^0.4.0"
   }
 }
