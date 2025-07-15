@@ -12,6 +12,8 @@ import starlightSiteGraph from 'starlight-site-graph'
 
 export default defineConfig({
 
+	site: 'https://kokosa.icu',
+
 	devToolbar: {
 		enabled: false
 	},
@@ -60,7 +62,6 @@ export default defineConfig({
 				starlightBlog({
 					title: { en: "Kokosa's Blog" },
 					postCount: 8,
-					recentPostCount: 10,
 					metrics: {
             			readingTime: true,
             			words: 'rounded'
