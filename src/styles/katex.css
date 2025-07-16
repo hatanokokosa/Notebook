@@ -3,3 +3,50 @@
     navigation: auto;
   }
 }
+
+:root {
+  --starlight-image-zoom-backdrop-bg: hsl(232deg, 23%, 18%);
+}
+
+:root[data-theme='light'] {
+  --starlight-image-zoom-backdrop-bg: hsl(220deg, 23%, 95%);
+}
+
+.friend-card {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  border: 1px solid var(--sl-color-gray-5);
+  text-decoration: none;
+  color: inherit;
+}
+
+.friend-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 2rem;
+}
+
+.friend-url {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-family: monospace;
+  margin-bottom: 0.75rem;
+}
+
+.friend-info h3 {
+  font-size: 1.3rem;
+}
+
+.friend-info p {
+  margin-top: 0.9rem;
+  margin: 0;
+  color: var(--sl-color-gray-3);
+  font-size: 0.9rem;
+}

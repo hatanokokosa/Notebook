@@ -13,7 +13,9 @@ hero:
       icon: right-arrow
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+---
 
 ## About Me
 
@@ -32,4 +34,31 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     Find me on <a href="https://github.com/hatanokokosa" target="_blank" rel="noopener noreferrer">GitHub</a> or PM: <a href="https://t.me/kokosaforwardbot" target="_blank" rel="noopener noreferrer">@kokosaforwardbot</a>\
     Mandarin: <a href="https://space.bilibili.com/3546660854565061" target="_blank" rel="noopener noreferrer">Bilibili</a>
   </Card>
+</CardGrid>
+
+## My Friends
+
+<CardGrid stagger>
+
+  <a href="https://ex-tasty.com/" class="friend-card" target="_blank" rel="noopener noreferrer">
+    <img src="https://avatars.githubusercontent.com/u/66236255?v=4" alt="冬夜" class="friend-avatar" />
+    <div class="friend-info">
+      <h3>冬夜</h3>
+      <div class="friend-url">ex-tasty.com</div>
+      <p>本博客的文章不是靜態的．新的補充和見解，乃至近期的相關見聞會發表在評論區。因此妳讀到的正文不是文章的全部內容，也不是最終效果，記得去看評論區！</p>
+    </div>
+  </a>
+
+  <a href="https://blog.cloudti.de/" class="friend-card" target="_blank" rel="noopener noreferrer">
+    <img src="https://blog.cloudti.de/_astro/04second2.PApjSzNF_Z2uBeGb.webp" alt="冬夜" class="friend-avatar" />
+    <div class="friend-info">
+      <h3>云楼汐</h3>
+      <div class="friend-url">blog.cloudti.de</div>
+      <p>大学三年级，热爱游戏，音乐...
+      光电信息专业，对计算机很有兴趣，会在telegram上活跃！
+      这是我第三次搭建博客，单纯是为了折腾一下Astro，这玩意很有趣。
+      未完待续......</p>
+    </div>
+  </a>
+
 </CardGrid>

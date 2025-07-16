@@ -44,6 +44,12 @@ importers:
       starlight-giscus:
         specifier: ^0.6.1
         version: 0.6.1(@astrojs/starlight@0.34.6(astro@5.11.1(@types/node@24.0.13)(rollup@4.45.0)(typescript@5.8.3)))
+      starlight-image-zoom:
+        specifier: ^0.13.0
+        version: 0.13.0(@astrojs/starlight@0.34.6(astro@5.11.1(@types/node@24.0.13)(rollup@4.45.0)(typescript@5.8.3)))
+      starlight-scroll-to-top:
+        specifier: ^0.1.1
+        version: 0.1.1(@astrojs/starlight@0.34.6(astro@5.11.1(@types/node@24.0.13)(rollup@4.45.0)(typescript@5.8.3)))
       starlight-site-graph:
         specifier: ^0.4.0
         version: 0.4.0(@astrojs/starlight@0.34.6(astro@5.11.1(@types/node@24.0.13)(rollup@4.45.0)(typescript@5.8.3)))(astro@5.11.1(@types/node@24.0.13)(rollup@4.45.0)(typescript@5.8.3))
@@ -2095,6 +2101,18 @@ packages:
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
     peerDependencies:
       '@astrojs/starlight': '>=0.32.0'
+
+  starlight-image-zoom@0.13.0:
+    resolution: {integrity: sha512-7K/7gshnKooYd4ePy5vtyv1jFoFVNUb8IoXWDcnY69+nxvmLATNrmOzD2M4TJ/aKynPSBSM6j9ia4s/PPy/JGA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.32.0'
+
+  starlight-scroll-to-top@0.1.1:
+    resolution: {integrity: sha512-e/l1Tqwz2U5wyoKPTE46RajLwFaKbS5FZcxvK1GnnbIq6VYixjBISVTcivPvuq5FyzFfYMcbf97e7WWgyrvr0g==}
+    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.34'
 
   starlight-site-graph@0.4.0:
     resolution: {integrity: sha512-pDiCtD3JCjD0lrL6nkNmnfcFOEv0ByHHRHH1edRjMlXJ45jyOD3sUzxwVRpOe+cx2Fqf1eQknsEBfK9mEORTww==}
@@ -5068,6 +5086,20 @@ snapshots:
       - supports-color
 
   starlight-giscus@0.6.1(@astrojs/starlight@0.34.6(astro@5.11.1(@types/node@24.0.13)(rollup@4.45.0)(typescript@5.8.3))):
+    dependencies:
+      '@astrojs/starlight': 0.34.6(astro@5.11.1(@types/node@24.0.13)(rollup@4.45.0)(typescript@5.8.3))
+
+  starlight-image-zoom@0.13.0(@astrojs/starlight@0.34.6(astro@5.11.1(@types/node@24.0.13)(rollup@4.45.0)(typescript@5.8.3))):
+    dependencies:
+      '@astrojs/starlight': 0.34.6(astro@5.11.1(@types/node@24.0.13)(rollup@4.45.0)(typescript@5.8.3))
+      mdast-util-mdx-jsx: 3.2.0
+      rehype-raw: 7.0.0
+      unist-util-visit: 5.0.0
+      unist-util-visit-parents: 6.0.1
+    transitivePeerDependencies:
+      - supports-color
+
+  starlight-scroll-to-top@0.1.1(@astrojs/starlight@0.34.6(astro@5.11.1(@types/node@24.0.13)(rollup@4.45.0)(typescript@5.8.3))):
     dependencies:
       '@astrojs/starlight': 0.34.6(astro@5.11.1(@types/node@24.0.13)(rollup@4.45.0)(typescript@5.8.3))
 
