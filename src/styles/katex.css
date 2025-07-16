@@ -22,8 +22,8 @@
 }
 
 .friend-avatar {
-  width: clamp(6rem, 12vw, 8rem);
-  height: clamp(6rem, 12vw, 8rem);
+  width: clamp(4rem, 12vw, 8rem);
+  height: clamp(4rem, 12vw, 8rem);
   border-radius: 50%;
   flex-shrink: 0;
   margin-right: 2rem;
