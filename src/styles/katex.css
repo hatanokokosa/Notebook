@@ -21,6 +21,10 @@
   color: inherit;
 }
 
+.friend-avatar-container {
+  flex-shrink: 0;
+}
+
 .friend-avatar {
   width: clamp(4rem, 12vw, 8rem);
   height: clamp(4rem, 12vw, 8rem);
