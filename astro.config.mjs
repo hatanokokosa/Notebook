@@ -8,8 +8,8 @@ import 'katex/contrib/mhchem';
 import starlightBlog from 'starlight-blog'
 import starlightGiscus from 'starlight-giscus'
 import starlightSiteGraph from 'starlight-site-graph'
-import starlightImageZoom from 'starlight-image-zoom'
 import starlightScrollToTop from 'starlight-scroll-to-top';
+import react from '@astrojs/react';
 
 
 export default defineConfig({
@@ -26,6 +26,8 @@ export default defineConfig({
 	},
 
 	integrations: [
+
+		react(),
 
 		starlight({
 
@@ -95,7 +97,6 @@ export default defineConfig({
 				}),
 
 				starlightSiteGraph(),
-				starlightImageZoom(),
 				starlightScrollToTop({
 					tooltipText: 'Back to top',
 					showTooltip: true,

@@ -14,24 +14,54 @@
 
 .friend-card {
   display: grid;
-  grid-template-columns: auto 1fr; /* 头像自适应，文本占剩余空间 */
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
   border: 1px solid var(--sl-color-gray-5);
   text-decoration: none;
   color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .friend-avatar-container {
   flex-shrink: 0;
 }
 
+.friend-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(45deg, #8b5cf6, #a855f7, #9333ea);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s ease;
+}
+
+.friend-card:hover::before {
+  transform: scaleY(1);
+}
+
+.friend-card:hover {
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
 .friend-avatar {
-  width: clamp(4rem, 12vw, 8rem);
-  height: clamp(4rem, 12vw, 8rem);
+  width: clamp(5rem, 15vw, 8rem);
+  height: clamp(5rem, 15vw, 8rem);
   border-radius: 50%;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.friend-card:hover .friend-avatar {
+  transform: scale(1.05);
 }
 
 .friend-url {
@@ -43,10 +73,21 @@
   font-size: 0.85rem;
   font-family: monospace;
   margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.friend-card:hover .friend-url {
+  background: rgba(139, 92, 246, 0.2);
+  transform: translateX(5px);
 }
 
 .friend-info h3 {
   font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+.friend-card:hover .friend-info h3 {
+  transform: translateX(3px);
 }
 
 .friend-info p {
@@ -54,4 +95,9 @@
   margin: 0;
   color: var(--sl-color-gray-3);
   font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.friend-card:hover .friend-info p {
+  transform: translateX(3px);
 }

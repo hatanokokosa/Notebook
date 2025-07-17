@@ -10,20 +10,27 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^4.3.0",
     "@astrojs/starlight": "latest",
     "@catppuccin/starlight": "^1.0.1",
+    "@fancyapps/ui": "^6.0.14",
     "@fontsource/baskervville": "^5.2.7",
     "@fontsource/maple-mono": "^5.2.5",
     "@fontsource/noto-serif-sc": "^5.2.6",
     "astro": "^5.6.1",
     "katex": "^0.16.22",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "sharp": "^0.34.2",
     "starlight-blog": "^0.24.0",
     "starlight-giscus": "^0.6.1",
-    "starlight-image-zoom": "^0.13.0",
     "starlight-scroll-to-top": "^0.1.1",
     "starlight-site-graph": "^0.4.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6"
   }
 }

@@ -1,8 +1,8 @@
 ---
 import Default from '@astrojs/starlight/components/MarkdownContent.astro'
-import ImageZoom from 'starlight-image-zoom/components/ImageZoom.astro'
+import ImageZoomer from '../ImageZoomer'
 ---
 
-<ImageZoom />
-<p>Ciallo ~ (∠・ω< )⌒★!</p>
+<p>Ciallo ~ (∠・ω&lt; )⌒★!</p>
+<ImageZoomer client:only="react" />
 <Default><slot /></Default>
