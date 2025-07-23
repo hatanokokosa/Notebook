@@ -55,11 +55,6 @@ export default defineConfig({
 				},
 			],
 
-			social: [
-				{ icon: 'github', label: 'GitHub', href: 'https://github.com/hatanokokosa' },
-				{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/hatanokokosa' },
-			],
-
 			plugins: [
 
 				catppuccin({
@@ -78,7 +73,7 @@ export default defineConfig({
 						kokosa: {
 							name: 'Hatano Kokosa',
 							url: 'https://github.com/hatanokokosa',
-							picture: 'https://raw.githubusercontent.com/hatanokokosa/Notebook/refs/heads/main/public/img/oc.webp',
+							picture: '/friends/oc.webp',
 						},
 					},
 				}),

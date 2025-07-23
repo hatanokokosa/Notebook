@@ -16,6 +16,7 @@
     "@fancyapps/ui": "^6.0.14",
     "@fontsource/baskervville": "^5.2.7",
     "@fontsource/maple-mono": "^5.2.5",
+    "@fontsource/noto-sans-sc": "^5.2.6",
     "@fontsource/noto-serif-sc": "^5.2.6",
     "astro": "^5.6.1",
     "katex": "^0.16.22",

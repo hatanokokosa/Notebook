@@ -5,7 +5,7 @@ lastUpdated: 2025-07-15
 tags:
   - Eg
   - Blog
-excerpt: About The Starlight Blog...
+excerpt: The title of the blog post which will be displayed at the top of the page and in the blog post list...
 ---
 
 ## title

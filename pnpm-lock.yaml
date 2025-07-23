@@ -26,6 +26,9 @@ importers:
       '@fontsource/maple-mono':
         specifier: ^5.2.5
         version: 5.2.5
+      '@fontsource/noto-sans-sc':
+        specifier: ^5.2.6
+        version: 5.2.6
       '@fontsource/noto-serif-sc':
         specifier: ^5.2.6
         version: 5.2.6
@@ -398,6 +401,9 @@ packages:
 
   '@fontsource/maple-mono@5.2.5':
     resolution: {integrity: sha512-iJR/yQj+7DatkzxJNMu3+1gvq1YOHhCjlS6MBOys/Fw/BEDnhC65mp3RZoBXDbk+00flvRO9b9G/IvxBk82Ekw==}
+
+  '@fontsource/noto-sans-sc@5.2.6':
+    resolution: {integrity: sha512-hk0xVQ+mL/W0rXDhBhud2U5te/slsQKcaU+3Ni6ZxeFP1jJmcNmxHEZOG5DjLBOi0L//0R5Nwvn6ebTiZrwVZw==}
 
   '@fontsource/noto-serif-sc@5.2.6':
     resolution: {integrity: sha512-Hag6qMMXvE6JZNTJYg6ijpRocanhym9odupJvu/c+yL8qmld4jQRQbQMR7G+t7pfGjB7HjZBDf8N1AHBS0n59g==}
@@ -3024,6 +3030,8 @@ snapshots:
   '@fontsource/baskervville@5.2.7': {}
 
   '@fontsource/maple-mono@5.2.5': {}
+
+  '@fontsource/noto-sans-sc@5.2.6': {}
 
   '@fontsource/noto-serif-sc@5.2.6': {}
 
