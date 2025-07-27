@@ -9,6 +9,7 @@ title: 欢迎！！！
 
 至于我的 Blog（ 上方 「 Kokosa's Blog 」 ），会塞一些我觉得是博客的东西，毕竟有 RSS
 
+
 ---
 
 #### 自问自答 Q&A：
@@ -57,6 +58,12 @@ Telegram：[@kokosaforwardbot](https://t.me/kokosaforwardbot)
 Matrix：[@kokosa:mozilla.org](https://matrix.to/#/@kokosa:mozilla.org)
 
 GPG：我的私钥丢了，懒得重新传了，所以加密邮件请告诉我密钥（？
+
+---
+
+#### 看看我的 Fetch！
+
+![fetch](/images/fetch.png)
 
 ---
 
