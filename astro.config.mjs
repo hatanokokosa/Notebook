@@ -1,16 +1,15 @@
-// @ts-check
+import starlightScrollToTop from 'starlight-scroll-to-top';
+import starlightSiteGraph from "starlight-site-graph";
+import rehypeFigure from "@microflash/rehype-figure";
 import catppuccin from "@catppuccin/starlight";
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
+import starlightGiscus from "starlight-giscus";
+import { defineConfig } from "astro/config";
+import starlightBlog from "starlight-blog";
+import starlight from "@astrojs/starlight";
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
-import 'katex/contrib/mhchem';
-import starlightBlog from 'starlight-blog'
-import starlightGiscus from 'starlight-giscus'
-import starlightSiteGraph from 'starlight-site-graph'
-import starlightScrollToTop from 'starlight-scroll-to-top';
 import react from '@astrojs/react';
-
+import 'katex/contrib/mhchem';
 
 export default defineConfig({
 
@@ -21,8 +20,13 @@ export default defineConfig({
 	},
 
 	markdown: {
-		remarkPlugins: [remarkMath],
-		rehypePlugins: [rehypeKatex]
+		remarkPlugins: [
+			remarkMath,
+		],
+		rehypePlugins: [
+			rehypeKatex,
+			rehypeFigure,
+		]
 	},
 
 	integrations: [
@@ -34,8 +38,10 @@ export default defineConfig({
 			title: 'Kokosa\'s Notebook',
 
 			customCss: [
-				'./src/styles/katex.css',
 				'./src/styles/font.css',
+				'./src/styles/katex.css',
+				'./src/styles/figure.css',
+				'./src/styles/friends.css',
 				'@fontsource/maple-mono/400.css',
 				'@fontsource/baskervville/600.css',
 				'@fontsource/noto-serif-sc/600.css',

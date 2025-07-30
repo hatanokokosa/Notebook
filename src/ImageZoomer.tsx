@@ -4,7 +4,7 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 export default function ImageZoomer() {
   useEffect(() => {
-    Fancybox.bind("article img", {
+    Fancybox.bind("img", {
       Carousel: {
         formatCaption: (fancybox, slide) => {
           return slide.triggerEl?.getAttribute('alt') || "";
@@ -22,11 +22,11 @@ export default function ImageZoomer() {
   return (
     <>
       <style>{`
-        article img {
+        img {
           cursor: pointer;
         }
         .fancybox-custom {
-          --fancybox-backdrop-bg: rgba(24, 24, 27, 0.8);
+          --fancybox-backdrop-bg: rgba(108, 111, 133, 0.5);
         }
       `}</style>
     </>
