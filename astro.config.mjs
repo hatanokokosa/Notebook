@@ -13,19 +13,17 @@ import 'katex/contrib/mhchem';
 
 export default defineConfig({
 
+	devToolbar: { enabled: false },
+
 	site: 'https://kokosa.icu',
 
-	devToolbar: {
-		enabled: false
-	},
-
 	markdown: {
+		rehypePlugins: [
+			rehypeFigure,
+			rehypeKatex
+		],
 		remarkPlugins: [
 			remarkMath,
-		],
-		rehypePlugins: [
-			rehypeKatex,
-			rehypeFigure,
 		]
 	},
 
@@ -38,13 +36,13 @@ export default defineConfig({
 			title: 'Kokosa\'s Notebook',
 
 			customCss: [
-				'./src/styles/font.css',
-				'./src/styles/katex.css',
-				'./src/styles/figure.css',
-				'./src/styles/friends.css',
-				'@fontsource/maple-mono/400.css',
-				'@fontsource/baskervville/600.css',
 				'@fontsource/noto-serif-sc/600.css',
+				'@fontsource/baskervville/600.css',
+				'@fontsource/maple-mono/400.css',
+				'./src/styles/friends.css',
+				'./src/styles/figure.css',
+				'./src/styles/katex.css',
+				'./src/styles/font.css'
 			],
 
 			components: {
@@ -64,47 +62,48 @@ export default defineConfig({
 			plugins: [
 
 				catppuccin({
-					dark: { flavor: "macchiato", accent: "blue" },
-					light: { flavor: "latte", accent: "sapphire" }
+					light: { flavor: "latte", accent: "lavender" },
+					dark: { flavor: "frappe", accent: "lavender" }
 				}),
 
 				starlightBlog({
-					title: { en: "Kokosa's Blog" },
-					postCount: 8,
+					authors: {
+						kokosa: {
+							url: 'https://github.com/hatanokokosa',
+							picture: '/friends/oc.webp',
+							name: 'Hatano Kokosa'
+						},
+					},
+
 					metrics: {
 						readingTime: true,
 						words: 'rounded'
 					},
-					authors: {
-						kokosa: {
-							name: 'Hatano Kokosa',
-							url: 'https://github.com/hatanokokosa',
-							picture: '/friends/oc.webp',
-						},
-					},
+					
+					title: { en: "Kokosa's Blog" },
+					postCount: 8
 				}),
 
 				starlightGiscus({
+					categoryId: 'DIC_kwDONiihcc4Cs5Yk',
 					repo: 'hatanokokosa/hatanokokosa',
 					repoId: 'R_kgDONiihcQ',
 					category: 'Q&A',
-					categoryId: 'DIC_kwDONiihcc4Cs5Yk',
 					theme: {
 						light: 'catppuccin_latte',
-						dark: 'catppuccin_mocha',
-						auto: 'preferred_color_scheme'
+						dark: 'catppuccin_frappe'
 					},
-					lazy: false
 				}),
 
 				starlightSiteGraph(),
+
 				starlightScrollToTop({
 					tooltipText: 'Back to top',
-					showTooltip: true,
-					smoothScroll: true,
-					threshold: 20,
 					svgStrokeWidth: 1.5,
+					smoothScroll: true,
+					showTooltip: true,
 					borderRadius: '50',
+					threshold: 20,
 				}),
 
 			],
