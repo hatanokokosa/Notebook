@@ -52,6 +52,11 @@
   margin: 0;
 }
 
+.friend-card:hover .friend-url {
+  background: rgba(139, 92, 246, 0.2);
+  transform: translateX(5px);
+}
+
 .friend-card:hover {
   box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
   border-color: rgba(139, 92, 246, 0.3);
