@@ -2,7 +2,7 @@
 title: Welcome!!!
 ---
 
-> 简体中文：[ 欢迎！！！ ](./about-zh)
+> 简体中文：[ 欢迎！！！ ](/main/about-zh)
 
 #### Where is this?
 
