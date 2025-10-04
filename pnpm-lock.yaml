@@ -23,7 +23,7 @@ importers:
       '@fontsource/baskervville':
         specifier: ^5.2.7
         version: 5.2.7
-      '@fontsource/maple-mono':
+      '@fontsource/iosevka':
         specifier: ^5.2.5
         version: 5.2.5
       '@fontsource/noto-sans-sc':
@@ -402,8 +402,8 @@ packages:
   '@fontsource/baskervville@5.2.7':
     resolution: {integrity: sha512-4Sp7auISlI0RdaxEfY0bvjqpOLHgiDMnp+GZWOaSV1Wkyjqqo7+rktQ3ikWFZiD4C6izJUJQYWTcDlcQeMaqLA==}
 
-  '@fontsource/maple-mono@5.2.5':
-    resolution: {integrity: sha512-iJR/yQj+7DatkzxJNMu3+1gvq1YOHhCjlS6MBOys/Fw/BEDnhC65mp3RZoBXDbk+00flvRO9b9G/IvxBk82Ekw==}
+  '@fontsource/iosevka@5.2.5':
+    resolution: {integrity: sha512-Zv/UHJodDug1LcnWv2u2+GPp3oWP3U6Xp16cJOsqqZQNsCu8sA/ttT331N0NypxBZ+7c8szlSRlYDcy9liZ8pw==}
 
   '@fontsource/noto-sans-sc@5.2.6':
     resolution: {integrity: sha512-hk0xVQ+mL/W0rXDhBhud2U5te/slsQKcaU+3Ni6ZxeFP1jJmcNmxHEZOG5DjLBOi0L//0R5Nwvn6ebTiZrwVZw==}
@@ -3038,7 +3038,7 @@ snapshots:
 
   '@fontsource/baskervville@5.2.7': {}
 
-  '@fontsource/maple-mono@5.2.5': {}
+  '@fontsource/iosevka@5.2.5': {}
 
   '@fontsource/noto-sans-sc@5.2.6': {}
 

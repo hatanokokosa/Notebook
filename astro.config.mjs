@@ -38,7 +38,7 @@ export default defineConfig({
 			customCss: [
 				'@fontsource/noto-serif-sc/600.css',
 				'@fontsource/baskervville/600.css',
-				'@fontsource/maple-mono/400.css',
+				'@fontsource/iosevka/400.css',
 				'./src/styles/friends.css',
 				'./src/styles/figure.css',
 				'./src/styles/katex.css',

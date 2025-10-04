@@ -1,7 +1,7 @@
 /* 设置 Starlight 的字体变量 */
 :root {
   --sl-font: 'Baskervville', 'Noto Serif SC', serif;
-  --sl-font-mono: 'Maple Mono', monospace;
+  --sl-font-mono: 'Iosevka', monospace;
 }
 
 :lang(zh) {
@@ -13,5 +13,5 @@ main {
 }
 
 pre, code {
-  font-family: 'Maple Mono', monospace;
+  font-family: 'Iosevka', 'Noto Serif SC', monospace;
 }
