@@ -70,7 +70,7 @@ export default defineConfig({
 					authors: {
 						kokosa: {
 							url: 'https://github.com/hatanokokosa',
-							picture: '/friends/oc.webp',
+							picture: '/friends/oc.avif',
 							name: 'Hatano Kokosa'
 						},
 					},
