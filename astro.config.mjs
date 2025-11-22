@@ -35,6 +35,8 @@ export default defineConfig({
 
 			title: 'Kokosa\'s Notebook',
 
+			favicon: '/favicon.svg',
+
 			customCss: [
 				'@fontsource/noto-serif-sc/600.css',
 				'@fontsource/baskervville/600.css',
