@@ -18,10 +18,10 @@
     "@fontsource/iosevka": "^5.2.5",
     "@fontsource/noto-serif-sc": "^5.2.8",
     "@microflash/rehype-figure": "^2.1.4",
-    "astro": "^5.16.0",
+    "astro": "^5.16.4",
     "katex": "^0.16.25",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "sharp": "^0.34.5",
@@ -31,7 +31,7 @@
     "starlight-site-graph": "^0.4.1"
   },
   "devDependencies": {
-    "@types/react": "^19.2.6",
+    "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3"
   }
 }
