@@ -90,7 +90,7 @@ const payload = {
 | **Ban List** | 查看所有被封禁的用户 |
 | **统计系统** | 消息数、用户数、AI 拦截数      |
 | **多 API Key 轮换** | 傻逼 Google |
-> 多 API Key 轮换这个功能是为了应对死妈 Google 的 Rate Limit，每天 20 次 API 调用够谁用啊，之前还每天 100 次调用，Gemini CLI 和 Antigravity 就两大管饱，API 就那么抠
+> 多 API Key 轮换这个功能是为了应对死妈 Google 的 Rate Limit，每天 20 次 API 调用够谁用啊，之前还每天 100 次调用，Gemini CLI 和 Antigravity 就量大管饱，API 就那么抠
   
   
 整个项目跑在 Cloudflare Workers 上（原项目的小巧思，方便好用还免费），完全零成本的方案，LLM 用的也是免费的，整个项目就一堆 JavaScript
