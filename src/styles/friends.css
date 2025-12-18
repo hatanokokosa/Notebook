@@ -13,7 +13,7 @@
 }
 
 .friend-url {
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(231, 130, 132, 0.1);
   transition: all 0.3s ease;
   padding: 0.25rem 0.75rem;
   margin-bottom: 0.75rem;
@@ -21,11 +21,12 @@
   display: inline-block;
   border-radius: 6px;
   font-size: 0.85rem;
-  color: #9676de;
+  /* Frappe Red */
+  color: #e78284;
 }
 
 .friend-card::before {
-  background: linear-gradient(45deg, #a889f0, #a855f7, #9333ea);
+  background: linear-gradient(45deg, #dc8a78, #e78284);
   transition: transform 0.3s ease;
   transform-origin: bottom;
   transform: scaleY(0);
@@ -53,13 +54,13 @@
 }
 
 .friend-card:hover .friend-url {
-  background: rgba(139, 92, 246, 0.2);
+  background: rgba(231, 130, 132, 0.2);
   transform: translateX(5px);
 }
 
 .friend-card:hover {
-  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
-  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 8px 25px rgba(231, 130, 132, 0.15);
+  border-color: rgba(231, 130, 132, 0.3);
 }
 
 .friend-info h3 {
