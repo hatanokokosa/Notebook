@@ -64,8 +64,8 @@ export default defineConfig({
 			plugins: [
 
 				catppuccin({
-					light: { flavor: "latte", accent: "lavender" },
-					dark: { flavor: "frappe", accent: "lavender" }
+					light: { flavor: "latte", accent: "rosewater" },
+					dark: { flavor: "frappe", accent: "rosewater" }
 				}),
 
 				starlightBlog({
