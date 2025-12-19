@@ -90,5 +90,5 @@ const payload = {
 最后把代码推到了 GitHub，以 BSD2 协议开源
 
 ## Link~
-[GitHub: kokosa-forward-bot](https://github.com/hatanokokosa/kokosa-forward-bot)
+[GitHub: kokosa-forward-bot](https://github.com/hatanokokosa/kokosa-forward-bot)  
 [LinuxDo: KFB — 一个带有 AI 审核的 Telegram 私聊转发机器人](https://linux.do/t/topic/1340613)
