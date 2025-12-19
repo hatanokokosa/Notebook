@@ -83,8 +83,12 @@ const payload = {
 | **统计系统** | 消息数、用户数、AI 拦截数      |
 | **多 API Key 轮换** | 傻逼 Google |
 > 多 API Key 轮换这个功能是为了应对死妈 Google 的 Rate Limit，每天 20 次 API 调用够谁用啊，之前还每天 100 次调用，Gemini CLI 和 Antigravity 就量大管饱，API 就那么抠
-  
+
   
 整个项目跑在 Cloudflare Workers 上（原项目的小巧思，方便好用还免费），完全零成本的方案，LLM 用的也是免费的，整个项目就一堆 JavaScript
 
-最后把代码推到了 GitHub，以 BSD2 协议开源，在此感谢原项目的 CC0 让我能随便选协议
+最后把代码推到了 GitHub，以 BSD2 协议开源
+
+## Link~
+[GitHub: kokosa-forward-bot](https://github.com/hatanokokosa/kokosa-forward-bot)
+[LinuxDo: KFB — 一个带有 AI 审核的 Telegram 私聊转发机器人](https://linux.do/t/topic/1340613)
