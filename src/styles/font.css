@@ -1,17 +1,19 @@
 /* 设置 Starlight 的字体变量 */
 :root {
-  --sl-font: 'Baskervville', 'Noto Serif SC', serif;
-  --sl-font-mono: 'Iosevka', monospace;
+  --sl-font: "Baskervville", "Noto Serif SC", serif;
+  --sl-font-mono: "Iosevka", monospace;
 }
 
-:lang(zh) {
-  --sl-font: 'Noto Serif SC', 'Baskervville', serif;
+:lang(zh),
+:lang(zh-CN) {
+  --sl-font: "Noto Serif SC", "Baskervville", serif;
 }
 
 main {
-  font-family: 'Baskervville', 'Noto Serif SC', serif;
+  font-family: "Baskervville", "Noto Serif SC", serif;
 }
 
-pre, code {
-  font-family: 'Iosevka', 'Noto Serif SC', monospace;
+pre,
+code {
+  font-family: "Iosevka", "Noto Serif SC", monospace;
 }

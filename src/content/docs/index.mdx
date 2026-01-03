@@ -1,139 +1,64 @@
 ---
-title: Welcome to Kokosa's Intensive Care Unit~
+title: 心桜的重症监护室~
 description: kokosa
 template: splash
 giscus: false
 hero:
-  tagline: users.users.kokosa.isNormalUser = true;<br />Kokosa will sa♥e you... or not?
+  tagline: users.users.kokosa.isNormalUser = true;
   image:
     file: ../../assets/kokosa.svg
     alt: Kokosa
   actions:
-    - text: Personal Notes
+    - text: Kokosa's Notebook
       link: /main/about/
       icon: right-caret
-    - text: My Blog
+    - text: 我的 Blog
       link: /blog/
       icon: rss
       variant: secondary
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid } from "@astrojs/starlight/components";
+import FriendList from "../../components/FriendList.astro";
 
 ---
 
-## About Me
+## 关于我
 
 <CardGrid stagger>
 
-  <Card title="Bio" icon="seti:bazel">
-      Handle: hatanokokosa, kokosa, kks  |  Any Pronouns\
-      Languages: Mandarin (native), English and some Japanese.
-  </Card>
+<Card title="简介" icon="seti:bazel">
+  ID：心桜，hatanokokosa，kokosa，kks，k2s，各种奇怪称呼\
+  语言：中文、英语、一点日语
+</Card>
 
-  <Card title="What I'm Using" icon="nix">
-      I currently use NixOS, a Linux distro that uses declarative configuration and the Nix package manager.
-  </Card>
+<Card title="我在用什么" icon="nix">
+  使用并长期使用 NixOS，一个使用声明式配置文件和 Nix 包管理器的 GNU/Linux 发行版
+</Card>
 
-  <Card title="What I'm Doing" icon="vercel">
-      I’m currently a high school student in China, learning Rust, Python, some full-stack development, and AI.
-  </Card>
+<Card title="我在做什么" icon="vercel">
+  准备高考，学习 Rust、Python 之类，学画画，一些全栈开发
+</Card>
 
-  <Card title="Contact Me" icon="comment-alt">
-    You can find me on [GitHub](https://github.com/hatanokokosa), [Codeberg](https://codeberg.org/hatanokokosa) 
-    or reach me via [Telegram](https://t.me/kokosaforwardbot), [Matrix](https://matrix.to/#/@kokosa:mozilla.org). 
-    I also post in Mandarin on [Bilibili](https://space.bilibili.com/3546660854565061).
-  </Card>
+<Card title="联系我" icon="comment-alt">
+  你可以在
+  [GitHub](https://github.com/hatanokokosa)、[Codeberg](https://codeberg.org/hatanokokosa)
+  或者通过
+  [Telegram](https://t.me/kokosaforwardbot)、[Matrix](https://matrix.to/#/@kokosa:mozilla.org)
+  联系我， 我也会在 [Bilibili](https://space.bilibili.com/3546660854565061)
+  发东西
+</Card>
 
 </CardGrid>
 
 <br />
 
-## My Friends
+## 友链
 
-<CardGrid stagger>
-
-  <a href="https://umisaltyu.github.io/" class="friend-card" target="_blank" rel="noopener noreferrer">
-    <div class="friend-avatar-container">
-      <img src="/friends/umisaltyu.avif" alt="umisaltyu" class="friend-avatar" />
-    </div>
-    <div class="friend-info">
-      <h3>UmiSaltYu</h3>
-      <div class="friend-url">umisaltyu.github.io</div>
-      <p>Night Sky Archives</p>
-    </div>
-  </a>
-
-  <a href="https://iffse.eu.org/" class="friend-card" target="_blank" rel="noopener noreferrer">
-    <div class="friend-avatar-container">
-      <img src="/friends/iff.avif" alt="如果果" class="friend-avatar" />
-    </div>
-    <div class="friend-info">
-      <h3>iff</h3>
-      <div class="friend-url">iffse.eu.org</div>
-      <p>Coding & Drawings<br />kks：如果果，是重女</p>
-    </div>
-  </a>
-
-  <a href="https://ex-tasty.com/" class="friend-card" target="_blank" rel="noopener noreferrer">
-    <div class="friend-avatar-container">
-      <img src="/friends/chisato.avif" alt="冬夜" class="friend-avatar" />
-    </div>
-    <div class="friend-info">
-      <h3>冬夜</h3>
-      <div class="friend-url">ex-tasty.com</div>
-      <p>邪惡與極限伴您一生……🥰<br />我要帶領尊貴的您前往極限的旅程和極限的時光</p>
-    </div>
-  </a>
-
-  <a href="https://blog.cloudti.de/" class="friend-card" target="_blank" rel="noopener noreferrer">
-    <div class="friend-avatar-container">
-      <img src="/friends/xi.avif" alt="云楼汐" class="friend-avatar" />
-    </div>
-    <div class="friend-info">
-      <h3>云楼汐</h3>
-      <div class="friend-url">blog.cloudti.de</div>
-      <p>“Hinc itur ad astra”<br />Algorithm, Computer and Math</p>
-    </div>
-  </a>
-
-  <a href="https://0o0.codeberg.page/" class="friend-card" target="_blank" rel="noopener noreferrer">
-    <div class="friend-avatar-container">
-      <img src="/friends/chen.avif" alt="沉渊覆雪" class="friend-avatar" />
-    </div>
-    <div class="friend-info">
-      <h3>沉渊覆雪</h3>
-      <div class="friend-url">0o0.codeberg.page</div>
-      <p>愿走向深渊的旅途里可以遇见无限美好</p>
-    </div>
-  </a>
-
-  <a href="https://cloverta.top/" class="friend-card" target="_blank" rel="noopener noreferrer">
-    <div class="friend-avatar-container">
-      <img src="/friends/clover.avif" alt="Cloverta" class="friend-avatar" />
-    </div>
-    <div class="friend-info">
-      <h3>ClovertaTheTrilobita</h3>
-      <div class="friend-url">cloverta.top</div>
-      <p>带学牲 | 计算机本科在读 | 死宅 | I use Arch btw<br />kks：主题好看，赞赏</p>
-    </div>
-  </a>
-
-  <a href="https://a-moment096.github.io/" class="friend-card" target="_blank" rel="noopener noreferrer">
-    <div class="friend-avatar-container">
-      <img src="/friends/am.avif" alt="A-Moment" class="friend-avatar" />
-    </div>
-    <div class="friend-info">
-      <h3>A Moment</h3>
-      <div class="friend-url">a-moment096.github.io</div>
-      <p>A Moment’s Rest<br />kks：同样赞赏</p>
-    </div>
-  </a>
-
-</CardGrid>
+<FriendList />
 
 <br />
 
-## Evangelize (x
+## 传教 (x
 
-![I Love Shian Forever~♥](/images/shian.avif)
+![我永远喜欢诗岸~♥](/images/shian.avif)

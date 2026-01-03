@@ -7,12 +7,12 @@ export default function ImageZoomer() {
     Fancybox.bind("img", {
       Carousel: {
         formatCaption: (fancybox, slide) => {
-          return slide.triggerEl?.getAttribute('alt') || "";
+          return slide.triggerEl?.getAttribute("alt") || "";
         },
-      },      
+      },
       groupAll: true,
       // wheel: 'slide',
-      mainClass: 'fancybox-custom',
+      mainClass: "fancybox-custom",
     });
     return () => {
       Fancybox.destroy();

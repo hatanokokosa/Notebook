@@ -2,8 +2,6 @@
 title: Welcome!!!
 ---
 
-> 简体中文：[ 欢迎！！！ ](/main/about-zh)
-
 #### Where is this?
 
 This is kks's personal website. I'll probably record some stuff here, such as: study notes, diary entries, drawings, OCs, things I randomly want to write after watching something... basically anything I can think of. So the categories here will be quite detailed.
@@ -20,31 +18,22 @@ A: Because it looks good. Source Han Sans looks weird, readability doesn't matte
 Q: Who will read this?  
 A: No idea! Who has nothing better to do than visit my website, probably just friends from chat groups
 
-Q: Why use English?  
-A: Because I like the Baskervville font, and I don't plan to add i18n
-
-Q: Why is the SVG on the homepage Nix's SVG?  
-A: Because I haven't made my own SVG yet, so it's just a placeholder
-
 ---
 
 #### Friend link format:
 
-```html
-<a href="your-target-url" class="friend-card">
-    <div class="friend-avatar-container">
-        <img src="/friends/your-avatar" class="friend-avatar" /> //or avatar link works too
-    </div>
-    <div class="friend-info">
-        <h3>Your Name</h3>
-        <div class="friend-url">
-            Your URL
-        </div>
-        <p>Say something random</p>
-    </div>
-</a>
+Add to `src/data/friends.ts` or just send to me the link and I'll add it
+
+```typescript
+{
+  link: "https://your-site.com/",
+  title: "Your Name",
+  avatar: "/friends/your-avatar.avif",
+  desc: "Say something random",
+}
 ```
-> What a SUCKY friend link format...
+
+> Better than the old HTML fmt
 
 ---
 
@@ -67,4 +56,5 @@ GPG: I lost my private key and I'm too lazy to re-upload it, so please tell me t
 ---
 
 ### And that's it
+
 Below is the comment section, repository at [hatanokokosa/hatanokokosa](https://github.com/hatanokokosa/hatanokokosa):

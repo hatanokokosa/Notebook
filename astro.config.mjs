@@ -1,4 +1,4 @@
-import starlightScrollToTop from 'starlight-scroll-to-top';
+import starlightScrollToTop from "starlight-scroll-to-top";
 import starlightSiteGraph from "starlight-site-graph";
 import rehypeFigure from "@microflash/rehype-figure";
 import catppuccin from "@catppuccin/starlight";
@@ -6,124 +6,128 @@ import starlightGiscus from "starlight-giscus";
 import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
 import starlight from "@astrojs/starlight";
-import rehypeKatex from 'rehype-katex';
-import remarkMath from 'remark-math';
-import react from '@astrojs/react';
-import 'katex/contrib/mhchem';
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+import react from "@astrojs/react";
+import "katex/contrib/mhchem";
 
 export default defineConfig({
+  devToolbar: { enabled: false },
 
-	devToolbar: { enabled: false },
+  site: "https://kokosa.icu",
 
-	site: 'https://kokosa.icu',
+  markdown: {
+    rehypePlugins: [rehypeFigure, rehypeKatex],
+    remarkPlugins: [remarkMath],
+  },
 
-	markdown: {
-		rehypePlugins: [
-			rehypeFigure,
-			rehypeKatex
-		],
-		remarkPlugins: [
-			remarkMath,
-		]
-	},
+  integrations: [
+    react(),
 
-	integrations: [
+    starlight({
+      title: "Kokosa's Notebook",
 
-		react(),
+      favicon: "/favicon.svg",
 
-		starlight({
+      // i18n configuration
+      defaultLocale: "root",
+      locales: {
+        root: {
+          label: "简体中文",
+          lang: "zh-CN",
+        },
+        en: {
+          label: "English",
+          lang: "en",
+        },
+      },
 
-			title: 'Kokosa\'s Notebook',
+      customCss: [
+        "@fontsource/noto-serif-sc/600.css",
+        "@fontsource/baskervville/600.css",
+        "@fontsource/iosevka/400.css",
+        "./src/styles/friends.css",
+        "./src/styles/figure.css",
+        "./src/styles/view-transition.css",
+        "./src/styles/font.css",
+      ],
 
-			favicon: '/favicon.svg',
+      components: {
+        MarkdownContent: "./src/components/MarkdownContent.astro",
+        SocialIcons: "./src/components/SocialIcons.astro",
+      },
 
-			customCss: [
-				'@fontsource/noto-serif-sc/600.css',
-				'@fontsource/baskervville/600.css',
-				'@fontsource/iosevka/400.css',
-				'./src/styles/friends.css',
-				'./src/styles/figure.css',
-				'./src/styles/katex.css',
-				'./src/styles/font.css'
-			],
+      head: [
+        {
+          tag: "link",
+          attrs: {
+            href: "https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css",
+            rel: "stylesheet",
+          },
+        },
+      ],
 
-			components: {
-				SocialIcons: './src/components/MarkdownContent.astro',
-			},
+      plugins: [
+        catppuccin({
+          light: { flavor: "latte", accent: "rosewater" },
+          dark: { flavor: "frappe", accent: "red" },
+        }),
 
-			head: [
-				{
-					tag: 'link',
-					attrs: {
-						href: 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css',
-						rel: 'stylesheet',
-					},
-				},
-			],
+        starlightBlog({
+          authors: {
+            kokosa: {
+              url: "https://github.com/hatanokokosa",
+              picture: "/friends/oc.avif",
+              name: "Hatano Kokosa",
+            },
+          },
 
-			plugins: [
+          metrics: {
+            readingTime: true,
+            words: "rounded",
+          },
 
-				catppuccin({
-					light: { flavor: "latte", accent: "rosewater" },
-					dark: { flavor: "frappe", accent: "red" }
-				}),
+          title: { "zh-CN": "Kokosa 的博客", en: "Kokosa's Blog" },
+          postCount: 8,
+        }),
 
-				starlightBlog({
-					authors: {
-						kokosa: {
-							url: 'https://github.com/hatanokokosa',
-							picture: '/friends/oc.avif',
-							name: 'Hatano Kokosa'
-						},
-					},
+        starlightGiscus({
+          categoryId: "DIC_kwDONiihcc4Cs5Yk",
+          repo: "hatanokokosa/hatanokokosa",
+          repoId: "R_kgDONiihcQ",
+          category: "Q&A",
+          theme: {
+            light: "catppuccin_latte",
+            dark: "catppuccin_frappe",
+          },
+        }),
 
-					metrics: {
-						readingTime: true,
-						words: 'rounded'
-					},
-					
-					title: { en: "Kokosa's Blog" },
-					postCount: 8
-				}),
+        starlightSiteGraph(),
 
-				starlightGiscus({
-					categoryId: 'DIC_kwDONiihcc4Cs5Yk',
-					repo: 'hatanokokosa/hatanokokosa',
-					repoId: 'R_kgDONiihcQ',
-					category: 'Q&A',
-					theme: {
-						light: 'catppuccin_latte',
-						dark: 'catppuccin_frappe'
-					},
-				}),
+        starlightScrollToTop({
+          tooltipText: "Back to top",
+          svgStrokeWidth: 1.5,
+          smoothScroll: true,
+          showTooltip: true,
+          borderRadius: "50",
+          threshold: 20,
+        }),
+      ],
 
-				starlightSiteGraph(),
-
-				starlightScrollToTop({
-					tooltipText: 'Back to top',
-					svgStrokeWidth: 1.5,
-					smoothScroll: true,
-					showTooltip: true,
-					borderRadius: '50',
-					threshold: 20,
-				}),
-
-			],
-
-			sidebar: [
-				{
-					label: 'Main',
-					autogenerate: { directory: 'main' },
-				},
-				{
-					label: 'Learning',
-					autogenerate: { directory: 'learning' },
-				},
-				{
-					label: 'Drawing',
-					autogenerate: { directory: 'drawing' },
-				},
-			],
-		}),
-	],
+      sidebar: [
+        {
+          label: "Main",
+          autogenerate: { directory: "main" },
+        },
+        {
+          label: "Learning",
+          autogenerate: { directory: "learning" },
+        },
+        {
+          label: "Drawing",
+          autogenerate: { directory: "drawing" },
+        },
+      ],
+    }),
+  ],
 });

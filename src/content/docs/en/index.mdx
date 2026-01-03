@@ -1,0 +1,65 @@
+---
+title: Welcome to Kokosa's Intensive Care Unit~
+description: kokosa
+template: splash
+giscus: false
+hero:
+  tagline: users.users.kokosa.isNormalUser = true;<br />Kokosa will sa♥e you... or not?
+  image:
+    file: ../../../assets/kokosa.svg
+    alt: Kokosa
+  actions:
+    - text: Personal Notes
+      link: /en/main/about/
+      icon: right-caret
+    - text: My Blog
+      link: /en/blog/
+      icon: rss
+      variant: secondary
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+import FriendList from "../../../components/FriendList.astro";
+
+---
+
+## About Me
+
+<CardGrid stagger>
+
+<Card title="Bio" icon="seti:bazel">
+  Handle: hatanokokosa, kokosa, kks | Any Pronouns\ Languages: Mandarin
+  (native), English and some Japanese.
+</Card>
+
+<Card title="What I'm Using" icon="nix">
+  I currently use NixOS, a Linux distro that uses declarative configuration and
+  the Nix package manager.
+</Card>
+
+<Card title="What I'm Doing" icon="vercel">
+  I’m currently a high school student in China, learning Rust, Python, some
+  full-stack development, and AI.
+</Card>
+
+<Card title="Contact Me" icon="comment-alt">
+  You can find me on [GitHub](https://github.com/hatanokokosa),
+  [Codeberg](https://codeberg.org/hatanokokosa) or reach me via
+  [Telegram](https://t.me/kokosaforwardbot),
+  [Matrix](https://matrix.to/#/@kokosa:mozilla.org). I also post in Mandarin on
+  [Bilibili](https://space.bilibili.com/3546660854565061).
+</Card>
+
+</CardGrid>
+
+<br />
+
+## My Friends
+
+<FriendList />
+
+<br />
+
+## Evangelize (x
+
+![I Love Shian Forever~♥](/images/shian.avif)

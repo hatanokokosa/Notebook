@@ -44,25 +44,27 @@ excerpt: 因为距离高考还有不到240天左右了，时间很紧所以并�
         ├── services.nix
         └── users.nix
 ```
->Home Manager 管理的那几个软件其实只有 fzf 是正在使用的，剩下两个都是计划使用所以先把配置写上，在设置里还是关闭的
+
+> Home Manager 管理的那几个软件其实只有 fzf 是正在使用的，剩下两个都是计划使用所以先把配置写上，在设置里还是关闭的
 
 ### 为什么要从 Clannels 换到 Flakes？
 
 相比 `configuration.nix` 来说，Flake 解决了许多问题，他可以锁定所有软件包及依赖的版本，一份配置文件可以精确到版本号与 Commit 的还原整个系统，而 configuration 似乎做不到这一点，会跟随 Channel 的更新
 
-| **特性** | **Channels** | **Flakes** |
-|------|----------|--------|
-| **依赖** | 隐式 (channels) | 显式 (inputs) |
-| **重建** | `sudo nixos-rebuild switch` | `nh os switch .` |
-| **复现** | 依赖各自的 channel 版本 | `flake.lock` 保证一致 |
-| **开发** | `nix-shell` | `nix develop` |
->nh是一个nixos帮助工具，但是对于configuration的支持很神秘，换到了 flake 之后发现这是个非常好用的工具，赞赏并推荐
+| **特性** | **Channels**                | **Flakes**            |
+| -------- | --------------------------- | --------------------- |
+| **依赖** | 隐式 (channels)             | 显式 (inputs)         |
+| **重建** | `sudo nixos-rebuild switch` | `nh os switch .`      |
+| **复现** | 依赖各自的 channel 版本     | `flake.lock` 保证一致 |
+| **开发** | `nix-shell`                 | `nix develop`         |
+
+> nh是一个nixos帮助工具，但是对于configuration的支持很神秘，换到了 flake 之后发现这是个非常好用的工具，赞赏并推荐
 
 同时，Flake 可以通过 Inputs 轻松的引用其他 Flakes，比如 `sodiboo/niri-flake` 之类的从而做到声明式的管理某些并不被官方支持的软件，我其实并不打算使用 HM 来管理 Niri
 
 还有开发环境方面，你或许会发现：GitHub/Codebreg 上的许多开源项目根目录下出现了一个叫做 `flake.nix` 的文件，有了这个文件你便可以使用 Nix 来轻松的还原整个开发环境，并且与主系统相互隔离————仅仅只需要一行 `nix develop`，大多数现代 Nix 项目（甚至不是 Nix 项目）都开始使用这些，毕竟确实好用
 
-当然它也有一些缺点，比如 API 不稳定（自 2019 年至今仍是 "experimental"）、强制依赖 Git之类的，其他坑也不少，*Determinate Nix* 解决了不少，但是它是部分（如nixd）闭源的。虽然 Flake 有不少坑，但是它会比 Channels 要方便一些，况且现在有 AI 可以管理我的配置，迁移并没有多复杂
+当然它也有一些缺点，比如 API 不稳定（自 2019 年至今仍是 "experimental"）、强制依赖 Git之类的，其他坑也不少，_Determinate Nix_ 解决了不少，但是它是部分（如nixd）闭源的。虽然 Flake 有不少坑，但是它会比 Channels 要方便一些，况且现在有 AI 可以管理我的配置，迁移并没有多复杂
 
 ### 文件展示？
 
