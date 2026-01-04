@@ -139,4 +139,4 @@ imports = [
 
 The rest isn't much different from my old config. They haven't been uploaded to GitHub yet, but I'll probably get around to it when I have time. Here's a screenshot:
 
-![I love this wallpaper so much](/images/rice.webp)
+![I love this wallpaper](/images/rice.avif)
