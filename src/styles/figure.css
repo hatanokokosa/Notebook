@@ -1,3 +1,7 @@
+:root {
+  --caption-color: var(--sl-color-gray-2);
+}
+
 figure img {
   border-color: rgba(177, 171, 190, 0.4);
   border-style: solid;
@@ -12,4 +16,20 @@ figcaption {
   font-size: 0.9rem;
   line-height: 1.4;
   opacity: 0.7;
+}
+
+/* Image zoom styles */
+article img:not(a img),
+.sl-markdown-content img:not(a img),
+figure img:not(a img),
+.content-panel img:not(a img) {
+  cursor: zoom-in;
+}
+
+.medium-zoom-overlay {
+  z-index: 9999;
+}
+
+.medium-zoom-image--opened {
+  z-index: 10000;
 }

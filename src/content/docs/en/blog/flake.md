@@ -13,7 +13,7 @@ With less than 240 days until the Gaokao (college entrance exam), time is tight 
 
 Amid all the busyness, I managed to get some things done. For example, last weekend I finally set up Flakes, which I'd been wanting to do for a while. With the help of CodeX CLI, it didn't take too long - I let the AI Agent handle the trickiest parts, and it was almost a one-shot success. Here's my current directory structure:
 
-```nix
+```txt
 .
 ├── flake.lock
 ├── flake.nix
@@ -139,4 +139,4 @@ imports = [
 
 The rest isn't much different from my old config. They haven't been uploaded to GitHub yet, but I'll probably get around to it when I have time. Here's a screenshot:
 
-![I love this wallpaper](/images/rice.avif)
+![I love this wallpaper](/posts/flake/rice.avif)

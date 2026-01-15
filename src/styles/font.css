@@ -9,10 +9,6 @@
   --sl-font: "Noto Serif SC", "Baskervville", serif;
 }
 
-main {
-  font-family: "Baskervville", "Noto Serif SC", serif;
-}
-
 pre,
 code {
   font-family: "Iosevka", "Noto Serif SC", monospace;

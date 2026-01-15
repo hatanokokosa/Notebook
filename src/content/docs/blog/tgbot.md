@@ -62,7 +62,7 @@ const payload = {
 
 于是和各路 LLM 苦战了一晚上，全降智了，操你妈 LLM 提供商，最终下了个 Antigravity 一口气把整个项目重构成了模块化的架构：
 
-```tree
+```txt
 .
 ├── src
 │   ├── ai.js

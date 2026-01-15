@@ -1,34 +1,24 @@
 import { useEffect } from "react";
-import { Fancybox } from "@fancyapps/ui";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import mediumZoom from "medium-zoom";
 
 export default function ImageZoomer() {
   useEffect(() => {
-    Fancybox.bind("img", {
-      Carousel: {
-        formatCaption: (fancybox, slide) => {
-          return slide.triggerEl?.getAttribute("alt") || "";
-        },
-      },
-      groupAll: true,
-      // wheel: 'slide',
-      mainClass: "fancybox-custom",
+    const selector = [
+      "article img:not(a img)",
+      ".sl-markdown-content img:not(a img)",
+      "figure img:not(a img)",
+      ".content-panel img:not(a img)",
+    ].join(", ");
+
+    const zoom = mediumZoom(selector, {
+      background: "rgba(108, 111, 133, 0.5)",
+      margin: 24,
     });
+
     return () => {
-      Fancybox.destroy();
+      zoom.detach();
     };
   }, []);
 
-  return (
-    <>
-      <style>{`
-        img {
-          cursor: pointer;
-        }
-        .fancybox-custom {
-          --fancybox-backdrop-bg: rgba(108, 111, 133, 0.5);
-        }
-      `}</style>
-    </>
-  );
+  return null;
 }
