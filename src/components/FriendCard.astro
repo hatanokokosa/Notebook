@@ -1,41 +1,45 @@
 ---
-import type { FriendLink } from '../data/friends';
+import type { FriendLink } from "../data/friends";
 
 interface Props {
-  friend: FriendLink;
+    friend: FriendLink;
 }
 
 const { friend } = Astro.props;
-const displayUrl = friend.link.replace(/^https?:\/\//, '').replace(/\/$/, '');
+const displayUrl = friend.link.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
-const descLines = friend.desc.split('\n');
+const descLines = friend.desc.split("\n");
 ---
 
-<a 
-  href={friend.link} 
-  class:list={["friend-card", { inactive: friend.inactive }]}
-  target="_blank" 
-  rel="noopener noreferrer"
+<a
+    href={friend.link}
+    class:list={["friend-card", { inactive: friend.inactive }]}
+    target="_blank"
+    rel="noopener noreferrer"
 >
-  <div class="friend-avatar-container">
-    <img src={friend.avatar} alt={friend.title} class="friend-avatar" />
-  </div>
-  <div class="friend-info">
-    <h3>{friend.title}</h3>
-    <div class="friend-url">{displayUrl}</div>
-    <p>
-      {descLines.map((line, i) => (
-        <>
-          {line}
-          {i < descLines.length - 1 && <br />}
-        </>
-      ))}
-      {friend.note && (
-        <>
-          <br />
-          {friend.note}
-        </>
-      )}
-    </p>
-  </div>
+    <div class="friend-avatar-container">
+        <img src={friend.avatar} alt={friend.title} class="friend-avatar" />
+    </div>
+    <div class="friend-info">
+        <h3>{friend.title}</h3>
+        <div class="friend-url">{displayUrl}</div>
+        <p>
+            {
+                descLines.map((line, i) => (
+                    <>
+                        {line}
+                        {i < descLines.length - 1 && <br />}
+                    </>
+                ))
+            }
+            {
+                friend.note && (
+                    <>
+                        <br />
+                        {friend.note}
+                    </>
+                )
+            }
+        </p>
+    </div>
 </a>
