@@ -1,21 +1,21 @@
 :root {
-  --caption-color: var(--sl-color-gray-2);
+    --caption-color: var(--sl-color-gray-2);
 }
 
 figure img {
-  border-color: rgba(177, 171, 190, 0.4);
-  border-style: solid;
-  border-width: 2px;
-  padding: 3px;
+    border-color: rgba(177, 171, 190, 0.4);
+    border-style: solid;
+    border-width: 2px;
+    padding: 3px;
 }
 
 figcaption {
-  color: var(--caption-color);
-  text-align: center;
-  margin-top: 0.7rem;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  opacity: 0.7;
+    color: var(--caption-color);
+    text-align: center;
+    margin-top: 0.7rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    opacity: 0.7;
 }
 
 /* Image zoom styles */
@@ -23,13 +23,13 @@ article img:not(a img),
 .sl-markdown-content img:not(a img),
 figure img:not(a img),
 .content-panel img:not(a img) {
-  cursor: zoom-in;
+    cursor: zoom-in;
 }
 
 .medium-zoom-overlay {
-  z-index: 9999;
+    z-index: 9999;
 }
 
 .medium-zoom-image--opened {
-  z-index: 10000;
+    z-index: 10000;
 }

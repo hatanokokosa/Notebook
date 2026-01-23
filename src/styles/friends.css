@@ -1,89 +1,89 @@
 .friend-card {
-  border: 1px solid var(--sl-color-gray-5);
-  grid-template-columns: auto 1fr;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  color: inherit;
-  display: grid;
-  padding: 1.5rem;
-  gap: 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    grid-template-columns: auto 1fr;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    color: inherit;
+    display: grid;
+    padding: 1.5rem;
+    gap: 1rem;
 }
 
 .friend-url {
-  background: rgba(231, 130, 132, 0.1);
-  transition: all 0.3s ease;
-  padding: 0.25rem 0.75rem;
-  margin-bottom: 0.75rem;
-  font-family: monospace;
-  display: inline-block;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  /* Frappe Red */
-  color: #e78284;
+    background: rgba(231, 130, 132, 0.1);
+    transition: all 0.3s ease;
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 0.75rem;
+    font-family: monospace;
+    display: inline-block;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    /* Frappe Red */
+    color: #e78284;
 }
 
 .friend-card::before {
-  background: linear-gradient(45deg, #dc8a78, #e78284);
-  transition: transform 0.3s ease;
-  transform-origin: bottom;
-  transform: scaleY(0);
-  position: absolute;
-  height: 100%;
-  content: "";
-  width: 4px;
-  left: 0;
-  top: 0;
+    background: linear-gradient(45deg, #dc8a78, #e78284);
+    transition: transform 0.3s ease;
+    transform-origin: bottom;
+    transform: scaleY(0);
+    position: absolute;
+    height: 100%;
+    content: "";
+    width: 4px;
+    left: 0;
+    top: 0;
 }
 
 .friend-avatar {
-  transition: transform 0.3s ease;
-  height: clamp(5rem, 15vw, 8rem);
-  width: clamp(5rem, 15vw, 8rem);
-  border-radius: 50%;
-  flex-shrink: 0;
+    transition: transform 0.3s ease;
+    height: clamp(5rem, 15vw, 8rem);
+    width: clamp(5rem, 15vw, 8rem);
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
 .friend-info p {
-  transition: transform 0.3s ease;
-  margin-top: 0.9rem;
-  font-size: 0.9rem;
-  margin: 0;
+    transition: transform 0.3s ease;
+    margin-top: 0.9rem;
+    font-size: 0.9rem;
+    margin: 0;
 }
 
 .friend-card:hover .friend-url {
-  background: rgba(231, 130, 132, 0.2);
-  transform: translateX(5px);
+    background: rgba(231, 130, 132, 0.2);
+    transform: translateX(5px);
 }
 
 .friend-card:hover {
-  box-shadow: 0 8px 25px rgba(231, 130, 132, 0.15);
-  border-color: rgba(231, 130, 132, 0.3);
+    box-shadow: 0 8px 25px rgba(231, 130, 132, 0.15);
+    border-color: rgba(231, 130, 132, 0.3);
 }
 
 .friend-info h3 {
-  transition: transform 0.3s ease;
-  font-size: 1.3rem;
+    transition: transform 0.3s ease;
+    font-size: 1.3rem;
 }
 
 .friend-card:hover .friend-avatar {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .friend-card:hover .friend-info h3 {
-  transform: translateX(3px);
+    transform: translateX(3px);
 }
 
 .friend-card:hover .friend-info p {
-  transform: translateX(3px);
+    transform: translateX(3px);
 }
 
 .friend-card:hover::before {
-  transform: scaleY(1);
+    transform: scaleY(1);
 }
 
 .friend-avatar-container {
-  flex-shrink: 0;
+    flex-shrink: 0;
 }
