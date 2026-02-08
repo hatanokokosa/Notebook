@@ -3,9 +3,7 @@ title: Rebuilding My TG Forward Bot
 date: 2025-12-18
 lastUpdated: 2025-12-18
 tags:
-  - coding
-  - node
-  - bot
+  - Bot
   - AI
 excerpt: The forwarding bot I was using kept receiving tons of spam. The developer never added a blocking feature, and the project had been abandoned for a year. Getting bombarded daily with VPN promotions, adult content, and scam messages... I couldn't take it anymore and decided to rebuild it myself...
 ---

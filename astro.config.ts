@@ -1,5 +1,5 @@
 import starlightScrollToTop from "starlight-scroll-to-top";
-import starlightSiteGraph from "starlight-site-graph";
+
 import rehypeFigure from "@microflash/rehype-figure";
 import catppuccin from "@catppuccin/starlight";
 import starlightGiscus from "starlight-giscus";
@@ -102,7 +102,7 @@ export default defineConfig({
           },
         }),
 
-        starlightSiteGraph(),
+
 
         starlightScrollToTop({
           tooltipText: "Back to top",
