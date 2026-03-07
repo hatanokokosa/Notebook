@@ -53,4 +53,10 @@ export const FRIENDS: FriendLink[] = [
     desc: "A Moment's Rest",
     note: "kks：同样赞赏",
   },
+  {
+    link: "https://www.zeroqing.com",
+    title: "ZeroQing's Blog",
+    avatar: "/friends/zq.avif",
+    desc: "一目洞察网中险，一策化解千般难",
+  },
 ];
