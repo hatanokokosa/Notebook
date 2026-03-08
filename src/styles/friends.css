@@ -21,7 +21,6 @@
     display: inline-block;
     border-radius: 6px;
     font-size: 0.85rem;
-    /* Frappe Red */
     color: #e78284;
 }
 
@@ -86,4 +85,12 @@
 
 .friend-avatar-container {
     flex-shrink: 0;
+}
+
+.friend-note {
+    border-left: 2px solid rgb(231, 130, 132, 0.8);
+    color: var(--sl-color-gray-3);
+    padding-left: 0.5em;
+    margin-top: 0.3em;
+    font-size: 0.95em;
 }
