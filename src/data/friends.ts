@@ -16,18 +16,18 @@ export const FRIENDS: FriendLink[] = [
     note: "好朋友！结婚！",
   },
   {
-    link: "https://iffse.eu.org/",
-    title: "iff",
-    avatar: "/friends/iff.avif",
-    desc: "Coding & Drawings",
-    note: "如果果，是重女",
-  },
-  {
     link: "https://ex-tasty.com/",
     title: "冬夜",
     avatar: "/friends/chisato.avif",
     desc: "邪惡與極限伴您一生……🥰\n我要帶領尊貴的您前往極限的旅程和極限的時光",
     note: "博客内容都非常优质，强烈推荐鉴赏",
+  },
+  {
+    link: "https://iffse.eu.org/",
+    title: "iff",
+    avatar: "/friends/iff.avif",
+    desc: "Coding & Drawings",
+    note: "如果果，是重女",
   },
   {
     link: "https://blog.cloudti.de/",

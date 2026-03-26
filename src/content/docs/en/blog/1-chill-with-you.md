@@ -16,7 +16,7 @@ The setting is that you and the protagonist exist in different parallel universe
 
 Until the 1.2 update (January 27th), when I saw a comment in Steam's discussion board: basically saying that when running this game on Linux with Proton, the in-game time always shows UTC+0.
 
-For those unfamiliar with UTC (Coordinated Universal Time), here's a simple example: I'm in UTC+8, so if my actual time is 8:00 AM, the game would show 0:00 AM - an 8-hour difference.
+For those unfamiliar with UTC (Universal Coordinated Time), here's a simple example: I'm in UTC+8, so if my actual time is 8:00 AM, the game would show 0:00 AM - an 8-hour difference.
 
 Wait, what? So it wasn't some parallel universe setting after all, just the timezone not being read correctly. No wonder it was exactly 8 hours off.
 

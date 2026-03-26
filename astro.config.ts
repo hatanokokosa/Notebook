@@ -2,7 +2,6 @@ import starlightScrollToTop from "starlight-scroll-to-top";
 
 import rehypeFigure from "@microflash/rehype-figure";
 import catppuccin from "@catppuccin/starlight";
-import starlightGiscus from "starlight-giscus";
 import { defineConfig } from "astro/config";
 import starlightBlog from "starlight-blog";
 import starlight from "@astrojs/starlight";
@@ -25,7 +24,7 @@ export default defineConfig({
     react(),
 
     starlight({
-      title: "Kokosa's Notebook",
+      title: "Kokosa's Intensive Care Unit",
 
       favicon: "/favicon.svg",
 
@@ -46,15 +45,14 @@ export default defineConfig({
         "@fontsource/noto-serif-sc/600.css",
         "@fontsource/baskervville/600.css",
         "@fontsource/iosevka/400.css",
+        "./src/styles/view-transition.css",
         "./src/styles/friends.css",
         "./src/styles/figure.css",
-        "./src/styles/view-transition.css",
         "./src/styles/font.css",
       ],
 
       components: {
         MarkdownContent: "./src/components/MarkdownContent.astro",
-        SocialIcons: "./src/components/SocialIcons.astro",
       },
 
       head: [
@@ -87,22 +85,9 @@ export default defineConfig({
             words: "rounded",
           },
 
-          title: { "zh-CN": "Kokosa 的博客", en: "Kokosa's Blog" },
+          title: { "zh-CN": "Kokosa's Blog", en: "Kokosa's Blog" },
           postCount: 8,
         }),
-
-        starlightGiscus({
-          categoryId: "DIC_kwDONiihcc4Cs5Yk",
-          repo: "hatanokokosa/hatanokokosa",
-          repoId: "R_kgDONiihcQ",
-          category: "Q&A",
-          theme: {
-            light: "catppuccin_latte",
-            dark: "catppuccin_frappe",
-          },
-        }),
-
-
 
         starlightScrollToTop({
           tooltipText: "Back to top",
@@ -124,7 +109,7 @@ export default defineConfig({
           autogenerate: { directory: "learning" },
         },
         {
-          label: "Drawing",
+          label: "Creating",
           autogenerate: { directory: "drawing" },
         },
       ],

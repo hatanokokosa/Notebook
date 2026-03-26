@@ -56,9 +56,6 @@ importers:
       starlight-blog:
         specifier: ^0.24.3
         version: 0.24.3(@astrojs/starlight@0.37.2(astro@5.16.9(@types/node@25.0.3)(rollup@4.55.1)(typescript@5.8.3)))(astro@5.16.9(@types/node@25.0.3)(rollup@4.55.1)(typescript@5.8.3))
-      starlight-giscus:
-        specifier: ^0.6.1
-        version: 0.6.1(@astrojs/starlight@0.37.2(astro@5.16.9(@types/node@25.0.3)(rollup@4.55.1)(typescript@5.8.3)))
       starlight-scroll-to-top:
         specifier: ^0.1.1
         version: 0.1.1(@astrojs/starlight@0.37.2(astro@5.16.9(@types/node@25.0.3)(rollup@4.55.1)(typescript@5.8.3)))
@@ -1880,12 +1877,6 @@ packages:
     engines: {node: '>=18.20.8'}
     peerDependencies:
       '@astrojs/starlight': '>=0.33.0'
-
-  starlight-giscus@0.6.1:
-    resolution: {integrity: sha512-5vwNb06slZW+UwVBrva3gARYoIegr2t5sowfmQ7x5+W1eFv4VlHmIy/XJO7tvdizWlShiRGsgRcQORqrkcemLg==}
-    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
-    peerDependencies:
-      '@astrojs/starlight': '>=0.32.0'
 
   starlight-scroll-to-top@0.1.1:
     resolution: {integrity: sha512-e/l1Tqwz2U5wyoKPTE46RajLwFaKbS5FZcxvK1GnnbIq6VYixjBISVTcivPvuq5FyzFfYMcbf97e7WWgyrvr0g==}
@@ -4630,10 +4621,6 @@ snapshots:
     transitivePeerDependencies:
       - astro
       - supports-color
-
-  starlight-giscus@0.6.1(@astrojs/starlight@0.37.2(astro@5.16.9(@types/node@25.0.3)(rollup@4.55.1)(typescript@5.8.3))):
-    dependencies:
-      '@astrojs/starlight': 0.37.2(astro@5.16.9(@types/node@25.0.3)(rollup@4.55.1)(typescript@5.8.3))
 
   starlight-scroll-to-top@0.1.1(@astrojs/starlight@0.37.2(astro@5.16.9(@types/node@25.0.3)(rollup@4.55.1)(typescript@5.8.3))):
     dependencies:
