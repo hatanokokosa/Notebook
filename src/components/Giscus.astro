@@ -1,9 +1,9 @@
 ---
-const { entry } = Astro.props;
+const { starlightRoute } = Astro.locals;
 const pathname = Astro.url.pathname;
 
 // comments: false?
-const hasCommentsEnabled = entry?.data?.comments !== false;
+const hasCommentsEnabled = starlightRoute?.entry?.data?.comments !== false;
 
 // auto generated page?
 const isBlogGeneratedPage =

@@ -11,7 +11,8 @@ function getGiscusTheme(): string {
     isDark = document.documentElement.dataset.theme === "dark";
   }
 
-  return isDark ? "catppuccin_frappe" : "catppuccin_latte";
+  const base = "https://kokosa.icu";
+  return isDark ? `${base}/giscus/frappe.css` : `${base}/giscus/latte.css`;
 }
 
 function renderGiscus() {
@@ -35,7 +36,8 @@ function renderGiscus() {
   script.setAttribute("data-emit-metadata", "0");
   script.setAttribute("data-input-position", "bottom");
   script.setAttribute("data-theme", getGiscusTheme());
-  script.setAttribute("data-lang", "zh-CN");
+  const lang = document.documentElement.lang || "zh-CN";
+  script.setAttribute("data-lang", lang);
   script.setAttribute("crossorigin", "anonymous");
   script.async = true;
 

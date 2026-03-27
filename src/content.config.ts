@@ -10,7 +10,7 @@ export const collections = {
       extend: (context) =>
         z
           .object({
-            giscus: z.boolean().optional().default(true),
+            comments: z.boolean().optional().default(true),
           })
           .merge(blogSchema(context)),
     }),

@@ -42,9 +42,8 @@ export default defineConfig({
       },
 
       customCss: [
-        "@fontsource/fraunces/400.css",
-        "@fontsource/fraunces/400-italic.css",
         "@fontsource/noto-serif-sc/600.css",
+        "@fontsource/fraunces/400.css",
         "@fontsource/iosevka/400.css",
         "./src/styles/view-transition.css",
         "./src/styles/sl-custom.css",
