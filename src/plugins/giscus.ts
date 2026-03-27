@@ -11,7 +11,7 @@ function getGiscusTheme(): string {
     isDark = document.documentElement.dataset.theme === "dark";
   }
 
-  const base = "https://kokosa.icu";
+  const base = "https://www.kokosa.icu";
   return isDark ? `${base}/giscus/frappe.css` : `${base}/giscus/latte.css`;
 }
 
