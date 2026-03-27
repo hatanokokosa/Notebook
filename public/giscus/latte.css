@@ -87,9 +87,12 @@ main .gsc-loading-image {
     background-image: url(https://giscus.catppuccin.com/assets/loading.gif);
 }
 
-/* Square corners */
-.rounded,
-.rounded-md,
-.gsc-comment-box-textarea {
+* {
     border-radius: 0 !important;
+}
+
+code,
+pre,
+.gsc-comment-box-textarea {
+    font-family: "Iosevka", monospace !important;
 }
