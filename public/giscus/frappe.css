@@ -88,11 +88,11 @@ main .gsc-loading-image {
 }
 
 * {
-    border-radius: 0 !important;
+    border-radius: 0;
 }
 
 code,
 pre,
 .gsc-comment-box-textarea {
-    font-family: "Iosevka", monospace !important;
+    font-family: "Iosevka", monospace;
 }
