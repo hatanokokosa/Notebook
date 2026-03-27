@@ -38,6 +38,7 @@ function renderGiscus() {
   script.setAttribute("data-theme", getGiscusTheme());
   const lang = document.documentElement.lang || "zh-CN";
   script.setAttribute("data-lang", lang);
+  script.setAttribute("data-loading", "eager");
   script.setAttribute("crossorigin", "anonymous");
   script.async = true;
 
