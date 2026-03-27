@@ -13,7 +13,7 @@
     "@astrojs/react": "^4.4.2",
     "@astrojs/starlight": "latest",
     "@catppuccin/starlight": "^1.0.2",
-    "@fontsource/baskervville": "^5.2.9",
+    "@fontsource/fraunces": "^5.2.9",
     "@fontsource/iosevka": "^5.2.5",
     "@fontsource/noto-serif-sc": "^5.2.8",
     "@microflash/rehype-figure": "^2.1.4",
