@@ -1,4 +1,9 @@
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/fraunces/400.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc/600.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/iosevka/400.css");
+
 main {
+    font-family: "Fraunces", "Noto Serif SC", serif;
     --color-prettylights-syntax-comment: #8c8fa1;
     --color-prettylights-syntax-constant: #1e66f5;
     --color-prettylights-syntax-entity: #1e66f5;
@@ -83,19 +88,8 @@ main .gsc-loading-image {
 }
 
 /* Square corners */
-main .gsc-comment-box,
-main .gsc-comment,
-main .gsc-reply,
-main .gsc-emoji-button,
-main .gsc-reply-box,
-main .gsc-reactions-button,
-main .gsc-direct-reaction-button,
-main .gsc-social-reaction-summary-item,
-main .gsc-comment-box-textarea,
-main .gsc-comment-box-tabs,
-main .gsc-header .gsc-left-header em,
-main .BtnGroup-item,
-main .pagination-loader-container,
-main .color-bg-tertiary {
+.rounded,
+.rounded-md,
+.gsc-comment-box-textarea {
     border-radius: 0 !important;
 }
