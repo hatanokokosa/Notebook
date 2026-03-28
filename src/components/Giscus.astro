@@ -7,17 +7,21 @@ const hasCommentsEnabled = starlightRoute?.entry?.data?.comments !== false;
 
 // auto generated page?
 const isBlogGeneratedPage =
-  pathname === '/' ||
-  pathname.endsWith('/blog') ||
-  pathname.endsWith('/blog/') ||
-  pathname.includes('/tags/') ||
-  pathname.includes('/author/');
+  pathname === "/" ||
+  pathname.endsWith("/blog") ||
+  pathname.endsWith("/blog/") ||
+  pathname.includes("/tags/") ||
+  pathname.includes("/author/");
 
 // render!
 const shouldRender = hasCommentsEnabled && !isBlogGeneratedPage;
 ---
 
-{shouldRender && (
-  <div class="giscus-container" style="margin-top: 3rem;"></div>
-  <script src="../plugins/giscus.ts"></script>
-)}
+{
+  shouldRender && (
+    <>
+      <div class="giscus-container" style="margin-top: 3rem;" />
+      <script src="../plugins/giscus.ts" />
+    </>
+  )
+}
