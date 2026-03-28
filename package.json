@@ -10,26 +10,26 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^4.4.2",
+    "@astrojs/react": "^5.0.2",
     "@astrojs/starlight": "latest",
-    "@catppuccin/starlight": "^1.0.2",
+    "@catppuccin/starlight": "^2.0.1",
     "@fontsource/fraunces": "^5.2.9",
     "@fontsource/iosevka": "^5.2.5",
     "@fontsource/noto-serif-sc": "^5.2.8",
     "@microflash/rehype-figure": "^2.1.4",
-    "astro": "^5.16.9",
-    "katex": "^0.16.27",
+    "astro": "^6.1.1",
+    "katex": "^0.16.44",
     "medium-zoom": "^1.1.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "sharp": "^0.34.5",
-    "starlight-blog": "^0.24.3",
+    "starlight-blog": "^0.26.1",
     "starlight-scroll-to-top": "^0.1.1"
   },
   "devDependencies": {
-    "@types/react": "^19.2.8",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3"
   }
 }
