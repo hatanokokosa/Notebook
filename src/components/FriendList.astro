@@ -4,17 +4,17 @@ import FriendCard from "./FriendCard.astro";
 import { CardGrid } from "@astrojs/starlight/components";
 
 interface Props {
-    /* show inactive friends, default: false */
-    showInactive?: boolean;
+  /* show inactive friends, default: false */
+  showInactive?: boolean;
 }
 
 const { showInactive = false } = Astro.props;
 
 const visibleFriends = showInactive
-    ? FRIENDS
-    : FRIENDS.filter((f) => !f.inactive);
+  ? FRIENDS
+  : FRIENDS.filter((f) => !f.inactive);
 ---
 
 <CardGrid stagger>
-    {visibleFriends.map((friend) => <FriendCard friend={friend} />)}
+  {visibleFriends.map((friend) => <FriendCard friend={friend} />)}
 </CardGrid>

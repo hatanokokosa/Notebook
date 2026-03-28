@@ -1,11 +1,11 @@
 ```blog
 ---
-title: 
-date: 
-lastUpdated: 
+title:
+date:
+lastUpdated:
 tags:
-  - 
-excerpt: 
+  -
+excerpt:
 ---
 
 ### Hello, World!

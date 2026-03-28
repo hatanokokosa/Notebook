@@ -1,9 +1,9 @@
 :root {
-    --sl-font: "Fraunces", "Noto Serif SC", serif;
-    --sl-font-mono: "Iosevka", monospace;
+  --sl-font: "Fraunces", "Noto Serif SC", serif;
+  --sl-font-mono: "Iosevka", monospace;
 }
 
 pre,
 code {
-    font-family: "Iosevka", "Noto Serif SC", monospace;
+  font-family: "Iosevka", "Noto Serif SC", monospace;
 }

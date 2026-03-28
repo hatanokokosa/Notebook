@@ -1,5 +1,4 @@
 import starlightScrollToTop from "starlight-scroll-to-top";
-
 import rehypeFigure from "@microflash/rehype-figure";
 import catppuccin from "@catppuccin/starlight";
 import { defineConfig } from "astro/config";
@@ -12,6 +11,10 @@ import "katex/contrib/mhchem";
 
 export default defineConfig({
   devToolbar: { enabled: false },
+
+  image: {
+    service: { entrypoint: "astro/assets/services/noop" },
+  },
 
   site: "https://kokosa.icu",
 
