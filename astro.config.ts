@@ -46,7 +46,7 @@ export default defineConfig({
 
       customCss: [
         "@fontsource/noto-serif-sc/600.css",
-        "@fontsource/noto-serif-sc/700.css",
+        "@fontsource/noto-serif-sc/800.css",
         "@fontsource/fraunces/400.css",
         "@fontsource/iosevka/400.css",
         "./src/styles/view-transition.css",
