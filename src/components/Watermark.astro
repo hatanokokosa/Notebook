@@ -1,0 +1,7 @@
+---
+const { starlightRoute } = Astro.locals;
+
+const hasWatermarkEnabled = starlightRoute?.entry?.data?.watermark === true;
+---
+
+{hasWatermarkEnabled && <script src="../plugins/watermark.ts" />}

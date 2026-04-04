@@ -1,10 +1,12 @@
 ---
 import Default from "@astrojs/starlight/components/MarkdownContent.astro";
+import Watermark from "./Watermark.astro";
 import ImageZoomer from "./ImageZoomer";
 import Giscus from "./Giscus.astro";
 ---
 
 <ImageZoomer client:only="react" />
+<Watermark {...Astro.props} />
 <Default><slot /></Default>
 
 <Giscus {...Astro.props} />

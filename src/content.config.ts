@@ -11,6 +11,7 @@ export const collections = {
         z
           .object({
             comments: z.boolean().optional().default(true),
+            watermark: z.boolean().optional().default(false),
           })
           .merge(blogSchema(context)),
     }),

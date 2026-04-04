@@ -1,3 +1,7 @@
 .sl-link-button {
   border-radius: 4px;
 }
+
+.sl-markdown-content em {
+  color: var(--sl-color-gray-3);
+}
