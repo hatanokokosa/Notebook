@@ -4,14 +4,16 @@ const pathname = Astro.url.pathname;
 
 // comments: false?
 const hasCommentsEnabled = starlightRoute?.entry?.data?.comments !== false;
+const hasEntry = Boolean(starlightRoute?.entry);
 
 // auto generated page?
 const isBlogGeneratedPage =
+  !hasEntry ||
   pathname === "/" ||
   pathname.endsWith("/blog") ||
   pathname.endsWith("/blog/") ||
   pathname.includes("/tags/") ||
-  pathname.includes("/author/");
+  pathname.includes("/authors/");
 
 // render!
 const shouldRender = hasCommentsEnabled && !isBlogGeneratedPage;

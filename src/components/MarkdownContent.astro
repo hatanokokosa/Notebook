@@ -1,12 +1,36 @@
 ---
 import Default from "@astrojs/starlight/components/MarkdownContent.astro";
+import BlogMarkdownContent from "starlight-blog/components/MarkdownContent.astro";
 import Watermark from "./Watermark.astro";
 import ImageZoomer from "./ImageZoomer";
 import Giscus from "./Giscus.astro";
+
+const { starlightRoute } = Astro.locals;
+const pathname = Astro.url.pathname;
+const contentHtml = await Astro.slots.render("default");
+const isBlogPostPage = starlightRoute?.entry?.data?.date instanceof Date;
+const isGeneratedBlogPage =
+  pathname === "/" ||
+  pathname.endsWith("/blog") ||
+  pathname.endsWith("/blog/") ||
+  pathname.includes("/tags/") ||
+  pathname.includes("/authors/");
+const shouldEnhanceImages =
+  !isGeneratedBlogPage && /<img[\s>]/i.test(contentHtml);
 ---
 
-<ImageZoomer client:only="react" />
+{shouldEnhanceImages && <ImageZoomer client:only="react" />}
 <Watermark {...Astro.props} />
-<Default><slot /></Default>
+{
+  isBlogPostPage ? (
+    <BlogMarkdownContent>
+      <Fragment set:html={contentHtml} />
+    </BlogMarkdownContent>
+  ) : (
+    <Default>
+      <Fragment set:html={contentHtml} />
+    </Default>
+  )
+}
 
 <Giscus {...Astro.props} />
