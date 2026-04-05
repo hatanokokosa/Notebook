@@ -88,3 +88,8 @@ html[data-theme="dark"] {
 .PhotoView-Slider__ArrowRight {
   display: none !important;
 }
+
+.photo-view__photo {
+  scale: 0.9;
+  transform-origin: center center;
+}

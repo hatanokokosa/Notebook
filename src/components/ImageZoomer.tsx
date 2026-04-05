@@ -191,6 +191,7 @@ export default function ImageZoomer() {
       }}
       maskOpacity={0.6}
       bannerVisible={false}
+      photoClassName="photo-view__photo"
     />
   );
 }
