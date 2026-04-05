@@ -5,7 +5,7 @@ import "react-photo-view/dist/react-photo-view.css";
 /** Marker appended to alt text to opt an image out of the viewer. */
 const NO_WATERMARK_MARKER = "|no-watermark";
 
-/** CSS selectors that match content images (shared with watermark.ts). */
+/** Selectors that match content images (shared with watermark.ts). */
 const IMG_SELECTORS = [
   "article img:not(a img)",
   ".sl-markdown-content img:not(a img)",
@@ -18,6 +18,10 @@ interface ImageData {
   key: string;
 }
 
+type WatermarkRuntime = {
+  ensureWatermarked: (img: HTMLImageElement) => Promise<void>;
+};
+
 /**
  * Collect all content images from the DOM and attach click handlers
  * that open the react-photo-view slider at the correct index.
@@ -29,13 +33,9 @@ export default function ImageZoomer() {
   const [visible, setVisible] = useState(false);
   const [index, setIndex] = useState(0);
   const [images, setImages] = useState<ImageData[]>([]);
-
-  // Keep a mutable ref to the cleanup function so we can teardown
-  // event listeners when re-scanning or unmounting.
   const cleanupRef = useRef<(() => void) | null>(null);
 
   const scan = useCallback(() => {
-    // Teardown previous listeners.
     cleanupRef.current?.();
 
     const imgElements =
@@ -50,9 +50,6 @@ export default function ImageZoomer() {
     const handlers: Array<{ el: HTMLImageElement; handler: () => void }> = [];
 
     filtered.forEach((img, i) => {
-      // Strip the no-watermark marker from alt text so it doesn't
-      // show in the viewer. (watermark.ts also does this, but we
-      // need to handle the case where this component initialises first.)
       const alt = img.alt ?? "";
       if (alt.endsWith(NO_WATERMARK_MARKER)) {
         img.alt = alt.slice(0, -NO_WATERMARK_MARKER.length).trimEnd();
@@ -65,17 +62,22 @@ export default function ImageZoomer() {
       }
 
       collected.push({ src: img.src, key: `${img.src}-${i}` });
-
-      // Visual hint that images are clickable.
       img.style.cursor = "zoom-in";
 
-      const handler = () => {
-        // Re-read src in case the watermark script replaced it
-        // with a data-URL after initial scan.
+      const handler = async () => {
+        const runtime = (
+          window as Window & { __watermarkRuntime?: WatermarkRuntime }
+        ).__watermarkRuntime;
+
+        if (runtime && img.dataset.noWatermark !== "true") {
+          await runtime.ensureWatermarked(img);
+        }
+
         const freshImages = collected.map((item, idx) => {
           const el = filtered[idx];
           return el ? { ...item, src: el.src } : item;
         });
+
         setImages(freshImages);
         setIndex(i);
         setVisible(true);
@@ -86,7 +88,6 @@ export default function ImageZoomer() {
     });
 
     setImages(collected);
-
     cleanupRef.current = () => {
       handlers.forEach(({ el, handler }) =>
         el.removeEventListener("click", handler),
@@ -95,12 +96,8 @@ export default function ImageZoomer() {
   }, []);
 
   useEffect(() => {
-    // Initial scan once DOM content is ready.
     scan();
-
-    // Re-scan on Astro page transitions.
     document.addEventListener("astro:page-load", scan);
-
     return () => {
       cleanupRef.current?.();
       document.removeEventListener("astro:page-load", scan);

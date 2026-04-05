@@ -1,6 +1,31 @@
 ---
 const { starlightRoute } = Astro.locals;
 const hasWatermarkEnabled = starlightRoute?.entry?.data?.watermark === true;
+const watermarkStyles = `
+[data-watermark-page] ~ .sl-markdown-content img:not(a img):not([data-watermark-ready="true"]) {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+[data-watermark-page] ~ .sl-markdown-content img[data-watermark-preview-ready="true"]:not([data-watermarked="true"]) {
+  filter: blur(10px) saturate(0.92) brightness(0.98);
+  transform: scale(1.01);
+  opacity: 0.9;
+  transform-origin: center;
+}
+
+[data-watermark-page] ~ .sl-markdown-content img[data-watermark-ready="true"] {
+  filter: blur(0);
+  transform: scale(1);
+  opacity: 1;
+  transition:
+    filter 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+`;
 ---
 
+{hasWatermarkEnabled && <style is:inline set:html={watermarkStyles} />}
+{hasWatermarkEnabled && <span hidden data-watermark-page />}
 {hasWatermarkEnabled && <script src="../plugins/watermark.ts" />}
