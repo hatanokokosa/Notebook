@@ -1,0 +1,90 @@
+:root {
+  --photo-view-backdrop: color-mix(
+    in srgb,
+    var(--sl-color-bg) 46%,
+    transparent
+  );
+  --photo-view-banner-bg: color-mix(
+    in srgb,
+    var(--sl-color-bg-nav) 72%,
+    transparent
+  );
+  --photo-view-banner-border: color-mix(
+    in srgb,
+    var(--sl-color-gray-5) 72%,
+    transparent
+  );
+  --photo-view-text: var(--sl-color-text);
+  --photo-view-muted-text: var(--sl-color-gray-3);
+  --photo-view-arrow-bg: color-mix(
+    in srgb,
+    var(--sl-color-bg-nav) 94%,
+    var(--sl-color-bg) 6%
+  );
+  --photo-view-arrow-border: color-mix(
+    in srgb,
+    var(--sl-color-gray-4) 100%,
+    transparent 0%
+  );
+  --photo-view-hover-bg: color-mix(
+    in srgb,
+    var(--sl-color-accent) 16%,
+    transparent
+  );
+}
+
+html[data-theme="light"] {
+  --photo-view-backdrop: color-mix(
+    in srgb,
+    var(--sl-color-gray-7) 42%,
+    transparent
+  );
+}
+
+html[data-theme="dark"] {
+  --photo-view-backdrop: color-mix(
+    in srgb,
+    var(--sl-color-bg) 50%,
+    transparent
+  );
+}
+
+.PhotoView-Slider__Backdrop {
+  background: var(--photo-view-backdrop) !important;
+  backdrop-filter: blur(3px) saturate(1.01);
+}
+
+.PhotoView-Slider__BannerWrap {
+  display: none !important;
+  background: var(--photo-view-banner-bg) !important;
+  border-bottom: 1px solid var(--photo-view-banner-border);
+  color: var(--photo-view-text) !important;
+  backdrop-filter: blur(18px) saturate(1.05);
+}
+
+.PhotoView-Slider__Counter {
+  color: var(--photo-view-muted-text);
+  opacity: 1;
+}
+
+.PhotoView-Slider__toolbarIcon {
+  border-radius: 999px;
+  color: var(--photo-view-text);
+  fill: currentColor;
+  opacity: 0.92;
+  transition:
+    background-color 180ms ease,
+    opacity 180ms ease,
+    color 180ms ease;
+}
+
+.PhotoView-Slider__toolbarIcon:hover {
+  background: var(--photo-view-hover-bg);
+  color: var(--photo-view-text);
+  opacity: 1;
+}
+
+.PhotoView-Slider__ArrowLeft,
+.PhotoView-Slider__ArrowRight {
+  display: none !important;
+}

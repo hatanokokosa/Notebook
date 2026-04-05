@@ -51,6 +51,7 @@ export default defineConfig({
         "@fontsource/iosevka/400.css",
         "./src/styles/view-transition.css",
         "./src/styles/sl-custom.css",
+        "./src/styles/photo-view.css",
         "./src/styles/friends.css",
         "./src/styles/figure.css",
         "./src/styles/font.css",

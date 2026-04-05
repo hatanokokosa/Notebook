@@ -12,6 +12,9 @@ const IMG_SELECTORS = [
   "figure img:not(a img)",
   ".content-panel img:not(a img)",
 ].join(", ");
+const VIEWER_PLACEHOLDER_SRC =
+  "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+const WATERMARK_PAGE_SELECTOR = "[data-watermark-page]";
 
 interface ImageData {
   src: string;
@@ -34,6 +37,78 @@ export default function ImageZoomer() {
   const [index, setIndex] = useState(0);
   const [images, setImages] = useState<ImageData[]>([]);
   const cleanupRef = useRef<(() => void) | null>(null);
+  const imageElementsRef = useRef<HTMLImageElement[]>([]);
+
+  const isWatermarkPage = useCallback(
+    () => document.querySelector(WATERMARK_PAGE_SELECTOR) !== null,
+    [],
+  );
+
+  const getViewerSrc = useCallback(
+    (img: HTMLImageElement): string => {
+      if (!isWatermarkPage()) return img.src;
+      if (img.dataset.noWatermark === "true") return img.src;
+      if (
+        img.dataset.watermarked === "true" ||
+        img.dataset.watermarkPreviewReady === "true"
+      ) {
+        return img.src;
+      }
+      return VIEWER_PLACEHOLDER_SRC;
+    },
+    [isWatermarkPage],
+  );
+
+  const syncImageSource = useCallback(
+    (targetIndex: number) => {
+      const img = imageElementsRef.current[targetIndex];
+      if (!img) return;
+
+      setImages((current) => {
+        const existing = current[targetIndex];
+        if (!existing) return current;
+
+        const nextSrc = getViewerSrc(img);
+        if (existing.src === nextSrc) return current;
+
+        const nextImages = [...current];
+        nextImages[targetIndex] = { ...existing, src: nextSrc };
+        return nextImages;
+      });
+    },
+    [getViewerSrc],
+  );
+
+  const ensureViewerImageReady = useCallback(
+    async (targetIndex: number) => {
+      const img = imageElementsRef.current[targetIndex];
+      if (!img) return;
+
+      const runtime = (
+        window as Window & { __watermarkRuntime?: WatermarkRuntime }
+      ).__watermarkRuntime;
+
+      if (runtime && isWatermarkPage() && img.dataset.noWatermark !== "true") {
+        await runtime.ensureWatermarked(img);
+      }
+
+      syncImageSource(targetIndex);
+    },
+    [isWatermarkPage, syncImageSource],
+  );
+
+  const warmNearbyImages = useCallback(
+    (centerIndex: number) => {
+      [centerIndex - 1, centerIndex + 1].forEach((targetIndex) => {
+        if (targetIndex < 0 || targetIndex >= imageElementsRef.current.length) {
+          return;
+        }
+
+        void ensureViewerImageReady(targetIndex);
+      });
+    },
+    [ensureViewerImageReady],
+  );
 
   const scan = useCallback(() => {
     cleanupRef.current?.();
@@ -45,6 +120,7 @@ export default function ImageZoomer() {
     const filtered = Array.from(imgElements).filter(
       (img) => img.naturalWidth >= 100 || !img.complete,
     );
+    imageElementsRef.current = filtered;
 
     const collected: ImageData[] = [];
     const handlers: Array<{ el: HTMLImageElement; handler: () => void }> = [];
@@ -61,26 +137,24 @@ export default function ImageZoomer() {
         }
       }
 
-      collected.push({ src: img.src, key: `${img.src}-${i}` });
+      collected.push({
+        src: getViewerSrc(img),
+        key: `${img.currentSrc || img.src}-${i}`,
+      });
       img.style.cursor = "zoom-in";
 
       const handler = async () => {
-        const runtime = (
-          window as Window & { __watermarkRuntime?: WatermarkRuntime }
-        ).__watermarkRuntime;
-
-        if (runtime && img.dataset.noWatermark !== "true") {
-          await runtime.ensureWatermarked(img);
-        }
+        await ensureViewerImageReady(i);
 
         const freshImages = collected.map((item, idx) => {
           const el = filtered[idx];
-          return el ? { ...item, src: el.src } : item;
+          return el ? { ...item, src: getViewerSrc(el) } : item;
         });
 
         setImages(freshImages);
         setIndex(i);
         setVisible(true);
+        warmNearbyImages(i);
       };
 
       img.addEventListener("click", handler);
@@ -93,7 +167,7 @@ export default function ImageZoomer() {
         el.removeEventListener("click", handler),
       );
     };
-  }, []);
+  }, [ensureViewerImageReady, getViewerSrc, warmNearbyImages]);
 
   useEffect(() => {
     scan();
@@ -110,8 +184,13 @@ export default function ImageZoomer() {
       visible={visible}
       onClose={() => setVisible(false)}
       index={index}
-      onIndexChange={setIndex}
+      onIndexChange={(nextIndex) => {
+        setIndex(nextIndex);
+        void ensureViewerImageReady(nextIndex);
+        warmNearbyImages(nextIndex);
+      }}
       maskOpacity={0.6}
+      bannerVisible={false}
     />
   );
 }
