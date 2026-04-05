@@ -16,7 +16,7 @@
 const WATERMARK_TEXT = "hatanokokosa";
 const WATERMARK_FONT = "Fraunces";
 const ROTATION_DEG = -30;
-const TEXT_COLOR = "rgba(128, 128, 128, 0.05)";
+const TEXT_COLOR = "rgba(128, 128, 128, 0.10)";
 
 // All sizes are relative to the image's shorter edge so that
 // the watermark scales proportionally regardless of resolution.
