@@ -12,18 +12,11 @@ const IMG_SELECTORS = [
   "figure img:not(a img)",
   ".content-panel img:not(a img)",
 ].join(", ");
-const VIEWER_PLACEHOLDER_SRC =
-  "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
-const WATERMARK_PAGE_SELECTOR = "[data-watermark-page]";
 
 interface ImageData {
   src: string;
   key: string;
 }
-
-type WatermarkRuntime = {
-  ensureWatermarked: (img: HTMLImageElement) => Promise<void>;
-};
 
 /**
  * Collect all content images from the DOM and attach click handlers
@@ -39,24 +32,9 @@ export default function ImageZoomer() {
   const cleanupRef = useRef<(() => void) | null>(null);
   const imageElementsRef = useRef<HTMLImageElement[]>([]);
 
-  const isWatermarkPage = useCallback(
-    () => document.querySelector(WATERMARK_PAGE_SELECTOR) !== null,
-    [],
-  );
-
   const getViewerSrc = useCallback(
-    (img: HTMLImageElement): string => {
-      if (!isWatermarkPage()) return img.src;
-      if (img.dataset.noWatermark === "true") return img.src;
-      if (
-        img.dataset.watermarked === "true" ||
-        img.dataset.watermarkPreviewReady === "true"
-      ) {
-        return img.src;
-      }
-      return VIEWER_PLACEHOLDER_SRC;
-    },
-    [isWatermarkPage],
+    (img: HTMLImageElement): string => img.currentSrc || img.src,
+    [],
   );
 
   const syncImageSource = useCallback(
@@ -84,17 +62,9 @@ export default function ImageZoomer() {
       const img = imageElementsRef.current[targetIndex];
       if (!img) return;
 
-      const runtime = (
-        window as Window & { __watermarkRuntime?: WatermarkRuntime }
-      ).__watermarkRuntime;
-
-      if (runtime && isWatermarkPage() && img.dataset.noWatermark !== "true") {
-        await runtime.ensureWatermarked(img);
-      }
-
       syncImageSource(targetIndex);
     },
-    [isWatermarkPage, syncImageSource],
+    [syncImageSource],
   );
 
   const warmNearbyImages = useCallback(

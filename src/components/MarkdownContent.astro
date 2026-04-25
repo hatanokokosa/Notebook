@@ -1,13 +1,17 @@
 ---
 import Default from "@astrojs/starlight/components/MarkdownContent.astro";
 import BlogMarkdownContent from "starlight-blog/components/MarkdownContent.astro";
-import Watermark from "./Watermark.astro";
 import ImageZoomer from "./ImageZoomer";
 import Giscus from "./Giscus.astro";
+import { applyStaticWatermarks } from "../lib/static-watermark";
 
 const { starlightRoute } = Astro.locals;
 const pathname = Astro.url.pathname;
 const contentHtml = await Astro.slots.render("default");
+const hasWatermarkEnabled = starlightRoute?.entry?.data?.watermark === true;
+const renderedContentHtml = hasWatermarkEnabled
+  ? await applyStaticWatermarks(contentHtml)
+  : contentHtml;
 const isBlogPostPage = starlightRoute?.entry?.data?.date instanceof Date;
 const isGeneratedBlogPage =
   pathname === "/" ||
@@ -16,19 +20,18 @@ const isGeneratedBlogPage =
   pathname.includes("/tags/") ||
   pathname.includes("/authors/");
 const shouldEnhanceImages =
-  !isGeneratedBlogPage && /<img[\s>]/i.test(contentHtml);
+  !isGeneratedBlogPage && /<img[\s>]/i.test(renderedContentHtml);
 ---
 
 {shouldEnhanceImages && <ImageZoomer client:only="react" />}
-<Watermark {...Astro.props} />
 {
   isBlogPostPage ? (
     <BlogMarkdownContent>
-      <Fragment set:html={contentHtml} />
+      <Fragment set:html={renderedContentHtml} />
     </BlogMarkdownContent>
   ) : (
     <Default>
-      <Fragment set:html={contentHtml} />
+      <Fragment set:html={renderedContentHtml} />
     </Default>
   )
 }
