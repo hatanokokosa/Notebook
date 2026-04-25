@@ -13,7 +13,7 @@ const LINE_SPACING_RATIO = 0.15;
 const COL_SPACING_RATIO = 0.35;
 const NO_WATERMARK_MARKER = "|no-watermark";
 const OUTPUT_FORMAT = "avif";
-const OUTPUT_QUALITY = 65;
+const OUTPUT_QUALITY = 80;
 
 const projectRoot = process.cwd();
 process.env.XDG_CACHE_HOME ??= path.join(projectRoot, ".cache");
