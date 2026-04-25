@@ -7,7 +7,7 @@ import { visit } from "unist-util-visit";
 
 const WATERMARK_TEXT = "hatanokokosa";
 const ROTATION_DEG = -30;
-const TEXT_COLOR = "rgba(128, 128, 128, 0.05)";
+const TEXT_COLOR = "rgba(128, 128, 128, 0.07)";
 const FONT_SIZE_RATIO = 0.04;
 const LINE_SPACING_RATIO = 0.15;
 const COL_SPACING_RATIO = 0.35;
