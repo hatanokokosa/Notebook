@@ -20,3 +20,4 @@ bun-debug.log*
 
 # dotfiles
 .vscode/
+.cache/
