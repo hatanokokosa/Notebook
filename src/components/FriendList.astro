@@ -1,7 +1,11 @@
 ---
 import { FRIENDS } from "../data/friends";
-import FriendCard from "./FriendCard.astro";
 import { CardGrid } from "@astrojs/starlight/components";
+import {
+  getFriendDescriptionLines,
+  getFriendDisplayUrl,
+  getVisibleFriends,
+} from "../plugins/friend";
 
 interface Props {
   /* show inactive friends, default: false */
@@ -9,12 +13,45 @@ interface Props {
 }
 
 const { showInactive = false } = Astro.props;
-
-const visibleFriends = showInactive
-  ? FRIENDS
-  : FRIENDS.filter((f) => !f.inactive);
+const visibleFriends = getVisibleFriends(FRIENDS, showInactive);
 ---
 
 <CardGrid stagger>
-  {visibleFriends.map((friend) => <FriendCard friend={friend} />)}
+  {
+    visibleFriends.map((friend) => {
+      const displayUrl = getFriendDisplayUrl(friend.link);
+      const descLines = getFriendDescriptionLines(friend.desc);
+
+      return (
+        <a
+          href={friend.link}
+          class:list={["friend-card", { inactive: friend.inactive }]}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="friend-avatar-container">
+            <img src={friend.avatar} alt={friend.title} class="friend-avatar" />
+          </div>
+          <div class="friend-info">
+            <h3>{friend.title}</h3>
+            <div class="friend-url">{displayUrl}</div>
+            <p>
+              {descLines.map((line, i) => (
+                <>
+                  {line}
+                  {i < descLines.length - 1 && <br />}
+                </>
+              ))}
+              {friend.note && (
+                <>
+                  <br />
+                  <span class="friend-note" set:html={friend.note} />
+                </>
+              )}
+            </p>
+          </div>
+        </a>
+      );
+    })
+  }
 </CardGrid>
