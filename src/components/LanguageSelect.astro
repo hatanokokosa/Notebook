@@ -4,6 +4,7 @@ import Select from "@astrojs/starlight/components/Select.astro";
 
 function localizedPathname(locale: string | undefined): string {
   const url = new URL(Astro.url);
+  const locales = config.locales ?? {};
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   const pathname =
     base && url.pathname.startsWith(base)
@@ -11,7 +12,7 @@ function localizedPathname(locale: string | undefined): string {
       : url.pathname;
   const segments = pathname.split("/").filter(Boolean);
 
-  if (segments[0] && segments[0] in config.locales) {
+  if (segments[0] && segments[0] in locales) {
     segments[0] = locale ?? "";
   } else if (locale) {
     segments.unshift(locale);
@@ -70,7 +71,7 @@ function localizedPathname(locale: string | undefined): string {
           if (!event.persisted) return;
 
           const markupSelectedIndex =
-            select.querySelector("option[selected]")?.index;
+            select.querySelector<HTMLOptionElement>("option[selected]")?.index;
           if (markupSelectedIndex !== select.selectedIndex) {
             select.selectedIndex = markupSelectedIndex ?? 0;
           }
