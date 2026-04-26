@@ -35,7 +35,7 @@ export default defineConfig({
       defaultLocale: "zh-cn",
       locales: {
         "zh-cn": {
-          label: "简体中文",
+          label: "Chinese",
           lang: "zh-CN",
         },
         "en-us": {
@@ -82,7 +82,7 @@ export default defineConfig({
             kokosa: {
               url: "https://github.com/hatanokokosa",
               picture: "/friends/oc.avif",
-              name: "Hatano Kokosa",
+              name: "Kokosa",
             },
           },
 
@@ -107,15 +107,15 @@ export default defineConfig({
 
       sidebar: [
         {
-          label: "About",
+          label: "about",
           autogenerate: { directory: "about" },
         },
         {
-          label: "Notes",
+          label: "notes",
           autogenerate: { directory: "note" },
         },
         {
-          label: "Creation",
+          label: "create",
           autogenerate: { directory: "create" },
         },
       ],
