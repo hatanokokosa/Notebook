@@ -15,6 +15,25 @@ function getGiscusTheme(): string {
   return isDark ? `${base}/giscus/frappe.css` : `${base}/giscus/latte.css`;
 }
 
+function getGiscusLang(): string {
+  const lang = (document.documentElement.lang || "zh-CN").toLowerCase();
+
+  if (lang.startsWith("en")) return "en";
+  if (lang === "zh-cn") return "zh-CN";
+  if (lang === "zh-tw") return "zh-TW";
+  if (lang === "zh-hk") return "zh-HK";
+
+  return "en";
+}
+
+function getGiscusTerm(): string {
+  const pathname = window.location.pathname;
+  const normalizedPathname = pathname.replace(/^\/(zh-cn|en-us)(?=\/|$)/, "");
+
+  if (normalizedPathname === "") return "/";
+  return normalizedPathname;
+}
+
 function renderGiscus() {
   const container = document.querySelector(".giscus-container");
   if (!container) return;
@@ -30,14 +49,14 @@ function renderGiscus() {
   script.setAttribute("data-repo-id", "R_kgDONiihcQ");
   script.setAttribute("data-category", "Q&A");
   script.setAttribute("data-category-id", "DIC_kwDONiihcc4Cs5Yk");
-  script.setAttribute("data-mapping", "pathname");
+  script.setAttribute("data-mapping", "specific");
+  script.setAttribute("data-term", getGiscusTerm());
   script.setAttribute("data-strict", "0");
   script.setAttribute("data-reactions-enabled", "1");
   script.setAttribute("data-emit-metadata", "0");
   script.setAttribute("data-input-position", "bottom");
   script.setAttribute("data-theme", getGiscusTheme());
-  const lang = document.documentElement.lang || "zh-CN";
-  script.setAttribute("data-lang", lang);
+  script.setAttribute("data-lang", getGiscusLang());
   script.setAttribute("data-loading", "eager");
   script.setAttribute("crossorigin", "anonymous");
   script.async = true;

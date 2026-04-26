@@ -32,15 +32,15 @@ export default defineConfig({
       favicon: "/favicon.svg",
 
       // i18n configuration
-      defaultLocale: "root",
+      defaultLocale: "zh-cn",
       locales: {
-        root: {
+        "zh-cn": {
           label: "简体中文",
           lang: "zh-CN",
         },
-        en: {
+        "en-us": {
           label: "English",
-          lang: "en",
+          lang: "en-US",
         },
       },
 
@@ -91,7 +91,7 @@ export default defineConfig({
             words: "rounded",
           },
 
-          title: { "zh-CN": "Kokosa's Blog", en: "Kokosa's Blog" },
+          title: { "zh-CN": "Kokosa's Blog", "en-US": "Kokosa's Blog" },
           postCount: 8,
         }),
 
@@ -107,8 +107,8 @@ export default defineConfig({
 
       sidebar: [
         {
-          label: "Main",
-          autogenerate: { directory: "main" },
+          label: "About",
+          autogenerate: { directory: "about" },
         },
         {
           label: "Notes",
