@@ -58,6 +58,7 @@ export default defineConfig({
       ],
 
       components: {
+        LanguageSelect: "./src/components/LanguageSelect.astro",
         MarkdownContent: "./src/components/MarkdownContent.astro",
       },
 

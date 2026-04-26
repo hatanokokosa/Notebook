@@ -1,3 +1,44 @@
----
-return Astro.redirect("/zh-cn/");
----
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Kokosa's Intensive Care Unit</title>
+    <script is:inline>
+      (() => {
+        const fallbackLocale = "zh-cn";
+        const supportedLocales = new Set(["zh-cn", "en-us"]);
+        const storageKey = "kokosa-preferred-locale";
+
+        const normalizeLocale = (locale) => {
+          const normalized = locale?.toLowerCase().replace("_", "-");
+          if (!normalized) return undefined;
+          if (supportedLocales.has(normalized)) return normalized;
+          if (normalized.startsWith("zh")) return "zh-cn";
+          if (normalized.startsWith("en")) return "en-us";
+        };
+
+        let preferredLocale;
+        try {
+          preferredLocale = normalizeLocale(localStorage.getItem(storageKey));
+        } catch {}
+
+        const browserLocale =
+          preferredLocale ||
+          navigator.languages?.map(normalizeLocale).find(Boolean) ||
+          normalizeLocale(navigator.language) ||
+          fallbackLocale;
+
+        location.replace(`/${browserLocale}/`);
+      })();
+    </script>
+    <meta http-equiv="refresh" content="0; url=/zh-cn/" />
+  </head>
+  <body>
+    <main>
+      <p>Redirecting...</p>
+      <p><a href="/zh-cn/">中文</a> · <a href="/en-us/">English</a></p>
+    </main>
+  </body>
+</html>
