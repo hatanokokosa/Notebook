@@ -72,7 +72,7 @@ _Being a hardcore homebody, she doesn't like sports, so sneakers, athletic shoes
 
 ---
 
-![Artist: 激辣三文鱼米米饭团](/create/01-kokosa/1000058964.avif)
+![Artist: 夢子不骡](/create/01-kokosa/kokosa3.avif)
 
 ---
 
@@ -80,24 +80,12 @@ _Being a hardcore homebody, she doesn't like sports, so sneakers, athletic shoes
 
 ---
 
+![Artist: 激辣三文鱼米米饭团](/create/01-kokosa/1000058964.avif)
+
+---
+
 ![Artist: 海盐冰淇淋球夜猫](/create/01-kokosa/1000063896.avif)
 ![Artist: 海盐冰淇淋球夜猫 (18th birthday illustration, mysterious dragon)](/create/01-kokosa/1000069742.avif)
-
----
-
-![Artist: 夢子不骡](/create/01-kokosa/1000064508.avif)
-
----
-
-### Other Outfit Designs
-
----
-
-![Artist: Kusuki (The ita-bag contains Shian and TT)](/create/01-kokosa/1000065043.avif)
-
----
-
-![Artist: 黑流 (18th birthday illustration, using the outfit from above)](/create/01-kokosa/1000069695.avif)
 
 ---
 
