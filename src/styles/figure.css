@@ -2,6 +2,13 @@
   --caption-color: var(--sl-color-gray-2);
 }
 
+article img:not(a img),
+.sl-markdown-content img:not(a img),
+figure img {
+  display: block;
+  margin-inline: auto;
+}
+
 figure img {
   border-color: rgba(177, 171, 190, 0.4);
   border-style: solid;
