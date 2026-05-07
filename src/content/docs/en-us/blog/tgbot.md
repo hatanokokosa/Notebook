@@ -91,7 +91,7 @@ Implemented features:
 | **Stats System**           | Message count, user count, and AI block count    |
 | **Multi API Key Rotation** | Google's API quota is too small                  |
 
-> Who is 20 API calls per day enough for? It used to be 100 calls per day. Gemini CLI and Antigravity were generous, but the API is just stingy.
+> Who is 20 API calls per day enough for? It used to be 100 calls per day. Gemini CLI and Antigravity were generous, but the API is just stingy.  
 > Second edit: now Gemini CLI and Antigravity are not enough either, FUCKING GOOGLE.
 
 The whole project runs on Cloudflare Workers (same as NFD, convenient, useful, and free), making it a completely zero-cost solution. The LLM is also free.

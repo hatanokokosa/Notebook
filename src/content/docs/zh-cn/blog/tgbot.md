@@ -91,7 +91,7 @@ Analyze the content:`;
 | **统计系统**        | 消息数、用户数、AI 拦截数     |
 | **多 API Key 轮换** | Google 给的 API 额度太少了    |
 
-> 每天 20 次 API 调用够谁用啊，之前还每天 100 次调用，Gemini CLI 和 Antigravity 就量大管饱，API 就那么抠
+> 每天 20 次 API 调用够谁用啊，之前还每天 100 次调用，Gemini CLI 和 Antigravity 就量大管饱，API 就那么抠  
 > 二编：现在 Gemini CLI 和 Antigravity 也不够用了
 
 整个项目跑在 Cloudflare Workers 上（NFD 就是这样，方便好用还免费），完全零成本的方案，LLM 用的也是免费的
