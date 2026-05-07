@@ -1,4 +1,3 @@
-import starlightScrollToTop from "starlight-scroll-to-top";
 import rehypeFigure from "@microflash/rehype-figure";
 import catppuccin from "@catppuccin/starlight";
 import { defineConfig } from "astro/config";
@@ -58,9 +57,19 @@ export default defineConfig({
       ],
 
       components: {
+        Head: "./src/components/Head.astro",
         LanguageSelect: "./src/components/LanguageSelect.astro",
         MarkdownContent: "./src/components/MarkdownContent.astro",
+        SocialIcons: "./src/components/SocialIcons.astro",
       },
+
+      social: [
+        {
+          href: "/zh-cn/blog/rss.xml",
+          icon: "rss",
+          label: "RSS",
+        },
+      ],
 
       head: [
         {
@@ -92,17 +101,11 @@ export default defineConfig({
             words: "rounded",
           },
 
-          title: { "zh-CN": "Kokosa's Blog", "en-US": "Kokosa's Blog" },
+          title: {
+            "zh-CN": "Kokosa's Blog",
+            "en-US": "Kokosa's Blog",
+          },
           postCount: 8,
-        }),
-
-        starlightScrollToTop({
-          tooltipText: "Back to top",
-          svgStrokeWidth: 1.5,
-          smoothScroll: true,
-          showTooltip: true,
-          borderRadius: "50",
-          threshold: 20,
         }),
       ],
 

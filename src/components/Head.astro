@@ -1,0 +1,23 @@
+---
+import config from "virtual:starlight/user-config";
+
+const locale =
+  Astro.locals.starlightRoute.locale ?? config.defaultLocale.locale ?? "zh-cn";
+const localizedRssHref = `/${locale}/blog/rss.xml`;
+const { head } = Astro.locals.starlightRoute;
+---
+
+{
+  head.map(({ tag: Tag, attrs, content }) => {
+    const patchedAttrs =
+      attrs?.rel === "alternate" &&
+      attrs?.type === "application/rss+xml" &&
+      typeof attrs.href === "string"
+        ? { ...attrs, href: localizedRssHref }
+        : attrs;
+
+    return <Tag {...patchedAttrs} set:html={content} />;
+  })
+}
+
+<script src="../plugins/scroll.ts"></script>
