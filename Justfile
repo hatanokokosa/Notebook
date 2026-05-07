@@ -1,7 +1,7 @@
 default:
     just --list
 
-test:
+dev:
     bun dev
 
 push:
