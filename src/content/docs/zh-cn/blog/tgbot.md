@@ -20,78 +20,84 @@ excerpt: 之前用的那个转发 Bot 一直收到很多广告，而且开发者
 
 谔谔...显然这条路行不通。于是我又听群友的尝试写了一堆**正则表达式**，但是众所周知，中文广告都很神秘，`丅子`、`微 P 嗯`、`神必 emoji 拼接`...这些真的能用正则防下来吗？或许可以，但是显然我的脑子没这么强大（汗），所以最后决定用 LLM 来审核
 
-### Gemini！好！
+### Gemini！
 
-我需要一个尽可能快，智商不用多高但是能理解语料的模型，然后当时并不知道 Google 又给 AI Studio 的限额缩水了，众所周知 Google 有个模型叫 `gemini-flash-lite`，感觉适合用来做审查内容的模型，于是就用上了，写了一段简单的 Prompt 过去让它判断用户输入，输出 `SAFE` 或是 `UNSAFE`
+我需要一个尽可能快，智商不用多高但是能理解语料的模型，众所周知 Google 有个模型叫 `gemini-3-flash`，感觉适合用来做审查内容的模型，于是就用上了，写了一段简单的 Prompt 过去让它判断用户输入，输出 `SAFE` 或是 `UNSAFE`
 
-```javascript
-const payload = {
-  contents: [
-    {
-      parts: [
-        {
-          text: `
-        	# Role
-        	Content Moderator API. Output one word only.
-        	# Rules
-        	UNSAFE if:
-        	- Real human nudity/sex
-        	- QR codes/spam/ads
-        	- Real gore/shock content
-        	- Illegal content promotion
-        	SAFE if:
-        	- 2D/Anime/Cartoon (even suggestive)
-        	- Normal photos/text/screenshots
-        	# Output
-        	One word: "SAFE" or "UNSAFE"
-        	Analyze: ${JSON.stringify(text)}`,
-        },
-      ],
-    },
-  ],
-};
+```typescript
+const MODERATION_PROMPT = `
+# Role
+Content Moderator API. Output one word only.
+
+# Rules
+UNSAFE if:
+- Real human nudity/sex
+- QR codes/spam/ads/gambling promotion
+- Real gore/shock content
+- Illegal content promotion
+- Scam/phishing attempts
+
+SAFE if:
+- 2D/Anime/Cartoon (even suggestive)
+- Normal photos/text/screenshots
+- Regular conversation
+
+# Output
+One word: "SAFE" or "UNSAFE"
+
+Analyze the content:`;
 ```
 
-虽然会有一点延迟，但是几乎可以忽略不计了，相比传统的规则匹配，LLM 能理解上下文和语义，误杀率低很多。缺点可能就是成本，不过Gemini 有免费额度，并不多就是了，接了三个 API 也就每天 60 次，广告拦截倒是勉强够用了
+虽然会有一点延迟，但是几乎可以忽略不计了，相比传统的规则匹配，LLM 能理解上下文和语义，误杀率低很多。缺点可能就是成本，不过 Gemini 有免费额度，并不多就是了，接了三个 API 也就每天 60 次，广告拦截倒是勉强够用了
 
-### 重构整个项目
+### TS大法好！
 
-既然都改了这么多了，干脆把整个项目重构一下吧。原来的代码架构很乱，所有逻辑都堆在一个文件里，维护起来比较痛苦（虽然这种项目几乎不需要怎么维护）
-
-于是和各路 LLM 苦战了一晚上，全降智了，操你妈 LLM 提供商，最终下了个 Antigravity 一口气把整个项目重构成了模块化的架构：
+整个项目是一个模块化的结构：
 
 ```txt
 .
 ├── src
-│   ├── ai.js
-│   ├── config.js
+│   ├── ai.ts
+│   ├── config.ts
 │   ├── handlers
-│   │   ├── admin.js
-│   │   └── guest.js
-│   ├── index.js
-│   ├── storage.js
-│   └── telegram.js
+│   │   ├── admin
+│   │   │   ├── callbacks.ts
+│   │   │   ├── commands.ts
+│   │   │   ├── index.ts
+│   │   │   ├── replies.ts
+│   │   │   └── shared.ts
+│   │   └── guest.ts
+│   ├── i18n
+│   │   ├── en.ts
+│   │   └── zh.ts
+│   ├── i18n.ts
+│   ├── index.ts
+│   ├── storage.ts
+│   ├── telegram.ts
+│   └── types.ts
+├── tsconfig.json
 └── wrangler.toml
 ```
 
-不得不说 Antigravity 是真的好，免费的 Claude Opus 4 爽用了，给的额度还多
-
 实现了这些：
 
-| **功能**            | **描述**                  |
-| ------------------- | ------------------------- |
-| **AI 内容审核**     | 基于 AI 的不良内容识别    |
-| **Ban List**        | 查看所有被封禁的用户      |
-| **统计系统**        | 消息数、用户数、AI 拦截数 |
-| **多 API Key 轮换** | 傻逼 Google               |
+| **功能**            | **描述**                      |
+| ------------------- | ----------------------------- |
+| **LLM 内容审核**    | 基于 LLM 的不良内容识别       |
+| **ban list**        | 查看所有被封禁的用户          |
+| **缓存内容哈希**    | 防止多次刷屏同样内容浪费token |
+| **黑名单系统**      | 同上，多次被拦截直接拉黑      |
+| **白名单系统**      | 连续未被拦截停止审查          |
+| **统计系统**        | 消息数、用户数、AI 拦截数     |
+| **多 API Key 轮换** | Google 给的 API 额度太少了    |
 
-> 多 API Key 轮换这个功能是为了应对死妈 Google 的 Rate Limit，每天 20 次 API 调用够谁用啊，之前还每天 100 次调用，Gemini CLI 和 Antigravity 就量大管饱，API 就那么抠
+> 每天 20 次 API 调用够谁用啊，之前还每天 100 次调用，Gemini CLI 和 Antigravity 就量大管饱，API 就那么抠
+> 二编：现在 Gemini CLI 和 Antigravity 也不够用了
 
-整个项目跑在 Cloudflare Workers 上（原项目的小巧思，方便好用还免费），完全零成本的方案，LLM 用的也是免费的，整个项目就一堆 JavaScript
+整个项目跑在 Cloudflare Workers 上（NFD 就是这样，方便好用还免费），完全零成本的方案，LLM 用的也是免费的
 
 最后把代码推到了 GitHub，以 BSD2 协议开源
 
 ## Link~
 
-[GitHub: kokosa-forward-bot](https://github.com/hatanokokosa/kokosa-forward-bot)  
-[LinuxDo: KFB — 一个带有 AI 审核的 Telegram 私聊转发机器人](https://linux.do/t/topic/1340613)
+[GitHub: kokosa-forward-bot](https://github.com/hatanokokosa/kokosa-forward-bot)
