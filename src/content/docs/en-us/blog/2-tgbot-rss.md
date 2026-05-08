@@ -106,9 +106,9 @@ It checks every 30 minutes. For easier testing, I also added a manual command:
 /rss_refresh
 ```
 
-![Notification after manually refreshing RSS feeds](/posts/2-tgbot-rss/refresh.png)
-
 > Then I realized that manual refreshes might collide with Cron, so it needs a KV lock. Otherwise, two refresh jobs might both see "this article has not been sent yet" and send it twice.
+
+![Notification after manually refreshing RSS feeds](/posts/2-tgbot-rss/refresh.png)
 
 ### LLM Summaries
 

@@ -106,9 +106,9 @@ crons = ["*/30 * * * *"]
 /rss_refresh
 ```
 
-![手动刷新 RSS 后的通知](/posts/2-tgbot-rss/refresh.png)
-
 > 然后我发现手动刷新可能和 Cron 刚好撞车，所以需要一个 KV lock，要不两个刷新任务同时看到“这篇文章没发过”，可能就发两遍了
+
+![手动刷新 RSS 后的通知](/posts/2-tgbot-rss/refresh.png)
 
 ### LLM 摘要
 
