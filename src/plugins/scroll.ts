@@ -1,11 +1,80 @@
 const cleanupKey = "__kokosaScrollToTopCleanup";
+const anchorCleanupKey = "__kokosaSmoothAnchorCleanup";
 const styleId = "kokosa-scroll-to-top-style";
 const buttonId = "kokosa-scroll-to-top-button";
 const tooltipText = "Back to top";
 
 type WindowWithScrollCleanup = Window & {
   [cleanupKey]?: () => void;
+  [anchorCleanupKey]?: () => void;
 };
+
+function setupSmoothAnchorScroll() {
+  const scrollWindow = window as WindowWithScrollCleanup;
+
+  scrollWindow[anchorCleanupKey]?.();
+
+  const getSamePageHashLink = (target: EventTarget | null) => {
+    if (!(target instanceof Element)) return null;
+
+    const link = target.closest<HTMLAnchorElement>('a[href*="#"]');
+    if (!link) return null;
+
+    const url = new URL(link.href, window.location.href);
+    if (
+      url.origin !== window.location.origin ||
+      url.pathname !== window.location.pathname ||
+      url.search !== window.location.search ||
+      !url.hash
+    ) {
+      return null;
+    }
+
+    return { link, hash: url.hash };
+  };
+
+  const onDocumentClick = (event: MouseEvent) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    const hashLink = getSamePageHashLink(event.target);
+    if (!hashLink) return;
+
+    const target =
+      hashLink.hash === "#_top"
+        ? document.documentElement
+        : document.getElementById(decodeURIComponent(hashLink.hash.slice(1)));
+
+    if (!target) return;
+
+    event.preventDefault();
+
+    const shouldReduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    target.scrollIntoView({
+      behavior: shouldReduceMotion ? "auto" : "smooth",
+      block: "start",
+    });
+
+    history.pushState(null, "", hashLink.hash);
+  };
+
+  document.addEventListener("click", onDocumentClick);
+
+  scrollWindow[anchorCleanupKey] = () => {
+    document.removeEventListener("click", onDocumentClick);
+  };
+}
 
 function setupScrollToTop() {
   const scrollWindow = window as WindowWithScrollCleanup;
@@ -213,11 +282,20 @@ function setupScrollToTop() {
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", setupScrollToTop, {
-    once: true,
-  });
+  document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+      setupScrollToTop();
+      setupSmoothAnchorScroll();
+    },
+    { once: true },
+  );
 } else {
   setupScrollToTop();
+  setupSmoothAnchorScroll();
 }
 
-document.addEventListener("astro:page-load", setupScrollToTop);
+document.addEventListener("astro:page-load", () => {
+  setupScrollToTop();
+  setupSmoothAnchorScroll();
+});

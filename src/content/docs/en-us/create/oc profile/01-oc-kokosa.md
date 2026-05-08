@@ -30,10 +30,10 @@ Dislikes socializing; more socially lazy than socially anxious. A hardcore homeb
 
 ### Appearance
 
-**Hairstyle:** Black **medium-length loose hair**, shoulder-length (so it's not actually long hair).  
+**Hairstyle:** Black **_medium-length loose hair_**, shoulder-length (so it's not actually long hair).  
 ~~_Rather, it's the kind of hair volume that makes you want to bury your face in the back of her neck and take a deep breath (Hey!)_~~
 
-**Face:** Wears **silver round-framed (thin-framed)** glasses. Her eyes are **red**, with a **flat eye shape and a cat-like mouth**.
+**Face:** Wears **_silver round-framed (thin-framed)_** glasses. Her eyes are **_red_**, with a **_flat eye shape and a cat-like mouth_**.
 
 ![Eye shape reference. This image is an example by Artist SANKI三木, not my OC|no-watermark](/create/01-kokosa/1000064494.avif)
 
@@ -49,26 +49,32 @@ _Might create a color palette later on._
 
 ### Clothes
 
-Mainly a **black hoodie**, with a mysterious logo composed of **light blue and white** printed on the right chest:
+Mainly a **_black hoodie_**, with a mysterious logo composed of **_light blue and white_** printed on the right chest:
 
 ![Referenced the Nix icon design, but feels like it has no meaning () pending redesign|no-watermark](/create/01-kokosa/img.avif)
 
-The lower body is shorts or a short skirt (black or off-white), mostly covered by the hoodie.  
-**Oversize!** Overall, it's an **extra-large black hoodie**.
+The lower body is **_shorts or a short skirt_** (black or off-white), mostly covered by the hoodie.  
+**_Oversize!_** A large **_black hoodie_**, with the hood down.
 
-![PID: 137359159 (THIIIIS big, roughly this kind of feeling)|no-watermark](/create/01-kokosa/137359159_p0.avif)
+![PID: 137359159 (THIIIIS big, reference only, not the actual outfit design)|no-watermark](/create/01-kokosa/137359159_p0.avif)
 
 ### Shoes & Socks
 
-![PID: 82771236 (Not exactly loose socks, just slightly loose and wrinkled micro-loose socks)|no-watermark](/create/01-kokosa/1000069629.avif)  
-Socks are **short white socks**, refer to the image above ⬆  
-Shoes have no specific design yet, usually black **platform leather shoes, slippers**, etc., depending on the scene. May add more details later.
+![PID: 82771236 (Not exactly loose socks, just slightly loose and wrinkled micro-loose socks)|no-watermark](/create/01-kokosa/1000069629.avif)
 
-_Being a hardcore homebody, she doesn't like sports, so sneakers, athletic shoes, etc., are pretty much out of the question ()_
+Socks are **_short white socks_**, refer to the image above ⬆  
+Shoes have no specific design yet, usually black **_platform leather shoes, slippers_**, etc., depending on the scene. May add more details later.
+
+_Being a hardcore homebody, she doesn't like sports, so sneakers and the like are pretty much out of the question ()_
 
 ---
 
 ## Artworks / Commissions
+
+Commissioned artworks, gifts from friends, and so on.  
+If it's drawn by myself and I feel okay posting it, it won't be listed here.
+
+### Full-size
 
 ---
 
@@ -80,12 +86,19 @@ _Being a hardcore homebody, she doesn't like sports, so sneakers, athletic shoes
 
 ---
 
-![Artist: 激辣三文鱼米米饭团](/create/01-kokosa/1000058964.avif)
+![Artist: 溪叶](/create/01-kokosa/kokosa-wake.avif)
 
 ---
 
-![Artist: 海盐冰淇淋球夜猫](/create/01-kokosa/1000063896.avif)
-![Artist: 海盐冰淇淋球夜猫 (18th birthday illustration, mysterious dragon)](/create/01-kokosa/1000069742.avif)
+### Chibi / QQ
+
+---
+
+![Artist: 阿影又迷路了](/create/01-kokosa/kokosa-qq.avif)
+
+---
+
+![Artist: 激辣三文鱼米米饭团 (probably counts as chibi?)](/create/01-kokosa/1000058964.avif)
 
 ---
 
