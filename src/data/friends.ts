@@ -34,7 +34,7 @@ export const FRIENDS: FriendLink[] = [
     title: "云楼汐",
     avatar: "/friends/xi.avif",
     desc: '"Hinc itur ad astra"\nAlgorithm, Computer and Math',
-    note: "你该更新了，，，",
+    note: "何时，我能看到Neovim完整版！",
   },
   {
     link: "https://0o0.codeberg.page/",
@@ -62,6 +62,6 @@ export const FRIENDS: FriendLink[] = [
     title: "ZeroQing's Blog",
     avatar: "/friends/zq.avif",
     desc: "一目洞察网中险，一策化解千般难",
-    note: "是网安佬，但是会忘记自己宝塔的密码",
+    note: "你想起来你的宝塔密码了吗",
   },
 ];
