@@ -34,7 +34,7 @@ export const FRIENDS: FriendLink[] = [
     title: "云楼汐",
     avatar: "/friends/xi.avif",
     desc: '"Hinc itur ad astra"\nAlgorithm, Computer and Math',
-    note: "何时，我能看到Neovim完整版！",
+    note: "何时，我能看到 Neovim 完整版！",
   },
   {
     link: "https://0o0.codeberg.page/",
@@ -44,11 +44,11 @@ export const FRIENDS: FriendLink[] = [
     note: "你是谁来着（）",
   },
   {
-    link: "https://cloverta.top/",
-    title: "ClovertaTheTrilobita",
+    link: "https://blog.cloverta.top/",
+    title: "Cloverta's Blog",
     avatar: "/friends/clover.avif",
     desc: "带学牲 | 计算机本科在读 | 死宅 | I use Arch btw",
-    note: "主题好看，赞赏",
+    note: "用衬线体的都是好人♥️",
   },
   {
     link: "https://a-moment096.github.io/",
