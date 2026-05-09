@@ -45,7 +45,7 @@ Dislikes socializing; more socially lazy than socially anxious. A hardcore homeb
 
 The outfit design is relatively simple, mostly common styles (
 
-_Might create a color palette later on._
+_For background elements and other color choices, refer to [Catppuccin](https://catppuccin.com/palette/)._
 
 ### Clothes
 
