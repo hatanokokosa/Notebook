@@ -4,6 +4,10 @@ import path from "node:path";
 import { fromHtml } from "hast-util-from-html";
 import { toHtml } from "hast-util-to-html";
 import { visit } from "unist-util-visit";
+import {
+  embedBlindWatermark,
+  getBlindWatermarkConfig,
+} from "./blind-watermark";
 
 const WATERMARK_TEXT = "kokosa.icu";
 const ROTATION_DEG = -30;
@@ -12,26 +16,17 @@ const FONT_SIZE_RATIO = 0.04;
 const LINE_SPACING_RATIO = 0.15;
 const COL_SPACING_RATIO = 0.35;
 const NO_WATERMARK_MARKER = "|no-watermark";
-const OUTPUT_FORMAT = "avif";
+const DEFAULT_OUTPUT_FORMAT = "avif";
+const BLIND_WATERMARK_OUTPUT_FORMAT = "avif";
 const OUTPUT_QUALITY = 80;
 
 const projectRoot = process.cwd();
 process.env.XDG_CACHE_HOME ??= path.join(projectRoot, ".cache");
 
-const WATERMARK_CACHE_VERSION = [
-  WATERMARK_TEXT,
-  ROTATION_DEG,
-  TEXT_COLOR,
-  FONT_SIZE_RATIO,
-  LINE_SPACING_RATIO,
-  COL_SPACING_RATIO,
-  OUTPUT_FORMAT,
-  OUTPUT_QUALITY,
-].join(":");
-
 const publicDir = path.join(projectRoot, "public");
 const outputDir = path.join(publicDir, "_watermarked");
 const distOutputDir = path.join(projectRoot, "dist", "_watermarked");
+const watermarkCacheDir = path.join(projectRoot, ".cache", "watermark");
 const generatedCache = new Map<string, Promise<string | null>>();
 
 type HastNode = {
@@ -120,6 +115,29 @@ type ImageDimensions = {
   width: number;
   height: number;
 };
+
+function getOutputFormat(blindWatermarkEnabled: boolean): string {
+  return blindWatermarkEnabled
+    ? BLIND_WATERMARK_OUTPUT_FORMAT
+    : DEFAULT_OUTPUT_FORMAT;
+}
+
+function getWatermarkCacheVersion(
+  blindWatermarkCacheVersion: string,
+  outputFormat: string,
+): string {
+  return [
+    WATERMARK_TEXT,
+    ROTATION_DEG,
+    TEXT_COLOR,
+    FONT_SIZE_RATIO,
+    LINE_SPACING_RATIO,
+    COL_SPACING_RATIO,
+    outputFormat,
+    OUTPUT_QUALITY,
+    blindWatermarkCacheVersion,
+  ].join(":");
+}
 
 function getAvifDimensions(buffer: Buffer): ImageDimensions | null {
   const ispeIndex = buffer.indexOf("ispe", 0, "ascii");
@@ -269,7 +287,13 @@ async function getWatermarkedSrc(src: string): Promise<string | null> {
   const inputStat = await stat(inputPath).catch(() => null);
   if (!inputStat?.isFile()) return null;
 
-  const cacheKey = `${inputPath}:${inputStat.mtimeMs}:${inputStat.size}:${suffix}`;
+  const blindWatermarkConfig = getBlindWatermarkConfig();
+  const outputFormat = getOutputFormat(blindWatermarkConfig.enabled);
+  const cacheVersion = getWatermarkCacheVersion(
+    blindWatermarkConfig.cacheVersion,
+    outputFormat,
+  );
+  const cacheKey = `${inputPath}:${inputStat.mtimeMs}:${inputStat.size}:${suffix}:${cacheVersion}`;
   const existing = generatedCache.get(cacheKey);
   if (existing) return existing;
 
@@ -281,11 +305,11 @@ async function getWatermarkedSrc(src: string): Promise<string | null> {
       .update(inputPath)
       .update(String(inputStat.mtimeMs))
       .update(String(inputStat.size))
-      .update(WATERMARK_CACHE_VERSION)
+      .update(cacheVersion)
       .digest("hex")
       .slice(0, 16);
     const outputBaseName = `${path.basename(srcPathname, path.extname(srcPathname))}.${hash}`;
-    const rasterOutputName = `${outputBaseName}.${OUTPUT_FORMAT}`;
+    const rasterOutputName = `${outputBaseName}.${outputFormat}`;
     const rasterOutputPath = path.join(outputDir, rasterOutputName);
 
     await mkdir(outputDir, { recursive: true });
@@ -293,8 +317,7 @@ async function getWatermarkedSrc(src: string): Promise<string | null> {
     const rasterOutputStat = await stat(rasterOutputPath).catch(() => null);
     if (!rasterOutputStat?.isFile()) {
       const { default: sharp } = await import("sharp");
-
-      await sharp(inputPath)
+      const visibleWatermarkedImage = sharp(inputPath)
         .rotate()
         .composite([
           {
@@ -303,15 +326,35 @@ async function getWatermarkedSrc(src: string): Promise<string | null> {
             ),
             blend: "over",
           },
-        ])
-        .avif({ quality: OUTPUT_QUALITY })
-        .toFile(rasterOutputPath);
+        ]);
+
+      if (blindWatermarkConfig.enabled) {
+        await mkdir(watermarkCacheDir, { recursive: true });
+
+        const intermediatePath = path.join(
+          watermarkCacheDir,
+          `${outputBaseName}.visible.png`,
+        );
+
+        await visibleWatermarkedImage.png().toFile(intermediatePath);
+        await embedBlindWatermark({
+          inputPath: intermediatePath,
+          outputPath: rasterOutputPath,
+          config: blindWatermarkConfig,
+        });
+      } else {
+        await visibleWatermarkedImage
+          .avif({ quality: OUTPUT_QUALITY })
+          .toFile(rasterOutputPath);
+      }
     }
 
     await mirrorGeneratedFile(rasterOutputPath, rasterOutputName);
 
     return `/_watermarked/${rasterOutputName}${suffix}`;
   })().catch((error) => {
+    if (blindWatermarkConfig.enabled) throw error;
+
     console.warn(`Watermark generation failed for ${src}:`, error);
     return null;
   });

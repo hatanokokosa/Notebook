@@ -1,0 +1,10 @@
+[package]
+name = "kokosa-blind-watermark"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+bitvec = "1.0.1"
+blind_watermark = "0.1.3"
+image = "0.25.10"
