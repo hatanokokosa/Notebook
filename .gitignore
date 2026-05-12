@@ -1,7 +1,6 @@
 # build output
 dist/
 public/_watermarked/
-result
 # generated types
 .astro/
 
