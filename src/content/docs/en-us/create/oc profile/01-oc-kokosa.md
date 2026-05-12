@@ -12,7 +12,7 @@ watermark: true
 
 ### Concept Art
 
-![Artist: 琅狐_Langhu](/create/01-kokosa/1000064932.avif)
+![Artist: 琅狐_Langhu](/create/01-kokosa/b6c6516c668d4790.avif)
 
 ---
 
@@ -24,7 +24,7 @@ _The world-building isn't fully written yet (), but anyway, it's an era with a s
 
 Dislikes socializing; more socially lazy than socially anxious. A hardcore homebody (otaku girl) whose hobbies revolve around all things computer-related. Loves reading and photography, which offsets some of her otaku genes to the point where she will actually drag friends out to travel. Frequently uses a film camera.
 
-![Reference: Nikon F2, using a waist-level viewfinder. The image shows a Nikon FM2 for color reference (please treat the orange as black x|no-watermark](/create/01-kokosa/nikonfm2.avif)
+![Reference: Nikon F2, using a waist-level viewfinder. The image shows a Nikon FM2 for color reference (please treat the orange as black x|no-watermark](/create/01-kokosa/0daa9a258d4f678e.avif)
 
 ---
 
@@ -35,7 +35,7 @@ Dislikes socializing; more socially lazy than socially anxious. A hardcore homeb
 
 **Face:** Wears **_silver round-framed (thin-framed)_** glasses. Her eyes are **_red_**, with a **_flat eye shape and a cat-like mouth_**.
 
-![Eye shape reference. This image is an example by Artist SANKI三木, not my OC|no-watermark](/create/01-kokosa/1000064494.avif)
+![Eye shape reference. This image is an example by Artist SANKI三木, not my OC|no-watermark](/create/01-kokosa/1eebc04e2b9b5e10.avif)
 
 **Physique:** Quite slender, but still has a bit of a chest _(maybe A-B?)_. Overall, quite petite.
 
@@ -51,16 +51,16 @@ _For background elements and other color choices, refer to [Catppuccin](https://
 
 Mainly a **_black hoodie_**, with a mysterious logo composed of **_light blue and white_** printed on the right chest:
 
-![Referenced the Nix icon design, but feels like it has no meaning () pending redesign|no-watermark](/create/01-kokosa/img.avif)
+![Referenced the Nix icon design, but feels like it has no meaning () pending redesign|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
 
 The lower body is **_shorts or a short skirt_** (black or off-white), mostly covered by the hoodie.  
 **_Oversize!_** A large **_black hoodie_**, with the hood down.
 
-![PID: 137359159 (THIIIIS big, reference only, not the actual outfit design)|no-watermark](/create/01-kokosa/137359159_p0.avif)
+![PID: 137359159 (THIIIIS big, reference only, not the actual outfit design)|no-watermark](/create/01-kokosa/f7cac4e70457572c.avif)
 
 ### Shoes & Socks
 
-![PID: 82771236 (Not exactly loose socks, just slightly loose and wrinkled micro-loose socks)|no-watermark](/create/01-kokosa/1000069629.avif)
+![PID: 82771236 (Not exactly loose socks, just slightly loose and wrinkled micro-loose socks)|no-watermark](/create/01-kokosa/cbd833383374aa0c.avif)
 
 Socks are **_short white socks_**, refer to the image above ⬆  
 Shoes have no specific design yet, usually black **_platform leather shoes, slippers_**, etc., depending on the scene. May add more details later.
@@ -78,15 +78,15 @@ If it's drawn by myself and I feel okay posting it, it won't be listed here.
 
 ---
 
-![Artist: 夢子不骡](/create/01-kokosa/kokosa3.avif)
+![Artist: 夢子不骡](/create/01-kokosa/74eac2952588cf9c.avif)
 
 ---
 
-![Artist: SANKI三木](/create/01-kokosa/1000054109.avif)
+![Artist: SANKI三木](/create/01-kokosa/e73c848cb93f0d69.avif)
 
 ---
 
-![Artist: 溪叶](/create/01-kokosa/kokosa-wake.avif)
+![Artist: 溪叶](/create/01-kokosa/322800afee3c593e.avif)
 
 ---
 
@@ -94,11 +94,11 @@ If it's drawn by myself and I feel okay posting it, it won't be listed here.
 
 ---
 
-![Artist: 阿影又迷路了](/create/01-kokosa/kokosa-qq.avif)
+![Artist: 阿影又迷路了](/create/01-kokosa/78e306083f5658a7.avif)
 
 ---
 
-![Artist: 激辣三文鱼米米饭团 (probably counts as chibi?)](/create/01-kokosa/1000058964.avif)
+![Artist: 激辣三文鱼米米饭团 (probably counts as chibi?)](/create/01-kokosa/d652b5eb48dbd731.avif)
 
 ---
 

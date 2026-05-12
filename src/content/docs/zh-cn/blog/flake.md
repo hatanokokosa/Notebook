@@ -139,4 +139,4 @@ imports = [
 
 其他的就和我原来的配置就没什么区别了，目前它们还没有被上传到 GitHub 托管，之后估计有时间就会去搞一下，最后就附带一张截图：
 
-![情绪好](/posts/flake/rice.avif)
+![情绪好](/posts/flake/336e0513775b3f1f.avif)

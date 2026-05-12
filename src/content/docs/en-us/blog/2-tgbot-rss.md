@@ -22,7 +22,7 @@ My requirement is simple: when a friend's blog updates, or when certain sites pu
 /rss_title         # rename
 ```
 
-![RSS bot command list](/posts/2-tgbot-rss/commands.png)
+![RSS bot command list](/posts/2-tgbot-rss/a293631260c072db.png)
 
 ### Why Not Use an Existing Service?
 
@@ -108,7 +108,7 @@ It checks every 30 minutes. For easier testing, I also added a manual command:
 
 > Then I realized that manual refreshes might collide with Cron, so it needs a KV lock. Otherwise, two refresh jobs might both see "this article has not been sent yet" and send it twice.
 
-![Notification after manually refreshing RSS feeds](/posts/2-tgbot-rss/refresh.png)
+![Notification after manually refreshing RSS feeds](/posts/2-tgbot-rss/6696e132cf6a7fbb.png)
 
 ### LLM Summaries
 

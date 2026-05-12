@@ -37,7 +37,7 @@ TZDIR="/usr/share/zoneinfo" TZ="Asia/Shanghai" %command%
 
 After adding these launch parameters and restarting the game, the time displays correctly. 9:31 is now 9:31.
 
-![Something like this, it was originally showing 1:31](/posts/1-chill-with-you/utcp8.avif)
+![Something like this, it was originally showing 1:31](/posts/1-chill-with-you/d4ed6b986d87948e.avif)
 
 ### Afterword
 

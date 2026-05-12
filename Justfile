@@ -10,6 +10,9 @@ deploy:
 clean:
     rm -rf dist public/_watermarked .cache .astro
 
+rename-images *args:
+    bun scripts/rename-images.ts {{args}}
+
 push:
     bunx prettier --write .
     git add .

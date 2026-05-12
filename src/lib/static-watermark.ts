@@ -14,6 +14,7 @@ const COL_SPACING_RATIO = 0.35;
 const NO_WATERMARK_MARKER = "|no-watermark";
 const OUTPUT_FORMAT = "avif";
 const OUTPUT_QUALITY = 80;
+const OUTPUT_ID_LENGTH = 16;
 
 const projectRoot = process.cwd();
 process.env.XDG_CACHE_HOME ??= path.join(projectRoot, ".cache");
@@ -285,9 +286,8 @@ async function getWatermarkedSrc(src: string): Promise<string | null> {
       .update(String(inputStat.mtimeMs))
       .update(String(inputStat.size))
       .update(cacheVersion)
-      .digest("hex")
-      .slice(0, 16);
-    const outputBaseName = `${path.basename(srcPathname, path.extname(srcPathname))}.${hash}`;
+      .digest("hex");
+    const outputBaseName = hash.slice(0, OUTPUT_ID_LENGTH);
     const rasterOutputName = `${outputBaseName}.${OUTPUT_FORMAT}`;
     const rasterOutputPath = path.join(outputDir, rasterOutputName);
 
