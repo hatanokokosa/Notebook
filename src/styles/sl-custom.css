@@ -1,5 +1,64 @@
 .sl-link-button {
-  border-radius: 4px;
+  border-radius: 0;
+}
+
+:root {
+  --pagefind-ui-border-radius: 0px !important;
+  --pagefind-ui-image-border-radius: 0px !important;
+  --sl-search-corners: 0px !important;
+}
+
+#starlight__search {
+  --pagefind-ui-border-radius: 0px !important;
+  --pagefind-ui-image-border-radius: 0px !important;
+  --sl-search-corners: 0px !important;
+}
+
+:where(a, button, code, dialog, input, kbd, pre, select, summary, textarea),
+:where(
+  .card,
+  .expressive-code pre,
+  .sl-badge,
+  .sl-link-card,
+  .friend-card,
+  .friend-url,
+  .pagination-links a,
+  .toggle,
+  starlight-file-tree .highlight,
+  #starlight__search .pagefind-ui__result-inner > *
+) {
+  border-radius: 0 !important;
+}
+
+.expressive-code {
+  --ec-brdRad: 0px !important;
+}
+
+.expressive-code pre::-webkit-scrollbar,
+.expressive-code pre::-webkit-scrollbar-track,
+.expressive-code pre::-webkit-scrollbar-thumb {
+  border-radius: 0 !important;
+}
+
+#starlight__search
+  :where(
+    .pagefind-ui__button,
+    .pagefind-ui__filter-checkbox,
+    .pagefind-ui__loading,
+    .pagefind-ui__result-image,
+    .pagefind-ui__result-tag,
+    .pagefind-ui__search-clear,
+    .pagefind-ui__search-input
+  ) {
+  border-radius: 0 !important;
+}
+
+:where(
+  .PhotoView-Slider__toolbarIcon,
+  .scroll-to-top-button,
+  starlight-menu-button > button
+) {
+  border-radius: 50% !important;
 }
 
 .sl-markdown-content em {

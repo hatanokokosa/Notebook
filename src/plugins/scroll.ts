@@ -141,7 +141,7 @@ function setupScrollToTop() {
       background-color: var(--sl-color-gray-6);
       color: var(--sl-color-text);
       padding: 5px 10px;
-      border-radius: 4px;
+      border-radius: 0;
       font-weight: 400;
       font-size: 14px;
       white-space: nowrap;
