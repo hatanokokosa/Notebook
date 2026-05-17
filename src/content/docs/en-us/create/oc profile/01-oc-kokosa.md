@@ -30,8 +30,7 @@ Dislikes socializing; more socially lazy than socially anxious. A hardcore homeb
 
 ### Appearance
 
-**Hairstyle:** Black **_medium-length loose hair_**, shoulder-length (so it's not actually long hair).  
-~~_Rather, it's the kind of hair volume that makes you want to bury your face in the back of her neck and take a deep breath (Hey!)_~~
+**Hairstyle:** Black **_medium-length loose hair_**, shoulder-length (so it's not actually long hair)
 
 **Face:** Wears **_silver round-framed (thin-framed)_** glasses. Her eyes are **_red_**, with a **_flat eye shape and a cat-like mouth_**.
 
@@ -49,12 +48,12 @@ _For background elements and other color choices, refer to [Catppuccin](https://
 
 ### Clothes
 
-Mainly a **_black hoodie_**, with a mysterious logo composed of **_light blue and white_** printed on the right chest:
+The inner layer is a simple white T-shirt, with the outer layer being mainly a **_black hoodie_**. On the right chest is a mysterious logo composed of **_light blue and white_** printed:
 
 ![Referenced the Nix icon design, but feels like it has no meaning () pending redesign|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
 
 The lower body is **_shorts or a short skirt_** (black or off-white), mostly covered by the hoodie.  
-**_Oversize!_** A large **_black hoodie_**, with the hood down.
+**_Oversize!_** A large **_black hoodie_**. If not specified otherwise, the hood is down by default.
 
 ![PID: 137359159 (THIIIIS big, reference only, not the actual outfit design)|no-watermark](/create/01-kokosa/f7cac4e70457572c.avif)
 
