@@ -83,10 +83,7 @@ function findTextFiles(): string[] {
   for (const dir of [path.join(root, "src"), publicDir]) {
     files.push(
       ...walk(dir)
-        .filter(
-          (filePath) =>
-            !filePath.includes(`${path.sep}_watermarked${path.sep}`),
-        )
+        .filter((filePath) => !filePath.includes(`${path.sep}_watermarked${path.sep}`))
         .filter((filePath) => textExtPattern.test(filePath)),
     );
   }
@@ -117,9 +114,7 @@ for (const textFile of findTextFiles()) {
   let nextText = text;
 
   for (const { sourcePath, targetPath } of mappings) {
-    nextText = nextText
-      .split(toPublicUrl(sourcePath))
-      .join(toPublicUrl(targetPath));
+    nextText = nextText.split(toPublicUrl(sourcePath)).join(toPublicUrl(targetPath));
   }
 
   if (nextText !== text) fs.writeFileSync(textFile, nextText);

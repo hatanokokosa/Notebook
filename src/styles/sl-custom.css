@@ -53,11 +53,7 @@
   border-radius: 0 !important;
 }
 
-:where(
-  .PhotoView-Slider__toolbarIcon,
-  .scroll-to-top-button,
-  starlight-menu-button > button
-) {
+:where(.PhotoView-Slider__toolbarIcon, .scroll-to-top-button, starlight-menu-button > button) {
   border-radius: 50% !important;
 }
 

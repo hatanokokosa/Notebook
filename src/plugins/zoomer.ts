@@ -9,11 +9,7 @@ interface ContentImageScan {
   cleanup: () => void;
 }
 
-type OpenImageHandler = (
-  index: number,
-  images: ImageData[],
-  elements: HTMLImageElement[],
-) => void | Promise<void>;
+type OpenImageHandler = (index: number, images: ImageData[], elements: HTMLImageElement[]) => void | Promise<void>;
 
 const noWatermarkMarker = "|no-watermark";
 
@@ -29,11 +25,8 @@ export function getViewerSrc(img: HTMLImageElement): string {
 }
 
 export function scanContentImages(onOpen: OpenImageHandler): ContentImageScan {
-  const imgElements =
-    document.querySelectorAll<HTMLImageElement>(imageSelectors);
-  const filtered = Array.from(imgElements).filter(
-    (img) => img.naturalWidth >= 100 || !img.complete,
-  );
+  const imgElements = document.querySelectorAll<HTMLImageElement>(imageSelectors);
+  const filtered = Array.from(imgElements).filter((img) => img.naturalWidth >= 100 || !img.complete);
 
   const images: ImageData[] = [];
   const handlers: Array<{ el: HTMLImageElement; handler: () => void }> = [];
@@ -65,9 +58,7 @@ export function scanContentImages(onOpen: OpenImageHandler): ContentImageScan {
     images,
     elements: filtered,
     cleanup: () => {
-      handlers.forEach(({ el, handler }) =>
-        el.removeEventListener("click", handler),
-      );
+      handlers.forEach(({ el, handler }) => el.removeEventListener("click", handler));
     },
   };
 }
@@ -80,8 +71,6 @@ function stripNoWatermarkMarker(img: HTMLImageElement) {
 
   const figcaption = img.closest("figure")?.querySelector("figcaption");
   if (figcaption?.textContent?.endsWith(noWatermarkMarker)) {
-    figcaption.textContent = figcaption.textContent
-      .slice(0, -noWatermarkMarker.length)
-      .trimEnd();
+    figcaption.textContent = figcaption.textContent.slice(0, -noWatermarkMarker.length).trimEnd();
   }
 }

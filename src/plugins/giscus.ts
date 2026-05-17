@@ -1,8 +1,5 @@
 function getGiscusTheme(): string {
-  const storedTheme =
-    typeof localStorage !== "undefined"
-      ? localStorage.getItem("starlight-theme")
-      : "auto";
+  const storedTheme = typeof localStorage !== "undefined" ? localStorage.getItem("starlight-theme") : "auto";
   let isDark = false;
 
   if (storedTheme === "auto" || !storedTheme) {
@@ -29,10 +26,7 @@ function getGiscusLang(): string {
 
 function getGiscusTerm(): string {
   const pathname = window.location.pathname;
-  const normalizedPathname = pathname.replace(
-    /^\/(zh-cn|en-us|ja-jp)(?=\/|$)/,
-    "",
-  );
+  const normalizedPathname = pathname.replace(/^\/(zh-cn|en-us|ja-jp)(?=\/|$)/, "");
 
   if (normalizedPathname === "") return "/";
   return normalizedPathname;
@@ -69,15 +63,10 @@ function renderGiscus() {
 }
 
 function updateGiscusTheme() {
-  const iframe = document.querySelector<HTMLIFrameElement>(
-    "iframe.giscus-frame",
-  );
+  const iframe = document.querySelector<HTMLIFrameElement>("iframe.giscus-frame");
   if (!iframe || !iframe.contentWindow) return;
 
-  iframe.contentWindow.postMessage(
-    { giscus: { setConfig: { theme: getGiscusTheme() } } },
-    "https://giscus.app",
-  );
+  iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: getGiscusTheme() } } }, "https://giscus.app");
 }
 
 let observer: MutationObserver | null = null;
@@ -92,9 +81,7 @@ function init() {
   });
 }
 
-window
-  .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", updateGiscusTheme);
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateGiscusTheme);
 
 init();
 document.addEventListener("astro:page-load", init);

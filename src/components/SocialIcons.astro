@@ -2,12 +2,9 @@
 import config from "virtual:starlight/user-config";
 import { Icon } from "@astrojs/starlight/components";
 
-const locale =
-  Astro.locals.starlightRoute.locale ?? config.defaultLocale.locale ?? "zh-cn";
+const locale = Astro.locals.starlightRoute.locale ?? config.defaultLocale.locale ?? "zh-cn";
 const localizedRssHref = `/${locale}/blog/rss.xml`;
-const links = (config.social ?? []).map((link) =>
-  link.icon === "rss" ? { ...link, href: localizedRssHref } : link,
-);
+const links = (config.social ?? []).map((link) => (link.icon === "rss" ? { ...link, href: localizedRssHref } : link));
 ---
 
 {

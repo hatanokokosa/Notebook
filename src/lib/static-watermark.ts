@@ -43,19 +43,13 @@ function getStringProperty(value: unknown): string {
   return "";
 }
 
-function setStringProperty(
-  node: HastNode,
-  propertyName: string,
-  value: string,
-): void {
+function setStringProperty(node: HastNode, propertyName: string, value: string): void {
   node.properties = node.properties ?? {};
   node.properties[propertyName] = value;
 }
 
 function stripNoWatermarkMarker(text: string): string {
-  return text.endsWith(NO_WATERMARK_MARKER)
-    ? text.slice(0, -NO_WATERMARK_MARKER.length).trimEnd()
-    : text;
+  return text.endsWith(NO_WATERMARK_MARKER) ? text.slice(0, -NO_WATERMARK_MARKER.length).trimEnd() : text;
 }
 
 function hasNoWatermarkMarker(node: HastNode): boolean {
@@ -68,9 +62,7 @@ function stripFigureCaptionMarker(node: HastNode): void {
   visit(node as never, "element", (child: HastNode) => {
     if (child.tagName !== "figcaption" || !child.children?.length) return;
 
-    const textNodes = child.children.filter(
-      (captionChild) => captionChild.type === "text",
-    );
+    const textNodes = child.children.filter((captionChild) => captionChild.type === "text");
     const lastText = textNodes.at(-1);
     if (!lastText?.value?.endsWith(NO_WATERMARK_MARKER)) return;
 
@@ -135,8 +127,7 @@ function getAvifDimensions(buffer: Buffer): ImageDimensions | null {
 }
 
 function getPngDimensions(buffer: Buffer): ImageDimensions | null {
-  if (buffer.length < 24 || buffer.toString("ascii", 1, 4) !== "PNG")
-    return null;
+  if (buffer.length < 24 || buffer.toString("ascii", 1, 4) !== "PNG") return null;
 
   return {
     width: buffer.readUInt32BE(16),
@@ -155,11 +146,7 @@ function getJpegDimensions(buffer: Buffer): ImageDimensions | null {
     const length = buffer.readUInt16BE(offset + 2);
     if (length < 2) return null;
 
-    if (
-      marker >= 0xc0 &&
-      marker <= 0xcf &&
-      ![0xc4, 0xc8, 0xcc].includes(marker)
-    ) {
+    if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) {
       return {
         height: buffer.readUInt16BE(offset + 5),
         width: buffer.readUInt16BE(offset + 7),
@@ -173,11 +160,7 @@ function getJpegDimensions(buffer: Buffer): ImageDimensions | null {
 }
 
 function getWebpDimensions(buffer: Buffer): ImageDimensions | null {
-  if (
-    buffer.length < 30 ||
-    buffer.toString("ascii", 0, 4) !== "RIFF" ||
-    buffer.toString("ascii", 8, 12) !== "WEBP"
-  ) {
+  if (buffer.length < 30 || buffer.toString("ascii", 0, 4) !== "RIFF" || buffer.toString("ascii", 8, 12) !== "WEBP") {
     return null;
   }
 
@@ -207,22 +190,12 @@ function getWebpDimensions(buffer: Buffer): ImageDimensions | null {
   return null;
 }
 
-async function getImageDimensions(
-  inputPath: string,
-): Promise<ImageDimensions | null> {
+async function getImageDimensions(inputPath: string): Promise<ImageDimensions | null> {
   const buffer = await readFile(inputPath);
-  return (
-    getPngDimensions(buffer) ??
-    getJpegDimensions(buffer) ??
-    getWebpDimensions(buffer) ??
-    getAvifDimensions(buffer)
-  );
+  return getPngDimensions(buffer) ?? getJpegDimensions(buffer) ?? getWebpDimensions(buffer) ?? getAvifDimensions(buffer);
 }
 
-async function mirrorGeneratedFile(
-  outputPath: string,
-  outputName: string,
-): Promise<void> {
+async function mirrorGeneratedFile(outputPath: string, outputName: string): Promise<void> {
   const distDirStat = await stat(path.dirname(distOutputDir)).catch(() => null);
   if (!distDirStat?.isDirectory()) return;
 
@@ -233,14 +206,8 @@ async function mirrorGeneratedFile(
 function createWatermarkSvg(width: number, height: number): string {
   const shortEdge = Math.min(width, height);
   const fontSize = Math.max(1, Math.round(shortEdge * FONT_SIZE_RATIO));
-  const lineSpacing = Math.max(
-    fontSize * 2,
-    Math.round(shortEdge * LINE_SPACING_RATIO),
-  );
-  const colSpacing = Math.max(
-    fontSize * 5,
-    Math.round(shortEdge * COL_SPACING_RATIO),
-  );
+  const lineSpacing = Math.max(fontSize * 2, Math.round(shortEdge * LINE_SPACING_RATIO));
+  const colSpacing = Math.max(fontSize * 5, Math.round(shortEdge * COL_SPACING_RATIO));
   const diagonal = Math.ceil(Math.sqrt(width * width + height * height));
   const start = -Math.ceil(diagonal / 2);
   const end = Math.ceil(diagonal / 2);
@@ -248,9 +215,7 @@ function createWatermarkSvg(width: number, height: number): string {
 
   for (let y = start; y <= end; y += lineSpacing) {
     for (let x = start; x <= end; x += colSpacing) {
-      texts.push(
-        `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle">${WATERMARK_TEXT}</text>`,
-      );
+      texts.push(`<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle">${WATERMARK_TEXT}</text>`);
     }
   }
 
@@ -300,9 +265,7 @@ async function getWatermarkedSrc(src: string): Promise<string | null> {
         .rotate()
         .composite([
           {
-            input: Buffer.from(
-              createWatermarkSvg(dimensions.width, dimensions.height),
-            ),
+            input: Buffer.from(createWatermarkSvg(dimensions.width, dimensions.height)),
             blend: "over",
           },
         ])
@@ -326,32 +289,28 @@ export async function applyStaticWatermarks(html: string): Promise<string> {
   const tree = fromHtml(html, { fragment: true }) as HastNode;
   const imageTasks: ImageTask[] = [];
 
-  visit(
-    tree as never,
-    "element",
-    (node: HastNode, _index, parent: HastNode) => {
-      if (node.tagName === "figure") {
-        stripFigureCaptionMarker(node);
-        return;
-      }
+  visit(tree as never, "element", (node: HastNode, _index, parent: HastNode) => {
+    if (node.tagName === "figure") {
+      stripFigureCaptionMarker(node);
+      return;
+    }
 
-      if (node.tagName !== "img") return;
+    if (node.tagName !== "img") return;
 
-      const alt = getStringProperty(node.properties?.alt);
-      if (alt.endsWith(NO_WATERMARK_MARKER)) {
-        setStringProperty(node, "alt", stripNoWatermarkMarker(alt));
-        setStringProperty(node, "dataNoWatermark", "true");
-        return;
-      }
+    const alt = getStringProperty(node.properties?.alt);
+    if (alt.endsWith(NO_WATERMARK_MARKER)) {
+      setStringProperty(node, "alt", stripNoWatermarkMarker(alt));
+      setStringProperty(node, "dataNoWatermark", "true");
+      return;
+    }
 
-      if (parent?.tagName === "a" || hasNoWatermarkMarker(node)) return;
+    if (parent?.tagName === "a" || hasNoWatermarkMarker(node)) return;
 
-      const src = getStringProperty(node.properties?.src);
-      if (!src) return;
+    const src = getStringProperty(node.properties?.src);
+    if (!src) return;
 
-      imageTasks.push({ node, src });
-    },
-  );
+    imageTasks.push({ node, src });
+  });
 
   await Promise.all(
     imageTasks.map(async ({ node, src }) => {

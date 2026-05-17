@@ -34,14 +34,7 @@ function setupSmoothAnchorScroll() {
   };
 
   const onDocumentClick = (event: MouseEvent) => {
-    if (
-      event.defaultPrevented ||
-      event.button !== 0 ||
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey
-    ) {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
       return;
     }
 
@@ -49,17 +42,13 @@ function setupSmoothAnchorScroll() {
     if (!hashLink) return;
 
     const target =
-      hashLink.hash === "#_top"
-        ? document.documentElement
-        : document.getElementById(decodeURIComponent(hashLink.hash.slice(1)));
+      hashLink.hash === "#_top" ? document.documentElement : document.getElementById(decodeURIComponent(hashLink.hash.slice(1)));
 
     if (!target) return;
 
     event.preventDefault();
 
-    const shouldReduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     target.scrollIntoView({
       behavior: shouldReduceMotion ? "auto" : "smooth",
@@ -216,10 +205,8 @@ function setupScrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const toggleVisibility = () => {
-    const scrollableDistance =
-      document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercentage =
-      scrollableDistance > 0 ? window.scrollY / scrollableDistance : 0;
+    const scrollableDistance = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercentage = scrollableDistance > 0 ? window.scrollY / scrollableDistance : 0;
     button.classList.toggle("visible", scrollPercentage > 0.2);
   };
   const checkZoomLevel = () => {

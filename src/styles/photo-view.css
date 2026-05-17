@@ -1,52 +1,20 @@
 :root {
-  --photo-view-backdrop: color-mix(
-    in srgb,
-    var(--sl-color-bg) 46%,
-    transparent
-  );
-  --photo-view-banner-bg: color-mix(
-    in srgb,
-    var(--sl-color-bg-nav) 72%,
-    transparent
-  );
-  --photo-view-banner-border: color-mix(
-    in srgb,
-    var(--sl-color-gray-5) 72%,
-    transparent
-  );
+  --photo-view-backdrop: color-mix(in srgb, var(--sl-color-bg) 46%, transparent);
+  --photo-view-banner-bg: color-mix(in srgb, var(--sl-color-bg-nav) 72%, transparent);
+  --photo-view-banner-border: color-mix(in srgb, var(--sl-color-gray-5) 72%, transparent);
   --photo-view-text: var(--sl-color-text);
   --photo-view-muted-text: var(--sl-color-gray-3);
-  --photo-view-arrow-bg: color-mix(
-    in srgb,
-    var(--sl-color-bg-nav) 94%,
-    var(--sl-color-bg) 6%
-  );
-  --photo-view-arrow-border: color-mix(
-    in srgb,
-    var(--sl-color-gray-4) 100%,
-    transparent 0%
-  );
-  --photo-view-hover-bg: color-mix(
-    in srgb,
-    var(--sl-color-accent) 16%,
-    transparent
-  );
+  --photo-view-arrow-bg: color-mix(in srgb, var(--sl-color-bg-nav) 94%, var(--sl-color-bg) 6%);
+  --photo-view-arrow-border: color-mix(in srgb, var(--sl-color-gray-4) 100%, transparent 0%);
+  --photo-view-hover-bg: color-mix(in srgb, var(--sl-color-accent) 16%, transparent);
 }
 
 html[data-theme="light"] {
-  --photo-view-backdrop: color-mix(
-    in srgb,
-    var(--sl-color-gray-7) 42%,
-    transparent
-  );
+  --photo-view-backdrop: color-mix(in srgb, var(--sl-color-gray-7) 42%, transparent);
 }
 
 html[data-theme="dark"] {
-  --photo-view-backdrop: color-mix(
-    in srgb,
-    var(--sl-color-bg) 50%,
-    transparent
-  );
+  --photo-view-backdrop: color-mix(in srgb, var(--sl-color-bg) 50%, transparent);
 }
 
 .PhotoView-Slider__Backdrop {

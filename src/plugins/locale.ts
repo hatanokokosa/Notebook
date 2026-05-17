@@ -25,8 +25,7 @@ class StarlightLanguageSelect extends HTMLElement {
     window.addEventListener("pageshow", (event) => {
       if (!event.persisted) return;
 
-      const markupSelectedIndex =
-        select.querySelector<HTMLOptionElement>("option[selected]")?.index;
+      const markupSelectedIndex = select.querySelector<HTMLOptionElement>("option[selected]")?.index;
       if (markupSelectedIndex !== select.selectedIndex) {
         select.selectedIndex = markupSelectedIndex ?? 0;
       }

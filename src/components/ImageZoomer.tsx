@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { PhotoSlider } from "react-photo-view";
-import {
-  getViewerSrc,
-  scanContentImages,
-  type ImageData,
-} from "../plugins/zoomer";
+import { getViewerSrc, scanContentImages, type ImageData } from "../plugins/zoomer";
 import "react-photo-view/dist/react-photo-view.css";
 
 export default function ImageZoomer() {
@@ -60,16 +56,14 @@ export default function ImageZoomer() {
   const scan = useCallback(() => {
     cleanupRef.current?.();
 
-    const contentImages = scanContentImages(
-      async (imageIndex, freshImages, elements) => {
-        imageElementsRef.current = elements;
-        await ensureViewerImageReady(imageIndex);
-        setImages(freshImages);
-        setIndex(imageIndex);
-        setVisible(true);
-        warmNearbyImages(imageIndex);
-      },
-    );
+    const contentImages = scanContentImages(async (imageIndex, freshImages, elements) => {
+      imageElementsRef.current = elements;
+      await ensureViewerImageReady(imageIndex);
+      setImages(freshImages);
+      setIndex(imageIndex);
+      setVisible(true);
+      warmNearbyImages(imageIndex);
+    });
 
     imageElementsRef.current = contentImages.elements;
     setImages(contentImages.images);
