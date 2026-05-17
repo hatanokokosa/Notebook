@@ -87,7 +87,7 @@ _背景などのその他の配色は、[Catppuccin](https://catppuccin.com/pale
 
 ---
 
-### デフォルメ
+### ちびキャラ
 
 ---
 
@@ -95,7 +95,7 @@ _背景などのその他の配色は、[Catppuccin](https://catppuccin.com/pale
 
 ---
 
-![イラストレーター：激辣三文鱼米米饭团（SDキャラに入るはず？）](/create/01-kokosa/d652b5eb48dbd731.avif)
+![イラストレーター：激辣三文鱼米米饭团（ちびキャラに入るはず？）](/create/01-kokosa/d652b5eb48dbd731.avif)
 
 ---
 
