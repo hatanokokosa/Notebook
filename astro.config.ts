@@ -41,6 +41,10 @@ export default defineConfig({
           label: "English",
           lang: "en-US",
         },
+        "ja-jp": {
+          label: "Japanese",
+          lang: "ja-JP",
+        },
       },
 
       customCss: [
@@ -104,6 +108,7 @@ export default defineConfig({
           title: {
             "zh-CN": "Kokosa's Blog",
             "en-US": "Kokosa's Blog",
+            "ja-JP": "Kokosa's Blog",
           },
           postCount: 8,
         }),

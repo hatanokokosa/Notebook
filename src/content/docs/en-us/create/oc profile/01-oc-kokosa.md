@@ -48,7 +48,7 @@ _For background elements and other color choices, refer to [Catppuccin](https://
 
 ### Clothes
 
-The inner layer is a simple white T-shirt, with the outer layer being mainly a **_black hoodie_**. On the right chest is a meaningless logo composed of **_light blue and white_** printed:
+The inner layer is a simple white T-shirt, with the outer layer being mainly a **_black hoodie_**. On the right chest is a mysterious logo composed of **_light blue and white_** printed:
 
 ![Referenced the Nix icon design, but feels like it has no meaning () pending redesign|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
 

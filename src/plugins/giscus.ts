@@ -22,13 +22,17 @@ function getGiscusLang(): string {
   if (lang === "zh-cn") return "zh-CN";
   if (lang === "zh-tw") return "zh-TW";
   if (lang === "zh-hk") return "zh-HK";
+  if (lang === "ja-jp") return "ja";
 
   return "en";
 }
 
 function getGiscusTerm(): string {
   const pathname = window.location.pathname;
-  const normalizedPathname = pathname.replace(/^\/(zh-cn|en-us)(?=\/|$)/, "");
+  const normalizedPathname = pathname.replace(
+    /^\/(zh-cn|en-us|ja-jp)(?=\/|$)/,
+    "",
+  );
 
   if (normalizedPathname === "") return "/";
   return normalizedPathname;

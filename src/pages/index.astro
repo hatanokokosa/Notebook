@@ -8,7 +8,7 @@
     <script is:inline>
       (() => {
         const fallbackLocale = "zh-cn";
-        const supportedLocales = new Set(["zh-cn", "en-us"]);
+        const supportedLocales = new Set(["zh-cn", "en-us", "ja-jp"]);
         const storageKey = "kokosa-preferred-locale";
 
         const normalizeLocale = (locale) => {
@@ -16,6 +16,7 @@
           if (!normalized) return undefined;
           if (supportedLocales.has(normalized)) return normalized;
           if (normalized.startsWith("zh")) return "zh-cn";
+          if (normalized.startsWith("ja")) return "ja-jp";
           if (normalized.startsWith("en")) return "en-us";
         };
 
@@ -38,7 +39,10 @@
   <body>
     <main>
       <p>Redirecting...</p>
-      <p><a href="/zh-cn/">中文</a> · <a href="/en-us/">English</a></p>
+      <p>
+        <a href="/zh-cn/">中文</a> · <a href="/en-us/">English</a> · <a
+          href="/ja-jp/">日本語</a>
+      </p>
     </main>
   </body>
 </html>
