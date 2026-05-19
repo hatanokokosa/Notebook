@@ -5,7 +5,7 @@ lastUpdated: 2026-05-08
 tags:
   - Bot
   - AI
-excerpt: I only wanted the forwarding bot to glance at RSS updates along the way, but of course it turned into a small engineering project again, subscription management, scheduled refreshes, article deduplication, AI summaries, manual testing... none of them could be skipped.
+excerpt: The forwarding bot I wrote before was originally just for receiving private messages. Then I casually added LLM moderation, casually added allowlists and blocklists, casually added appeals, casually added i18n, casually, casually, casually...
 ---
 
 ### I Wanted to Mess with the Bot Again
