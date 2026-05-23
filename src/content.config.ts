@@ -12,6 +12,7 @@ export const collections = {
           .object({
             comments: z.boolean().optional().default(true),
             watermark: z.boolean().optional().default(false),
+            download: z.boolean().optional().default(false),
           })
           .merge(blogSchema(context)),
     }),

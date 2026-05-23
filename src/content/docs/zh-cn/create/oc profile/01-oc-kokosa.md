@@ -1,5 +1,6 @@
 ---
 title: Kokosa
+download: true
 comments: false
 watermark: true
 ---

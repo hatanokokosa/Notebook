@@ -2,6 +2,7 @@
 import Default from "@astrojs/starlight/components/MarkdownContent.astro";
 import BlogMarkdownContent from "starlight-blog/components/MarkdownContent.astro";
 import ImageZoomer from "./ImageZoomer";
+import DownloadOverlay from "./DownloadOverlay";
 import Giscus from "./Giscus.astro";
 import { applyStaticWatermarks } from "../lib/static-watermark";
 
@@ -9,6 +10,7 @@ const { starlightRoute } = Astro.locals;
 const pathname = Astro.url.pathname;
 const contentHtml = await Astro.slots.render("default");
 const hasWatermarkEnabled = starlightRoute?.entry?.data?.watermark === true;
+const hasDownloadEnabled = starlightRoute?.entry?.data?.download === true;
 const renderedContentHtml = hasWatermarkEnabled ? await applyStaticWatermarks(contentHtml) : contentHtml;
 const isBlogPostPage = starlightRoute?.entry?.data?.date instanceof Date;
 const isGeneratedBlogPage =
@@ -21,6 +23,7 @@ const shouldEnhanceImages = !isGeneratedBlogPage && /<img[\s>]/i.test(renderedCo
 ---
 
 {shouldEnhanceImages && <ImageZoomer client:only="react" />}
+{shouldEnhanceImages && <DownloadOverlay enabled={hasDownloadEnabled} client:only="react" />}
 {
   isBlogPostPage ? (
     <BlogMarkdownContent>
