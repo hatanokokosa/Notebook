@@ -40,3 +40,45 @@ figure img:not(a img),
 .medium-zoom-image--opened {
   z-index: 10000;
 }
+
+[data-dl-btn] {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #dce0e8;
+  color: #4c4f69;
+  border: 1px solid #ccd0da;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+[data-dl-btn]:hover {
+  background: #eff1f5;
+  border-color: #bcc0cc;
+  transform: translateY(-1px);
+}
+
+[data-dl-btn]:focus-visible {
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 2px;
+}
+
+[data-theme="dark"] [data-dl-btn] {
+  background: #303446;
+  color: #e78284;
+  border-color: #414559;
+}
+
+[data-theme="dark"] [data-dl-btn]:hover {
+  background: #414559;
+  border-color: #51576d;
+}

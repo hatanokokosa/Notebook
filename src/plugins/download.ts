@@ -1,12 +1,22 @@
 export async function downloadImage(img: HTMLImageElement): Promise<void> {
-  if (!img.complete || img.naturalWidth === 0) {
-    await new Promise<void>((resolve, reject) => {
-      img.addEventListener("load", () => resolve(), { once: true });
-      img.addEventListener("error", () => reject(new Error("Image load failed")), { once: true });
-    });
+  if (!img.complete) {
+    const loaded = await waitForImage(img);
+    if (!loaded) {
+      const fallbackSrc = img.currentSrc || img.src;
+      if (fallbackSrc) openInTab(fallbackSrc);
+      return;
+    }
   }
 
   const src = img.currentSrc || img.src;
+  if (!src) return;
+
+  if (img.naturalWidth === 0) {
+    openInTab(src);
+    return;
+  }
+
+  const pngFilename = getDownloadFilename(src, "png", true);
 
   if (/\.(gif|svg)(\?|#|$)/i.test(src)) {
     if (isSameOrigin(src)) {
@@ -20,14 +30,14 @@ export async function downloadImage(img: HTMLImageElement): Promise<void> {
   const sameOrigin = isSameOrigin(src);
 
   if (sameOrigin) {
-    canvasToPngDownload(img);
+    canvasToPngDownload(img, pngFilename);
     return;
   }
 
   try {
     const corsImg = await loadCrossOriginImg(src);
     if (corsImg) {
-      canvasToPngDownload(corsImg);
+      canvasToPngDownload(corsImg, pngFilename);
       return;
     }
   } catch {
@@ -35,6 +45,15 @@ export async function downloadImage(img: HTMLImageElement): Promise<void> {
   }
 
   openInTab(src);
+}
+
+function waitForImage(img: HTMLImageElement): Promise<boolean> {
+  if (img.complete) return Promise.resolve(img.naturalWidth > 0);
+
+  return new Promise((resolve) => {
+    img.addEventListener("load", () => resolve(true), { once: true });
+    img.addEventListener("error", () => resolve(false), { once: true });
+  });
 }
 
 function isSameOrigin(src: string): boolean {
@@ -65,9 +84,10 @@ function loadCrossOriginImg(src: string): Promise<HTMLImageElement> {
   });
 }
 
-function canvasToPngDownload(source: CanvasImageSource): void {
+function canvasToPngDownload(source: CanvasImageSource, filename: string): void {
   const w = source instanceof HTMLImageElement ? source.naturalWidth : (source as HTMLVideoElement).videoWidth;
   const h = source instanceof HTMLImageElement ? source.naturalHeight : (source as HTMLVideoElement).videoHeight;
+  if (w === 0 || h === 0) return;
 
   const canvas = document.createElement("canvas");
   canvas.width = w;
@@ -84,23 +104,44 @@ function canvasToPngDownload(source: CanvasImageSource): void {
   canvas.toBlob((blob) => {
     if (!blob) return;
     const url = URL.createObjectURL(blob);
-    triggerDownload(url, "image.png");
-    URL.revokeObjectURL(url);
+    triggerDownload(url, filename);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }, "image/png");
 }
 
 function downloadLink(src: string): void {
-  const fileName =
-    src
-      .split("/")
-      .pop()
-      ?.replace(/\.[^.]+$/, "") ?? "image";
-  const ext =
-    src
-      .split("/")
-      .pop()
-      ?.match(/\.(\w+)(\?|#|$)/)?.[1] ?? "png";
-  triggerDownload(src, `${fileName}.${ext}`);
+  triggerDownload(src, getDownloadFilename(src, "png"));
+}
+
+function getDownloadFilename(src: string, fallbackExt: string, forceExt = false): string {
+  const pathname = getSrcPathname(src);
+  const rawName = pathname.split("/").pop() ?? "";
+  const decodedName = safeDecodeURIComponent(rawName);
+  const baseName = decodedName.replace(/\.[^.]*$/, "");
+  const safeBaseName = baseName.replace(/[<>:"/\\|?*\u0000-\u001f]+/g, "-").trim() || "image";
+  const ext = forceExt ? fallbackExt : getSrcExtension(pathname) || fallbackExt;
+
+  return `${safeBaseName}.${ext}`;
+}
+
+function getSrcPathname(src: string): string {
+  try {
+    return new URL(src, location.href).pathname;
+  } catch {
+    return src.split(/[?#]/, 1)[0] ?? src;
+  }
+}
+
+function getSrcExtension(pathname: string): string {
+  return pathname.match(/\.([a-z0-9]+)$/i)?.[1]?.toLowerCase() ?? "";
+}
+
+function safeDecodeURIComponent(value: string): string {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
 }
 
 function openInTab(src: string): void {

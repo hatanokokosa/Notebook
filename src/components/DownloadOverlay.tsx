@@ -9,6 +9,8 @@ const IMG_SELECTOR = [
 ].join(", ");
 
 const WRAPPER_ATTR = "data-dl-wrapper";
+const OWNER_ATTR = "data-dl-owner";
+let nextOwnerId = 0;
 
 function makeSvgIcon(): SVGSVGElement {
   const ns = "http://www.w3.org/2000/svg";
@@ -52,13 +54,14 @@ function isImgCentered(img: HTMLImageElement): boolean {
   return Math.abs(imgRect.left + imgRect.width / 2 - parentRect.left - parentRect.width / 2) < 1.5;
 }
 
-function wrapImage(img: HTMLImageElement): HTMLButtonElement {
+function wrapImage(img: HTMLImageElement, ownerId: string): HTMLButtonElement {
   const parent = img.parentNode as HTMLElement;
   const centered = isImgCentered(img);
   const block = centered || getComputedStyle(img).display === "block";
 
   const wrapper = document.createElement("div");
   wrapper.setAttribute(WRAPPER_ATTR, "");
+  wrapper.setAttribute(OWNER_ATTR, ownerId);
   css(wrapper, {
     position: "relative",
     display: block ? "block" : "inline-block",
@@ -66,20 +69,10 @@ function wrapImage(img: HTMLImageElement): HTMLButtonElement {
   });
 
   const btn = document.createElement("button");
+  btn.type = "button";
   btn.setAttribute("data-dl-btn", "");
   btn.ariaLabel = "Download image";
   btn.appendChild(makeSvgIcon());
-  css(btn, {
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    display: "flex",
-    height: "36px",
-    width: "36px",
-    bottom: "8px",
-    right: "8px",
-    padding: "0",
-  });
 
   btn.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -93,8 +86,8 @@ function wrapImage(img: HTMLImageElement): HTMLButtonElement {
   return btn;
 }
 
-function unwrapAll() {
-  document.querySelectorAll<HTMLDivElement>(`[${WRAPPER_ATTR}]`).forEach((wrapper) => {
+function unwrapAll(ownerId: string) {
+  document.querySelectorAll<HTMLDivElement>(`[${WRAPPER_ATTR}][${OWNER_ATTR}="${ownerId}"]`).forEach((wrapper) => {
     const parent = wrapper.parentNode;
     if (!parent) return;
     const img = wrapper.querySelector("img");
@@ -103,56 +96,42 @@ function unwrapAll() {
   });
 }
 
-function injectThemeStyle() {
-  const id = "dl-overlay-theme";
-  if (document.getElementById(id)) return;
-  const el = document.createElement("style");
-  el.id = id;
-  el.textContent = `\
-[data-dl-btn] {
-  background: #dce0e8 !important;
-  color: #4c4f69 !important;
-  border: 1px solid #ccd0da !important;
-}
-[data-theme="dark"] [data-dl-btn] {
-  background: #303446 !important;
-  color: #e78284 !important;
-  border: 1px solid #414559 !important;
-}`;
-  document.head.appendChild(el);
-}
-
 export default function DownloadOverlay({ enabled }: { enabled?: boolean }) {
   const scannedRef = useRef(false);
+  const ownerIdRef = useRef("");
+
+  if (!ownerIdRef.current) {
+    ownerIdRef.current = String(++nextOwnerId);
+  }
+
+  const ownerId = ownerIdRef.current;
 
   const scan = useCallback(() => {
     if (!enabled) {
       if (scannedRef.current) {
-        unwrapAll();
+        unwrapAll(ownerId);
         scannedRef.current = false;
       }
       return;
     }
 
-    injectThemeStyle();
-
     document.querySelectorAll<HTMLImageElement>(IMG_SELECTOR).forEach((img) => {
       if (img.closest(`[${WRAPPER_ATTR}]`)) return;
       if (!img.parentNode) return;
-      wrapImage(img);
+      wrapImage(img, ownerId);
     });
 
     scannedRef.current = true;
-  }, [enabled]);
+  }, [enabled, ownerId]);
 
   useEffect(() => {
     scan();
     document.addEventListener("astro:page-load", scan);
     return () => {
-      unwrapAll();
+      unwrapAll(ownerId);
       document.removeEventListener("astro:page-load", scan);
     };
-  }, [scan]);
+  }, [scan, ownerId]);
 
   return null;
 }
