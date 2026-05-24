@@ -1,7 +1,7 @@
 import { docsLoader, i18nLoader } from "@astrojs/starlight/loaders";
 import { docsSchema, i18nSchema } from "@astrojs/starlight/schema";
 import { defineCollection, z } from "astro:content";
-import { blogSchema } from "starlight-blog/schema";
+import { blogSchema } from "./plugins/kokosa-blog/schema";
 
 export const collections = {
   docs: defineCollection({

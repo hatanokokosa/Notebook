@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
+    "@astrojs/markdown-remark": "^7.0.0",
+    "@astrojs/mdx": "^5.0.0",
     "@astrojs/react": "^5.0.4",
     "@astrojs/starlight": "^0.38.4",
     "@catppuccin/starlight": "^2.0.1",
@@ -20,7 +22,14 @@
     "@fontsource/noto-serif-sc": "^5.2.8",
     "@microflash/rehype-figure": "^2.1.4",
     "astro": "^6.1.9",
+    "astro-remote": "^0.3.4",
+    "github-slugger": "^2.0.0",
+    "hast-util-from-html": "^2.0.3",
+    "hast-util-to-html": "^9.0.5",
+    "hast-util-to-string": "^3.0.1",
     "katex": "^0.16.45",
+    "marked": "^17.0.4",
+    "marked-plaintify": "^1.1.1",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "react": "^19.2.5",
@@ -29,7 +38,9 @@
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "sharp": "0.34.5",
-    "starlight-blog": "^0.26.1"
+    "unist-util-is": "^6.0.1",
+    "unist-util-remove": "^4.0.0",
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",

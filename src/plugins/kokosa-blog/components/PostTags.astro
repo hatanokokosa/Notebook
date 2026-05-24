@@ -1,0 +1,71 @@
+---
+import type { StarlightBlogEntry } from "../libs/content";
+import type { Locale } from "../libs/i18n";
+import { getRelativeBlogUrl } from "../libs/page";
+import { getEntryTags } from "../libs/tags";
+
+interface Props {
+  entry: StarlightBlogEntry;
+  locale: Locale;
+}
+
+const { entry, locale } = Astro.props;
+
+const tags = getEntryTags(entry);
+const hasDefaultSlot = Astro.slots.has("default");
+---
+
+{
+  tags.length > 0 || hasDefaultSlot ? (
+    <div class="post-tags not-content">
+      {tags.length > 0 && <b>{Astro.locals.t("kokosaBlog.post.tags")}</b>}
+      <ul>
+        {tags.map((tag) => (
+          <li>
+            <a href={getRelativeBlogUrl(`/tags/${tag.slug}`, locale)}>{tag.label}</a>
+          </li>
+        ))}
+      </ul>
+      <slot />
+    </div>
+  ) : null
+}
+
+<style>
+  .post-tags {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: block;
+    padding: 0;
+  }
+
+  a {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.3rem;
+    color: var(--sl-color-accent);
+    font-size: var(--sl-text-sm);
+    padding: 0.25rem 0.5rem 0.35rem;
+    position: relative;
+    text-decoration: none;
+    z-index: 2;
+  }
+
+  a:hover {
+    border-color: var(--sl-color-accent);
+    color: var(--sl-color-accent);
+  }
+</style>

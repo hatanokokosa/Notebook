@@ -1,11 +1,11 @@
 import rehypeFigure from "@microflash/rehype-figure";
 import catppuccin from "@catppuccin/starlight";
 import { defineConfig } from "astro/config";
-import starlightBlog from "starlight-blog";
 import starlight from "@astrojs/starlight";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import react from "@astrojs/react";
+import kokosaBlog from "./src/plugins/kokosa-blog";
 import "katex/contrib/mhchem";
 
 export default defineConfig({
@@ -91,15 +91,7 @@ export default defineConfig({
           dark: { flavor: "frappe", accent: "red" },
         }),
 
-        starlightBlog({
-          authors: {
-            kokosa: {
-              url: "https://github.com/hatanokokosa",
-              picture: "/friends/oc.avif",
-              name: "Kokosa",
-            },
-          },
-
+        kokosaBlog({
           metrics: {
             readingTime: true,
             words: "rounded",
