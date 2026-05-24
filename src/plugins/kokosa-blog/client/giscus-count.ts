@@ -1,15 +1,25 @@
-const giscusOrigin = "https://giscus.app";
-const repo = "hatanokokosa/hatanokokosa";
-const repoId = "R_kgDONiihcQ";
-const category = "Q&A";
-const categoryId = "DIC_kwDONiihcc4Cs5Yk";
+const discussionsEndpoint = "https://api.github.com/repos/hatanokokosa/hatanokokosa/discussions?per_page=100";
+const cacheKey = "kokosa-giscus-counts-v2";
+const cacheTtl = 5 * 60 * 1000;
+const uniqueTermPrefix = "kokosa:";
 
 interface GiscusCounts {
   comments: number;
   reactions: number;
 }
 
-const iframeTerms = new WeakMap<Window, string>();
+interface CachedCounts {
+  expiresAt: number;
+  counts: Record<string, GiscusCounts>;
+}
+
+interface GitHubDiscussion {
+  title?: string;
+  body?: string;
+  comments?: number;
+  category?: { name?: string };
+  reactions?: { total_count?: number };
+}
 
 function getCountLabel({ comments, reactions }: GiscusCounts) {
   const lang = document.documentElement.lang.toLowerCase();
@@ -25,91 +35,95 @@ function getFallbackLabel() {
   return "评论 - · 喜欢 -";
 }
 
-function getWidgetUrl(term: string) {
-  const params = new URLSearchParams({
-    origin: window.location.href.split("#")[0],
-    session: "",
-    theme: "preferred_color_scheme",
-    reactionsEnabled: "1",
-    emitMetadata: "1",
-    inputPosition: "bottom",
-    repo,
-    repoId,
-    category,
-    categoryId,
-    strict: "0",
-    description: "",
-    backLink: window.location.href.split("#")[0],
-    term,
-  });
+function normalizeTerm(value: string) {
+  let pathname = value.trim().replace(/^#\s*/, "");
 
-  return `${giscusOrigin}/widget?${params.toString()}`;
+  if (pathname.startsWith(uniqueTermPrefix)) pathname = pathname.slice(uniqueTermPrefix.length);
+
+  try {
+    pathname = new URL(pathname).pathname;
+  } catch {}
+
+  pathname = pathname.replace(/^\/(zh-cn|en-us|ja-jp)(?=\/|$)/, "");
+  if (!pathname.startsWith("/")) pathname = `/${pathname}`;
+  if (!pathname.endsWith("/")) pathname = `${pathname}/`;
+
+  return pathname;
 }
 
-function ensureFrameHost() {
-  let host = document.querySelector<HTMLElement>("[data-giscus-count-frames]");
-  if (host) return host;
+function getDiscussionTerms(discussion: GitHubDiscussion) {
+  const terms = new Set<string>();
 
-  host = document.createElement("div");
-  host.dataset.giscusCountFrames = "";
-  host.style.position = "absolute";
-  host.style.inlineSize = "1px";
-  host.style.blockSize = "1px";
-  host.style.overflow = "hidden";
-  host.style.opacity = "0";
-  host.style.pointerEvents = "none";
-  document.body.appendChild(host);
+  if (discussion.title) terms.add(normalizeTerm(discussion.title));
 
-  return host;
-}
-
-function createMetadataFrame(term: string) {
-  const iframe = document.createElement("iframe");
-  iframe.title = "Giscus metadata";
-  iframe.src = getWidgetUrl(term);
-  iframe.loading = "lazy";
-  iframe.tabIndex = -1;
-  iframe.setAttribute("aria-hidden", "true");
-  iframe.style.border = "0";
-  iframe.style.inlineSize = "1px";
-  iframe.style.blockSize = "1px";
-  iframe.style.visibility = "hidden";
-
-  ensureFrameHost().appendChild(iframe);
-  if (iframe.contentWindow) iframeTerms.set(iframe.contentWindow, term);
-}
-
-function hydrateCommentCounts() {
-  const counters = [...document.querySelectorAll<HTMLElement>("[data-giscus-term]")];
-  const terms = new Set(counters.map((counter) => counter.dataset.giscusTerm).filter((term): term is string => Boolean(term)));
-
-  ensureFrameHost().replaceChildren();
-  for (const term of terms) createMetadataFrame(term);
-
-  window.setTimeout(() => {
-    for (const counter of counters) {
-      if (counter.textContent?.includes("...")) counter.textContent = getFallbackLabel();
-    }
-  }, 7000);
-}
-
-window.addEventListener("message", (event) => {
-  if (event.origin !== giscusOrigin) return;
-  if (!(typeof event.data === "object" && event.data?.giscus && "discussion" in event.data.giscus)) return;
-
-  const term = event.source ? iframeTerms.get(event.source as Window) : undefined;
-  if (!term) return;
-
-  const discussion = event.data.giscus.discussion;
-  const label = getCountLabel({
-    comments: Number(discussion.totalCommentCount ?? 0) + Number(discussion.totalReplyCount ?? 0),
-    reactions: Number(discussion.reactionCount ?? 0),
-  });
-
-  for (const counter of document.querySelectorAll<HTMLElement>(`[data-giscus-term="${CSS.escape(term)}"]`)) {
-    counter.textContent = label;
+  for (const url of discussion.body?.match(/https?:\/\/[^\s)]+/g) ?? []) {
+    terms.add(normalizeTerm(url));
   }
-});
+
+  return terms;
+}
+
+function readCachedCounts() {
+  try {
+    const cached = JSON.parse(localStorage.getItem(cacheKey) ?? "") as CachedCounts;
+    if (cached.expiresAt > Date.now()) return cached.counts;
+  } catch {}
+}
+
+function writeCachedCounts(counts: Record<string, GiscusCounts>) {
+  try {
+    localStorage.setItem(cacheKey, JSON.stringify({ expiresAt: Date.now() + cacheTtl, counts } satisfies CachedCounts));
+  } catch {}
+}
+
+async function fetchAllCounts() {
+  const cached = readCachedCounts();
+  if (cached) return cached;
+
+  const response = await fetch(discussionsEndpoint, {
+    headers: { Accept: "application/vnd.github+json" },
+  });
+  if (!response.ok) throw new Error("Failed to fetch GitHub discussions");
+
+  const discussions = (await response.json()) as GitHubDiscussion[];
+  const counts: Record<string, GiscusCounts> = {};
+
+  for (const discussion of discussions) {
+    if (discussion.category?.name !== "Q&A") continue;
+
+    const value = {
+      comments: Number(discussion.comments ?? 0),
+      reactions: Number(discussion.reactions?.total_count ?? 0),
+    };
+
+    for (const term of getDiscussionTerms(discussion)) {
+      counts[term] = value;
+    }
+  }
+
+  writeCachedCounts(counts);
+  return counts;
+}
+
+async function hydrateCommentCounts() {
+  const counters = [...document.querySelectorAll<HTMLElement>("[data-giscus-term]")];
+  if (counters.length === 0) return;
+
+  try {
+    const counts = await fetchAllCounts();
+
+    for (const counter of counters) {
+      const term = counter.dataset.giscusTerm ? normalizeTerm(counter.dataset.giscusTerm) : undefined;
+      counter.textContent = term && counts[term] ? getCountLabel(counts[term]) : getCountLabel({ comments: 0, reactions: 0 });
+    }
+  } catch {
+    for (const counter of counters) {
+      counter.textContent = getFallbackLabel();
+    }
+  }
+}
 
 hydrateCommentCounts();
 document.addEventListener("astro:page-load", hydrateCommentCounts);
+
+export {};
