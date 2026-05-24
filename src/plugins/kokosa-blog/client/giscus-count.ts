@@ -1,6 +1,6 @@
 const discussionsEndpoint = "https://api.github.com/repos/hatanokokosa/hatanokokosa/discussions?per_page=100";
 const cacheKey = "kokosa-giscus-counts-v2";
-const cacheTtl = 5 * 60 * 1000;
+const cacheTtl = 2 * 60 * 60 * 1000;
 const uniqueTermPrefix = "kokosa:";
 
 interface GiscusCounts {
