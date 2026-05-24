@@ -9,6 +9,7 @@ deploy:
 
 clean:
     rm -rf dist public/_watermarked .cache .astro
+    bun run astro sync
 
 rename-images *args:
     bun scripts/rename-images.ts {{args}}
