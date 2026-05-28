@@ -65,6 +65,10 @@
   --kokosa-strong-color: #e78284;
 }
 
+.sl-markdown-content {
+  line-height: calc(var(--sl-line-height) * 1.2);
+}
+
 :root[data-theme="light"] {
   --kokosa-strong-color: #d20f39;
 }

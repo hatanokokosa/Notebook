@@ -50,9 +50,10 @@ _关于背景之类的其他元素配色，可以参考 [Catppuccin](https://cat
 
 ### 衣服
 
-内衬是一件简洁的白色 T 恤，外套主要是 **_黑色帽衫_**，右胸口印有 **_浅蓝色、白色_** 组成的神必标志：
+内衬是一件简洁的白色 T 恤，外套主要是 **_黑色帽衫_**，右胸口印有神必标志：  
+使用的颜色（Hex 颜色码）：Lavender：`#babbf1` Mantle：`#e6e9ef`
 
-![参考了 Nix 的图标设计，但是感觉没什么含义（）待重新设计|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
+![新版决定直接用 Nix 的了 | 设计：Nix 社区（CC-BY-4.0） 配色方案：Catppuccin（MIT）|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
 
 下半身是 **_短裤或短裙_**（黑色或米白色），被连帽衫盖住大部分  
 **_Oversize！_** 大号 **_黑色连帽衫_**，如果没说的话，连帽衫的帽子默认是放下来的

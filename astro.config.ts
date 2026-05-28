@@ -6,6 +6,7 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import react from "@astrojs/react";
 import kokosaBlog from "./src/plugins/kokosa-blog";
+import rehypeColorCode from "./src/plugins/rehype-color-code";
 import "katex/contrib/mhchem";
 
 export default defineConfig({
@@ -18,7 +19,7 @@ export default defineConfig({
   site: "https://kokosa.icu",
 
   markdown: {
-    rehypePlugins: [rehypeFigure, rehypeKatex],
+    rehypePlugins: [rehypeFigure, rehypeKatex, rehypeColorCode],
     remarkPlugins: [remarkMath],
   },
 
@@ -57,6 +58,7 @@ export default defineConfig({
         "./src/styles/sl-custom.css",
         "./src/styles/friends.css",
         "./src/styles/figure.css",
+        "./src/styles/color-code.css",
         "./src/styles/font.css",
       ],
 
@@ -88,7 +90,7 @@ export default defineConfig({
       plugins: [
         catppuccin({
           light: { flavor: "latte", accent: "rosewater" },
-          dark: { flavor: "frappe", accent: "red" },
+          dark: { flavor: "frappe", accent: "lavender" },
         }),
 
         kokosaBlog({
