@@ -49,9 +49,10 @@ _For background elements and other color choices, refer to [Catppuccin](https://
 
 ### Clothes
 
-The inner layer is a simple white T-shirt, with the outer layer being mainly a **_black hoodie_**. On the right chest is a mysterious logo composed of **_light blue and white_** printed:
+The inner layer is a simple white T-shirt, with the outer layer being mainly a **_black hoodie_**. On the right chest is a mysterious logo:  
+Colors used (Hex color codes): Lavender: `#babbf1` Mantle: `#e6e9ef`
 
-![Referenced the Nix icon design, but feels like it has no meaning () pending redesign|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
+![New version decided to use Nix directly | Design: Nix community (CC-BY-4.0) Color scheme: Catppuccin (MIT)|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
 
 The lower body is **_shorts or a short skirt_** (black or off-white), mostly covered by the hoodie.  
 **_Oversize!_** A large **_black hoodie_**. If not specified otherwise, the hood is down by default.
