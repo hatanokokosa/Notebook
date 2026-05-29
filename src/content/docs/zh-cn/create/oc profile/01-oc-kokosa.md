@@ -51,7 +51,8 @@ _关于背景之类的其他元素配色，可以参考 [Catppuccin](https://cat
 ### 衣服
 
 内衬是一件简洁的白色 T 恤，外套主要是 **_黑色帽衫_**，右胸口印有神必标志：  
-使用的颜色（Hex 颜色码）：Lavender：`#babbf1` Mantle：`#e6e9ef`
+使用的颜色（Hex 颜色码）：  
+Lavender：`#babbf1` Mantle：`#e6e9ef`
 
 ![新版决定直接用 Nix 的了 | 设计：Nix 社区（CC-BY-4.0） 配色方案：Catppuccin（MIT）|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
 

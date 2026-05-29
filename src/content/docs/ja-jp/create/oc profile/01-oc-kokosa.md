@@ -52,7 +52,8 @@ _背景などのその他の配色は、[Catppuccin](https://catppuccin.com/pale
 ### 服
 
 インナーは **_シンプルな白のTシャツ_**。アウターは主に **_黒のパーカー（フーディ）_** で、右胸には謎のロゴがプリントされている：  
-使用色（Hexカラーコード）：Lavender：`#babbf1` Mantle：`#e6e9ef`
+使用色（Hexカラーコード）：  
+Lavender：`#babbf1` Mantle：`#e6e9ef`
 
 ![新バージョンでは Nix をそのまま使うことにしました | デザイン：Nix コミュニティ（CC-BY-4.0） 配色：Catppuccin（MIT）|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
 

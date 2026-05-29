@@ -50,7 +50,8 @@ _For background elements and other color choices, refer to [Catppuccin](https://
 ### Clothes
 
 The inner layer is a simple white T-shirt, with the outer layer being mainly a **_black hoodie_**. On the right chest is a mysterious logo:  
-Colors used (Hex color codes): Lavender: `#babbf1` Mantle: `#e6e9ef`
+Colors used (Hex color codes):  
+Lavender: `#babbf1` Mantle: `#e6e9ef`
 
 ![New version decided to use Nix directly | Design: Nix community (CC-BY-4.0) Color scheme: Catppuccin (MIT)|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
 
