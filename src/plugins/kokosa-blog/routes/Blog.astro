@@ -36,4 +36,10 @@ const pageProps = getPageProps(getBlogTitle(locale));
   :global(.content-panel:nth-of-type(2)) {
     border-top: none;
   }
+
+  @media (min-width: 72rem) {
+    :global(html[data-has-sidebar][data-has-toc]) {
+      --sl-content-width: 48rem;
+    }
+  }
 </style>

@@ -69,6 +69,35 @@
   line-height: calc(var(--sl-line-height) * 1.1);
 }
 
+@media (min-width: 72rem) {
+  [data-has-sidebar][data-has-toc] {
+    --sl-content-width: 52rem;
+  }
+
+  [data-has-sidebar][data-has-toc] .main-pane {
+    --sl-content-margin-inline: clamp(1.5rem, 4vw, 4rem) auto;
+  }
+
+  .right-sidebar-panel :where(a) {
+    font-size: var(--sl-text-sm);
+    line-height: 1.45;
+  }
+
+  [data-small-img] {
+    --kokosa-media-width: 45rem;
+  }
+
+  [data-small-img] .sl-markdown-content :where(figure:has(img), p:has(> img:only-child)) {
+    max-width: var(--kokosa-media-width);
+    margin-inline: auto;
+  }
+
+  [data-small-img] .sl-markdown-content img:not(a img) {
+    max-width: min(100%, var(--kokosa-media-width));
+    height: auto;
+  }
+}
+
 :root[data-theme="light"] {
   --kokosa-strong-color: #d20f39;
 }

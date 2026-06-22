@@ -3,6 +3,7 @@ title: Kokosa
 download: true
 comments: false
 watermark: true
+small-img: true
 ---
 
 ## Basic Information

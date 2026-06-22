@@ -133,6 +133,4 @@ It has started to go beyond the original plan a little bit (a few-hundred-line f
 
 ### Afterword
 
-After vibe-coding it at the speed of light, I realized: could I have used something like OpenClaw to help me do this? kfb, rise up already... surpassing Lobehub is just around the corner...
-
-The bot is still very quiet, but now when I publish something myself, the bot reminds me on its own: you posted another filler article. (I just do not know how long it will be before the next one.)
+After vibe-coding it at the speed of light, I realized: could I have used something like OpenClaw to help me do this? kfb, rise up already... surpassing Lobehub is just around the corner... The bot is still very quiet, but now when I publish something myself, the bot reminds me on its own: you posted another filler article. (I just do not know how long it will be before the next one.)

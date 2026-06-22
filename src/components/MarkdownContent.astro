@@ -11,6 +11,7 @@ const pathname = Astro.url.pathname;
 const contentHtml = await Astro.slots.render("default");
 const hasWatermarkEnabled = starlightRoute?.entry?.data?.watermark === true;
 const hasDownloadEnabled = starlightRoute?.entry?.data?.download === true;
+const hasSmallImages = starlightRoute?.entry?.data?.["small-img"] === true;
 const renderedContentHtml = hasWatermarkEnabled ? await applyStaticWatermarks(contentHtml) : contentHtml;
 const isBlogPostPage = starlightRoute?.entry?.data?.date instanceof Date;
 const isGeneratedBlogPage =
@@ -22,18 +23,20 @@ const isGeneratedBlogPage =
 const shouldEnhanceImages = !isGeneratedBlogPage && /<img[\s>]/i.test(renderedContentHtml);
 ---
 
-{shouldEnhanceImages && <ImageZoomer client:only="react" />}
-{shouldEnhanceImages && <DownloadOverlay enabled={hasDownloadEnabled} client:only="react" />}
-{
-  isBlogPostPage ? (
-    <BlogMarkdownContent>
-      <Fragment set:html={renderedContentHtml} />
-    </BlogMarkdownContent>
-  ) : (
-    <Default>
-      <Fragment set:html={renderedContentHtml} />
-    </Default>
-  )
-}
+<div data-small-img={hasSmallImages ? "" : undefined}>
+  {shouldEnhanceImages && <ImageZoomer client:only="react" />}
+  {shouldEnhanceImages && <DownloadOverlay enabled={hasDownloadEnabled} client:only="react" />}
+  {
+    isBlogPostPage ? (
+      <BlogMarkdownContent>
+        <Fragment set:html={renderedContentHtml} />
+      </BlogMarkdownContent>
+    ) : (
+      <Default>
+        <Fragment set:html={renderedContentHtml} />
+      </Default>
+    )
+  }
+</div>
 
 <Giscus {...Astro.props} />
