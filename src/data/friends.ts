@@ -17,7 +17,7 @@ export const FRIENDS: FriendLink[] = [
   },
   {
     link: "https://ex-tasty.com/",
-    title: "冬夜",
+    title: "開源 lib",
     avatar: "/friends/chisato.avif",
     desc: "邪惡與極限伴您一生……🥰\n我要帶領尊貴的您前往極限的旅程和極限的時光",
     note: "博客内容都非常优质，推荐鉴赏",
