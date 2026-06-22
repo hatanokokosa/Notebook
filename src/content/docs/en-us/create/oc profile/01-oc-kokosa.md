@@ -93,6 +93,10 @@ If it's drawn by myself and I feel okay posting it, it won't be listed here.
 
 ---
 
+![Artist: 阿影又迷路了](/create/01-kokosa/0689f0f177019b4e.avif)
+
+---
+
 ### Chibi / QQ
 
 ---

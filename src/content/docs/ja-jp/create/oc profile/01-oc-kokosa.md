@@ -93,6 +93,10 @@ Lavender：`#babbf1` Mantle：`#e6e9ef`
 
 ---
 
+![イラストレーター：阿影又迷路了](/create/01-kokosa/0689f0f177019b4e.avif)
+
+---
+
 ### ちびキャラ
 
 ---
