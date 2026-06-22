@@ -57,10 +57,10 @@ Lavender：`#babbf1` Mantle：`#e6e9ef`
 
 ![新版决定直接用 Nix 的了 | 设计：Nix 社区（CC-BY-4.0） 配色方案：Catppuccin（MIT）|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
 
-下半身是 **_短裤或短裙_**（黑色或米白色），被连帽衫盖住大部分  
+下半身是 **_短裤_**（黑色或米白色），被连帽衫盖住大部分  
 **_Oversize！_** 大号 **_黑色连帽衫_**，如果没说的话，连帽衫的帽子默认是放下来的
 
-![PID：137359159（这——么大的，图不是服设是参考）|no-watermark](/create/01-kokosa/f7cac4e70457572c.avif)
+![服设大概是这样](/create/01-kokosa/99d58bfe8da63b52.png)
 
 ### 鞋袜
 

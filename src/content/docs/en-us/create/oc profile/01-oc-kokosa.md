@@ -56,10 +56,10 @@ Lavender: `#babbf1` Mantle: `#e6e9ef`
 
 ![New version decided to use Nix directly | Design: Nix community (CC-BY-4.0) Color scheme: Catppuccin (MIT)|no-watermark](/create/01-kokosa/3cbd5ec96ee96b2a.avif)
 
-The lower body is **_shorts or a short skirt_** (black or off-white), mostly covered by the hoodie.  
+The lower body is **_shorts_** (black or off-white), mostly covered by the hoodie.  
 **_Oversize!_** A large **_black hoodie_**. If not specified otherwise, the hood is down by default.
 
-![PID: 137359159 (THIIIIS big, reference only, not the actual outfit design)|no-watermark](/create/01-kokosa/f7cac4e70457572c.avif)
+![This is roughly the outfit design](/create/01-kokosa/99d58bfe8da63b52.png)
 
 ### Shoes & Socks
 
