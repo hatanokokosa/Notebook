@@ -63,9 +63,15 @@ const commentCountLabels = {
   }
 
   h2 {
-    font-size: var(--sl-text-3xl);
+    font-size: var(--sl-text-2xl);
     line-height: var(--sl-line-height-headings);
     margin-bottom: 0;
+  }
+
+  @media (min-width: 50em) {
+    h2 {
+      font-size: var(--sl-text-3xl);
+    }
   }
 
   .preview-link {
