@@ -4,8 +4,7 @@ date: 2026-02-08
 lastUpdated: 2026-02-08
 tags:
   - Gaming
-  - Proton
-excerpt: There's a game on Steam called **Chill with You ~ Lofi Story** (is it even a game? it's basically a pomodoro timer!). It's one of my favorites - the protagonist is adorable and provides great companionship...
+excerpt: Fix the issue where the game defaults to the UTC+0 timezone under Wine
 ---
 
 ::toc
@@ -24,12 +23,12 @@ Wait, what? So it wasn't some parallel universe setting after all, just the time
 
 ### Problem Analysis
 
-It's actually a pretty simple issue, and I quickly found the cause: Proton-run Windows programs can't correctly read the Linux system's timezone information. On Linux, timezone data is usually stored in `/usr/share/zoneinfo/`, while on NixOS it's in `/etc/zoneinfo/`.
+It's actually a pretty simple issue, and I quickly found the cause: Windows programs translated through Proton somehow cannot correctly read the Linux system's timezone information. On Linux, timezone data is usually stored under `/usr/share/zoneinfo/`.
 
 The solution is simple - just manually specify the timezone in the launch options. Go to Steam → Game Properties → Launch Options and add:
 
 - `TZ=Asia/Shanghai`: Sets the timezone to Shanghai (Beijing Time)
-- `TZDIR=/etc/zoneinfo`: Specifies the timezone file directory location
+- `/usr/share/zoneinfo/`: Specifies the timezone file directory location
 
 It should look something like this:
 
@@ -37,7 +36,7 @@ It should look something like this:
 TZDIR="/usr/share/zoneinfo" TZ="Asia/Shanghai" %command%
 ```
 
-After adding these launch parameters and restarting the game, the time displays correctly. 9:31 is now 9:31.
+After adding these launch parameters and restarting the game, the time displays correctly.
 
 ![Something like this, it was originally showing 1:31](/posts/1-chill-with-you/d4ed6b986d87948e.avif)
 

@@ -4,17 +4,17 @@ date: 2026-05-08
 lastUpdated: 2026-05-08
 tags:
   - Bot
-  - AI
-excerpt: The forwarding bot I wrote before was originally just for receiving private messages. Then I casually added LLM moderation, casually added allowlists and blocklists, casually added appeals, casually added i18n, casually, casually, casually...
+  - Coding
+excerpt: Add RSS subscription forwarding to the message forwarding bot
 ---
 
 ::toc
 
-### I Wanted to Mess with the Bot Again
+### The Current Tools Are Too Hard to Use... So...
 
-The forwarding bot I wrote before was originally just for receiving private messages. Then I casually added LLM moderation, casually added allowlists and blocklists, casually added appeals, casually added i18n, casually, casually, casually... wait, how did this become 1,500 lines? So I started casually adding things again. The RSS tool I use is not that pleasant anyway, so why not stuff RSS into it too? kfb, one day you will become a super bot packed with way too many features...
+The forwarding bot I wrote before was originally only meant to receive private messages. Because I needed ad blocking, I added LLM moderation; to save a few tokens, I casually added allowlists and blocklists; to avoid false bans, I added appeals; then, because I had nothing better to do, I added i18n... holy crap, how is this almost 2,000 lines of code? The RSS tool I use also happens to be unpleasant, so why not stuff RSS into it too? kfb, one day you will become a bot with far too many features...
 
-My requirement is simple: when a friend's blog updates, or when certain sites publish new articles, the bot sends me one Telegram message. I do not need to turn it into a feed reader, and I do not need a pretty admin dashboard. A few commands for CRUD over the RSS list are enough:
+My requirement is very simple: when a friend's blog updates, send me a Telegram message. I do not need to turn it into an information feed reader, and a few commands for adding, deleting, updating, listing, sending, and receiving RSS entries are enough:
 
 ```txt
 /rss_add           # add
@@ -25,15 +25,6 @@ My requirement is simple: when a friend's blog updates, or when certain sites pu
 ```
 
 ![RSS bot command list](/posts/2-tgbot-rss/a293631260c072db.png)
-
-### Why Not Use an Existing Service?
-
-Of course I could use an existing RSS bot, but I do not want one chat box to contain hundreds of bots and become the king of bots. This bot can already:
-
-- send Telegram messages
-- use Gemini for summaries
-
-Looking at it that way, why not add RSS too? (no)
 
 ### Mysterious RSS Generation
 
@@ -67,22 +58,11 @@ For example, this is mine:
 </item>
 ```
 
-> I have always felt that stuffing the full article into RSS is very silly.
-
-The handling strategy is:
-
-- prefer `guid`
-- if there is no `guid`, use `link`
-- if that is also missing, use `title + pubDate`
-- if `content:encoded` exists, send it to the AI for summarization
+> I have always felt that stuffing the full article into RSS is very silly, so I have already changed this.
 
 ### Push Old Posts and Enjoy Getting Flooded
 
-When adding an RSS feed for the first time, it definitely cannot push every article immediately. After all, this is a message bot, not some full application.
-
-Some blog RSS feeds contain dozens of posts, and adding the subscription would flood the screen. So when a feed is added for the first time, the bot fetches it once and records all existing articles as read, without sending anything.
-
-After that, scheduled refreshes only notify me when they discover new items:
+When adding an RSS feed for the first time, it definitely cannot push every article immediately. After all, this is a message bot. Some blog RSS feeds contain dozens of posts, and I have already read them; if adding a subscription filled the whole screen, that would be annoying. So when a feed is added for the first time, the bot fetches it once and records all existing articles as read, but does not send them. After that, scheduled refreshes only notify me when they discover new items:
 
 ```txt
 [RSS] Kokosa's Blog
@@ -112,11 +92,9 @@ It checks every 30 minutes. For easier testing, I also added a manual command:
 
 ![Notification after manually refreshing RSS feeds](/posts/2-tgbot-rss/6696e132cf6a7fbb.png)
 
-### LLM Summaries
+### AI-Generated Article Summaries
 
-Since Gemini was already connected, how could a notification contain only a link? So I made it summarize the article too.
-
-The timeout for the previous content moderation feature was only 4 seconds. Moderation only needs to output `SAFE` or `UNSAFE`, while summaries have more to think about (not really). It needs to read the title, read the content, and write one sentence, so 4 seconds can time out pretty easily. I gave summaries a separate 20-second timeout. If it fails, it is not a big deal. At worst, it becomes:
+Since Gemini was already connected, how could a notification contain only a link? So I made it summarize the article too. The timeout for the previous content moderation feature was only 4 seconds, because moderation only needs to output `SAFE` or `UNSAFE`, while summaries have more to think about. So summaries get a separate 20-second timeout. If it fails, at worst it becomes:
 
 ```txt
 Summary: AI summary unavailable.
@@ -124,15 +102,6 @@ Summary: AI summary unavailable.
 
 The link is still sent as usual.
 
-### What It Looks Like Now
-
-- private-message forwarding
-- spam moderation
-- RSS subscription notifications
-- to be continued...
-
-It has started to go beyond the original plan a little bit (a few-hundred-line forwarding bot that only blocked ads), but not too far.
-
 ### Afterword
 
-After vibe-coding it at the speed of light, I realized: could I have used something like OpenClaw to help me do this? kfb, rise up already... surpassing Lobehub is just around the corner... The bot is still very quiet, but now when I publish something myself, the bot reminds me on its own: you posted another filler article. (I just do not know how long it will be before the next one.)
+After finishing this at vibe-coding speed, I realized: maybe I could have used something like OpenClaw or Hermes to help me do this. kfb, rise up... surpassing the lobster is just around the corner...

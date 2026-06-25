@@ -3,8 +3,9 @@ title: configuration.nix から Flake へ
 date: 2025-10-04
 lastUpdated: 2025-10-04
 tags:
-  - NixOS
-excerpt: 受験まで残り 240 日を切っているので、ブログを書く時間はあまりない。でも鯖の民に「さすがに一本くらい書け、じゃないとサイトが永遠に空っぽのままだぞ」と詰められたので、一念発起。本当は日記を書く習慣はあるんだけど、ちょっと個人的すぎるのでここには公開しない……
+  - Computer
+  - Coding
+excerpt: NixOS の設定ファイルを Flake に移行する
 ---
 
 ::toc
