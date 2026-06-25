@@ -17,7 +17,13 @@ const { entry, locale } = Astro.props;
 const entryPath = `/${getPathWithLocale(entry.id, locale)}`;
 const href = getRelativeUrl(entryPath);
 const giscusTerm = href.replace(/^\/(zh-cn|en-us|ja-jp)(?=\/|$)/, "") || "/";
-const commentPlaceholder = locale === "ja-jp" ? "コメント ..." : locale === "en-us" ? "Comments ..." : "评论 ...";
+const commentCountLabels = {
+  "data-comment-one": Astro.locals.t("kokosaBlog.comments.comment_one"),
+  "data-comment-other": Astro.locals.t("kokosaBlog.comments.comment_other"),
+  "data-reaction-one": Astro.locals.t("kokosaBlog.comments.reaction_one"),
+  "data-reaction-other": Astro.locals.t("kokosaBlog.comments.reaction_other"),
+  "data-fallback-label": Astro.locals.t("kokosaBlog.comments.fallback"),
+};
 ---
 
 <article class="preview">
@@ -28,7 +34,14 @@ const commentPlaceholder = locale === "ja-jp" ? "コメント ..." : locale === 
     {entry.data.cover && <Cover cover={entry.data.cover} />}
     <Metadata entry={entry} {locale} />
     <PostTags {entry} {locale}>
-      <span class="comment-count" data-giscus-term={giscusTerm} aria-label="Giscus comments">{commentPlaceholder}</span>
+      <span
+        class="comment-count"
+        data-giscus-term={giscusTerm}
+        aria-label={Astro.locals.t("kokosaBlog.comments.ariaLabel")}
+        {...commentCountLabels}
+      >
+        {Astro.locals.t("kokosaBlog.comments.placeholder")}
+      </span>
     </PostTags>
   </header>
   <div class="sl-markdown-content">

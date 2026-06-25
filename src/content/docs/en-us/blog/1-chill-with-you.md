@@ -8,6 +8,8 @@ tags:
 excerpt: There's a game on Steam called **Chill with You ~ Lofi Story** (is it even a game? it's basically a pomodoro timer!). It's one of my favorites - the protagonist is adorable and provides great companionship...
 ---
 
+::toc
+
 ### What's This About
 
 There's a game on Steam called **Chill with You ~ Lofi Story** (is it even a game? it's basically a pomodoro timer!). It's one of my favorites - the protagonist is adorable and provides great companionship.

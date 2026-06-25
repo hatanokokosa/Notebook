@@ -3,8 +3,8 @@ title: 给 Bot 塞一个 RSS 订阅
 date: 2026-05-08
 lastUpdated: 2026-05-08
 tags:
-  - 机器人 🤖
-  - 编码 ⌨️
+  - 机器人
+  - 编码
 excerpt: 为消息转发 Bot 添加 RSS 订阅转发功能
 ---
 

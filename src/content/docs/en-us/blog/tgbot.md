@@ -8,6 +8,8 @@ tags:
 excerpt: The forwarding bot I was using kept receiving tons of spam, and the developer never added a blocking feature. When I checked again, the project had already been inactive for a year. Every day I had to deal with VPN promotions, adult-content funnels, U-shield scams, and other garbage messages. I really could not take it anymore, so I decided to rewrite the feature myself...
 ---
 
+::toc
+
 ### The Beginning
 
 The forwarding bot I used before was [Node Forward Bot](https://github.com/LloydAsp/nfd). I had used it for quite a while, but it kept receiving all kinds of ads, which got extremely annoying. When I checked again, I found that the project had already been inactive for a year. Since NFD2 is not open source (I think? I could not find a repository), I did not try it, and I also do not know whether it has ad-blocking features. So I decided to reinvent the wheel for my own use.

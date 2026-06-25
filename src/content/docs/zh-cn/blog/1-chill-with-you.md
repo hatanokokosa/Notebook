@@ -3,7 +3,7 @@ title: Chill with You 的时区 Bug
 date: 2026-02-08
 lastUpdated: 2026-02-08
 tags:
-  - 游戏 🎮
+  - 游戏
 excerpt: 修复在 Wine 下默认显示 UTC+0 时区的问题
 ---
 

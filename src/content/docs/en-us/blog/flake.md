@@ -7,6 +7,8 @@ tags:
 excerpt: With less than 240 days until the Gaokao (college entrance exam), time is tight and I don't have much time to blog. But after being urged by friends, I figured I should at least write one post. Actually, I've been keeping a diary, but it's too personal to share...
 ---
 
+::toc
+
 ### What's up
 
 With less than 240 days until the Gaokao (college entrance exam), time is tight and I don't have much time to blog. But after being urged by friends, I figured I should at least write one post. Actually, I've been keeping a diary, but it's too personal to share publicly.

@@ -8,6 +8,8 @@ tags:
 excerpt: The forwarding bot I wrote before was originally just for receiving private messages. Then I casually added LLM moderation, casually added allowlists and blocklists, casually added appeals, casually added i18n, casually, casually, casually...
 ---
 
+::toc
+
 ### I Wanted to Mess with the Bot Again
 
 The forwarding bot I wrote before was originally just for receiving private messages. Then I casually added LLM moderation, casually added allowlists and blocklists, casually added appeals, casually added i18n, casually, casually, casually... wait, how did this become 1,500 lines? So I started casually adding things again. The RSS tool I use is not that pleasant anyway, so why not stuff RSS into it too? kfb, one day you will become a super bot packed with way too many features...

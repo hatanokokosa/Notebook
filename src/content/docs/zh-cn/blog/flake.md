@@ -3,8 +3,8 @@ title: 从 configuration.nix 到 Flake
 date: 2025-10-04
 lastUpdated: 2025-10-04
 tags:
-  - 电脑 🖥
-  - 编码 ⌨️
+  - 电脑
+  - 编码
 excerpt: 将 NixOS 的配置文件迁移为 Flake
 ---
 

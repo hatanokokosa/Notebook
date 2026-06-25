@@ -3,8 +3,8 @@ title: 重构自己的 TG 转发 Bot
 date: 2025-12-18
 lastUpdated: 2025-12-18
 tags:
-  - 机器人 🤖
-  - 编码 ⌨️
+  - 机器人
+  - 编码
 excerpt: 将转发机器人从 NFD 换为自己搓的
 ---
 

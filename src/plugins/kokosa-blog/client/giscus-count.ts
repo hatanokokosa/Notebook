@@ -21,14 +21,20 @@ interface GitHubDiscussion {
   reactions?: { total_count?: number };
 }
 
-function getCountLabel({ comments, reactions }: GiscusCounts) {
-  const lang = document.documentElement.lang.toLowerCase();
-  if (lang.startsWith("ja")) return `${comments} 件のコメント · ${reactions} いいね`;
-  if (lang.startsWith("en")) return `${comments} comment${comments === 1 ? "" : "s"} · ${reactions} like${reactions === 1 ? "" : "s"}`;
-  return `${comments}条评论 · ${reactions}个喜欢`;
+function getDatasetValue(counter: HTMLElement, key: string, fallback: string) {
+  return counter.dataset[key] ?? fallback;
 }
 
-function getFallbackLabel() {
+function getCountLabel(counter: HTMLElement, { comments, reactions }: GiscusCounts) {
+  const commentLabel = getDatasetValue(counter, comments === 1 ? "commentOne" : "commentOther", ` comment${comments === 1 ? "" : "s"}`);
+  const reactionLabel = getDatasetValue(counter, reactions === 1 ? "reactionOne" : "reactionOther", ` like${reactions === 1 ? "" : "s"}`);
+
+  return `${comments}${commentLabel} · ${reactions}${reactionLabel}`;
+}
+
+function getFallbackLabel(counter?: HTMLElement) {
+  if (counter?.dataset.fallbackLabel) return counter.dataset.fallbackLabel;
+
   const lang = document.documentElement.lang.toLowerCase();
   if (lang.startsWith("ja")) return "コメント - · いいね -";
   if (lang.startsWith("en")) return "Comments - · Likes -";
@@ -114,11 +120,12 @@ async function hydrateCommentCounts() {
 
     for (const counter of counters) {
       const term = counter.dataset.giscusTerm ? normalizeTerm(counter.dataset.giscusTerm) : undefined;
-      counter.textContent = term && counts[term] ? getCountLabel(counts[term]) : getCountLabel({ comments: 0, reactions: 0 });
+      counter.textContent =
+        term && counts[term] ? getCountLabel(counter, counts[term]) : getCountLabel(counter, { comments: 0, reactions: 0 });
     }
   } catch {
     for (const counter of counters) {
-      counter.textContent = getFallbackLabel();
+      counter.textContent = getFallbackLabel(counter);
     }
   }
 }
