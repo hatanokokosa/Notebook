@@ -4,6 +4,7 @@ import BlogMarkdownContent from "../plugins/kokosa-blog/components/starlight/Mar
 import ImageZoomer from "./ImageZoomer";
 import DownloadOverlay from "./DownloadOverlay";
 import Giscus from "./Giscus.astro";
+import ArticleToc from "./ArticleToc.astro";
 import { applyStaticWatermarks } from "../lib/static-watermark";
 
 const { starlightRoute } = Astro.locals;
@@ -13,6 +14,9 @@ const hasWatermarkEnabled = starlightRoute?.entry?.data?.watermark === true;
 const hasDownloadEnabled = starlightRoute?.entry?.data?.download === true;
 const hasSmallImages = starlightRoute?.entry?.data?.["small-img"] === true;
 const renderedContentHtml = hasWatermarkEnabled ? await applyStaticWatermarks(contentHtml) : contentHtml;
+const articleTocMarker = /<!--\s*toc\s*-->|<p>\s*(?:\[toc\]|::toc)\s*<\/p>/i;
+const contentParts = renderedContentHtml.split(articleTocMarker);
+const shouldInsertArticleToc = Boolean(starlightRoute?.toc) && contentParts.length > 1;
 const isBlogPostPage = starlightRoute?.entry?.data?.date instanceof Date;
 const isGeneratedBlogPage =
   pathname === "/" ||
@@ -29,11 +33,29 @@ const shouldEnhanceImages = !isGeneratedBlogPage && /<img[\s>]/i.test(renderedCo
   {
     isBlogPostPage ? (
       <BlogMarkdownContent>
-        <Fragment set:html={renderedContentHtml} />
+        {shouldInsertArticleToc ? (
+          contentParts.map((part, index) => (
+            <>
+              {part && <Fragment set:html={part} />}
+              {index < contentParts.length - 1 && <ArticleToc />}
+            </>
+          ))
+        ) : (
+          <Fragment set:html={renderedContentHtml} />
+        )}
       </BlogMarkdownContent>
     ) : (
       <Default>
-        <Fragment set:html={renderedContentHtml} />
+        {shouldInsertArticleToc ? (
+          contentParts.map((part, index) => (
+            <>
+              {part && <Fragment set:html={part} />}
+              {index < contentParts.length - 1 && <ArticleToc />}
+            </>
+          ))
+        ) : (
+          <Fragment set:html={renderedContentHtml} />
+        )}
       </Default>
     )
   }

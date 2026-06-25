@@ -70,6 +70,10 @@
 }
 
 @media (min-width: 72rem) {
+  .right-sidebar {
+    border-inline-start: 0;
+  }
+
   [data-has-sidebar][data-has-toc] {
     --sl-content-width: 52rem;
   }

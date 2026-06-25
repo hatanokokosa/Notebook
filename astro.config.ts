@@ -1,5 +1,4 @@
 import rehypeFigure from "@microflash/rehype-figure";
-import catppuccin from "@catppuccin/starlight";
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import rehypeKatex from "rehype-katex";
@@ -60,12 +59,15 @@ export default defineConfig({
         "./src/styles/figure.css",
         "./src/styles/color-code.css",
         "./src/styles/font.css",
+        "./src/styles/catppuccin.css",
       ],
 
       components: {
         Head: "./src/components/Head.astro",
         LanguageSelect: "./src/components/LanguageSelect.astro",
         MarkdownContent: "./src/components/MarkdownContent.astro",
+        PageTitle: "./src/components/PageTitle.astro",
+        PageSidebar: "./src/components/PageSidebar.astro",
         SocialIcons: "./src/components/SocialIcons.astro",
       },
 
@@ -88,11 +90,6 @@ export default defineConfig({
       ],
 
       plugins: [
-        catppuccin({
-          light: { flavor: "latte", accent: "rosewater" },
-          dark: { flavor: "frappe", accent: "lavender" },
-        }),
-
         kokosaBlog({
           metrics: {
             readingTime: true,

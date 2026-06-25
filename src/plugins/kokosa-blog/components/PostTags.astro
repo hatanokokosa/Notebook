@@ -22,11 +22,15 @@ const hasDefaultSlot = Astro.slots.has("default");
       <ul>
         {tags.map((tag) => (
           <li>
-            <a href={getRelativeBlogUrl(`/tags/${tag.slug}`, locale)}>{tag.label}</a>
+            <a href={getRelativeBlogUrl(`/tags/${tag.slug}`, locale)}># {tag.label}</a>
           </li>
         ))}
       </ul>
-      <slot />
+      {hasDefaultSlot && (
+        <span class="post-tags-extra">
+          <slot />
+        </span>
+      )}
     </div>
   ) : null
 }
@@ -36,14 +40,14 @@ const hasDefaultSlot = Astro.slots.has("default");
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.3rem;
     margin-top: 0;
   }
 
   ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
+    gap: 0.5rem;
     margin: 0;
     padding: 0;
   }
@@ -51,6 +55,10 @@ const hasDefaultSlot = Astro.slots.has("default");
   li {
     display: block;
     padding: 0;
+  }
+
+  .post-tags-extra {
+    margin-inline-start: 0.65rem;
   }
 
   a {

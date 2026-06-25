@@ -1,0 +1,57 @@
+---
+import TocList from "./TocList.astro";
+import { countTocItems, getUserTocItems } from "../lib/toc";
+
+const { toc } = Astro.locals.starlightRoute;
+const tocItems = toc ? getUserTocItems(toc.items) : [];
+const tocItemCount = countTocItems(tocItems);
+const shouldOpen = tocItemCount <= 5;
+---
+
+{
+  toc && tocItemCount > 0 && (
+    <details class="article-toc not-content" open={shouldOpen}>
+      <summary>{Astro.locals.t("tableOfContents.onThisPage")}</summary>
+      <div class="article-toc-content">
+        <TocList toc={tocItems} />
+      </div>
+    </details>
+  )
+}
+
+<style>
+  .article-toc {
+    display: none;
+  }
+
+  @media (min-width: 72rem) {
+    .article-toc {
+      display: block;
+      border: 1px solid var(--sl-color-hairline-light);
+      padding: 0.75rem 1rem;
+      background: var(--sl-color-bg);
+    }
+  }
+
+  summary {
+    color: var(--sl-color-white);
+    cursor: pointer;
+    font-weight: 600;
+    line-height: var(--sl-line-height-headings);
+  }
+
+  .article-toc-content {
+    margin-top: 0.75rem;
+  }
+
+  .article-toc :global(a) {
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-base);
+    text-decoration: none;
+  }
+
+  .article-toc :global(a:hover),
+  .article-toc :global(a[aria-current="true"]) {
+    color: var(--sl-color-white);
+  }
+</style>

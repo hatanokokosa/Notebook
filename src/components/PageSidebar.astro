@@ -1,0 +1,40 @@
+---
+import MobileTableOfContents from "./MobileTableOfContents.astro";
+import { countTocItems, getUserTocItems } from "../lib/toc";
+
+const { toc } = Astro.locals.starlightRoute;
+const hasUserTocItems = toc ? countTocItems(getUserTocItems(toc.items)) > 0 : false;
+---
+
+{toc && !hasUserTocItems && <style is:global set:html={`html[data-has-toc] { --sl-mobile-toc-height: 0rem; }`} />}
+
+{
+  toc && (
+    <>
+      <div class="lg:sl-hidden">
+        <MobileTableOfContents />
+      </div>
+      <div class="right-sidebar-panel sl-hidden lg:sl-block">
+        <div class="sl-container">{/* Reserved for future desktop sidebar content. */}</div>
+      </div>
+    </>
+  )
+}
+
+<style>
+  @layer starlight.core {
+    .right-sidebar-panel {
+      padding: 1rem var(--sl-sidebar-pad-x);
+    }
+
+    .sl-container {
+      width: calc(var(--sl-sidebar-width) - 2 * var(--sl-sidebar-pad-x));
+    }
+
+    @media (min-width: 72rem) {
+      .sl-container {
+        max-width: calc(((100vw - var(--sl-sidebar-width) - 2 * var(--sl-content-pad-x) - 2 * var(--sl-sidebar-pad-x)) * 0.25));
+      }
+    }
+  }
+</style>

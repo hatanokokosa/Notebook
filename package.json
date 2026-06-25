@@ -16,7 +16,6 @@
     "@astrojs/mdx": "^5.0.0",
     "@astrojs/react": "^5.0.4",
     "@astrojs/starlight": "^0.38.4",
-    "@catppuccin/starlight": "^2.0.1",
     "@fontsource/fraunces": "^5.2.9",
     "@fontsource/iosevka": "^5.2.5",
     "@fontsource/noto-serif-sc": "^5.2.8",

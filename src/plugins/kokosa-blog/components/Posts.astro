@@ -22,7 +22,17 @@ const { entries, locale } = Astro.props;
   .posts {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
-    padding-top: 3rem;
+    gap: 2rem;
+    padding-top: 1rem;
+  }
+
+  @media (max-width: 49.999em) {
+    .posts {
+      align-items: center;
+    }
+
+    .posts > :global(.preview) {
+      width: min(92%, 32rem);
+    }
   }
 </style>
