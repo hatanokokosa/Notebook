@@ -1,7 +1,7 @@
 ---
 title: 给 Bot 塞一个 RSS 订阅
 date: 2026-05-08
-lastUpdated: 2026-06-25
+lastUpdated: 2026-05-08
 tags:
   - 机器人 🤖
   - 编码 ⌨️

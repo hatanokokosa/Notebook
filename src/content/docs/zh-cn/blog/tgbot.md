@@ -1,7 +1,7 @@
 ---
 title: 重构自己的 TG 转发 Bot
 date: 2025-12-18
-lastUpdated: 2026-06-25
+lastUpdated: 2025-12-18
 tags:
   - 机器人 🤖
   - 编码 ⌨️

@@ -22,7 +22,7 @@ const hasDefaultSlot = Astro.slots.has("default");
       <ul>
         {tags.map((tag) => (
           <li>
-            <a href={getRelativeBlogUrl(`/tags/${tag.slug}`, locale)}># {tag.label}</a>
+            <a href={getRelativeBlogUrl(`/tags/${tag.slug}`, locale)}>{tag.label}</a>
           </li>
         ))}
       </ul>
