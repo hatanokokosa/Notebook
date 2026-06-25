@@ -12,7 +12,7 @@ const { showInactive = false } = Astro.props;
 const visibleFriends = getVisibleFriends(FRIENDS, showInactive);
 ---
 
-<CardGrid stagger>
+<CardGrid>
   {
     visibleFriends.map((friend) => {
       const displayUrl = getFriendDisplayUrl(friend.link);

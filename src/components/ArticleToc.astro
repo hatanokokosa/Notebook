@@ -13,7 +13,9 @@ const shouldOpen = tocItemCount <= 5;
     <details class="article-toc not-content" open={shouldOpen}>
       <summary>{Astro.locals.t("tableOfContents.onThisPage")}</summary>
       <div class="article-toc-content">
-        <TocList toc={tocItems} />
+        <div class="article-toc-inner">
+          <TocList toc={tocItems} />
+        </div>
       </div>
     </details>
   )
@@ -34,14 +36,62 @@ const shouldOpen = tocItemCount <= 5;
   }
 
   summary {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
     color: var(--sl-color-white);
     cursor: pointer;
     font-weight: 600;
     line-height: var(--sl-line-height-headings);
+    transition: color 180ms ease;
+  }
+
+  summary::marker,
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: "›";
+    color: var(--sl-color-gray-3);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .article-toc[open]:not([data-closing]) summary::after {
+    transform: rotateZ(90deg);
   }
 
   .article-toc-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    margin-top: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-0.25rem);
+    visibility: hidden;
+    transition:
+      grid-template-rows 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      margin-top 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 180ms ease,
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 260ms;
+  }
+
+  .article-toc[open]:not([data-closing]) .article-toc-content {
+    grid-template-rows: 1fr;
     margin-top: 0.75rem;
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .article-toc-inner {
+    min-height: 0;
+    overflow: hidden;
   }
 
   .article-toc :global(a) {
@@ -54,4 +104,75 @@ const shouldOpen = tocItemCount <= 5;
   .article-toc :global(a[aria-current="true"]) {
     color: var(--sl-color-white);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    summary,
+    summary::after,
+    .article-toc-content {
+      transition: none;
+    }
+
+    .article-toc-content {
+      transform: none;
+    }
+  }
 </style>
+
+<script>
+  const articleTocAnimationMs = 260;
+  const articleTocBoundAttr = "data-article-toc-bound";
+
+  function setupArticleTocAnimations() {
+    document.querySelectorAll<HTMLDetailsElement>(`.article-toc:not([${articleTocBoundAttr}])`).forEach((details) => {
+      const summary = details.querySelector("summary");
+      if (!summary) return;
+
+      details.setAttribute(articleTocBoundAttr, "");
+      let closeTimer = 0;
+      let openFrame = 0;
+
+      const shouldReduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const setOpen = (open: boolean) => {
+        window.clearTimeout(closeTimer);
+        window.cancelAnimationFrame(openFrame);
+
+        if (open) {
+          details.open = true;
+          if (shouldReduceMotion()) {
+            details.removeAttribute("data-closing");
+            return;
+          }
+
+          details.setAttribute("data-closing", "");
+          openFrame = window.requestAnimationFrame(() => {
+            details.removeAttribute("data-closing");
+          });
+          return;
+        }
+
+        if (!details.open) return;
+
+        if (shouldReduceMotion()) {
+          details.removeAttribute("data-closing");
+          details.open = false;
+          return;
+        }
+
+        details.setAttribute("data-closing", "");
+        closeTimer = window.setTimeout(() => {
+          details.open = false;
+          details.removeAttribute("data-closing");
+        }, articleTocAnimationMs);
+      };
+
+      summary.addEventListener("click", (event) => {
+        event.preventDefault();
+        setOpen(!details.open || details.hasAttribute("data-closing"));
+      });
+    });
+  }
+
+  setupArticleTocAnimations();
+  document.addEventListener("astro:page-load", setupArticleTocAnimations);
+</script>

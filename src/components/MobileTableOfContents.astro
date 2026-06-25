@@ -22,7 +22,9 @@ const hasTocItems = countTocItems(tocItems) > 0;
             <span class="display-current" />
           </summary>
           <div class="dropdown">
-            <TocList toc={tocItems} isMobile />
+            <div class="dropdown-inner">
+              <TocList toc={tocItems} isMobile />
+            </div>
           </div>
         </details>
       </nav>
@@ -75,9 +77,12 @@ const hasTocItems = countTocItems(tocItems) > 0;
       background-color: var(--sl-color-black);
       user-select: none;
       cursor: pointer;
+      transition:
+        color 180ms ease,
+        border-color 180ms ease;
     }
 
-    details[open] .toggle {
+    details[open]:not([data-closing]) .toggle {
       color: var(--sl-color-white);
       border-color: var(--sl-color-accent);
     }
@@ -91,7 +96,11 @@ const hasTocItems = countTocItems(tocItems) > 0;
       transform: rotateZ(180deg);
     }
 
-    details[open] .caret {
+    .caret {
+      transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    details[open]:not([data-closing]) .caret {
       transform: rotateZ(90deg);
     }
 
@@ -104,14 +113,50 @@ const hasTocItems = countTocItems(tocItems) > 0;
 
     .dropdown {
       --border-top: 1px;
+      display: grid;
+      grid-template-rows: 0fr;
       margin-top: calc(-1 * var(--border-top));
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-0.35rem) scale(0.985);
+      transform-origin: top center;
+      visibility: hidden;
+      transition:
+        grid-template-rows 260ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 180ms ease,
+        transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 260ms;
+    }
+
+    details[open]:not([data-closing]) .dropdown {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      visibility: visible;
+      transition-delay: 0s;
+    }
+
+    .dropdown-inner {
+      min-height: 0;
+      max-height: calc(85vh - var(--sl-nav-height) - var(--sl-mobile-toc-height));
       border: var(--border-top) solid var(--sl-color-gray-6);
       border-top-color: var(--sl-color-hairline-shade);
-      max-height: calc(85vh - var(--sl-nav-height) - var(--sl-mobile-toc-height));
       overflow-y: auto;
       background-color: var(--sl-color-black);
       box-shadow: var(--sl-shadow-md);
       overscroll-behavior: contain;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .toggle,
+      .caret,
+      .dropdown {
+        transition: none;
+      }
+
+      .dropdown {
+        transform: none;
+      }
     }
   }
 </style>
@@ -122,14 +167,58 @@ const hasTocItems = countTocItems(tocItems) > 0;
       super();
 
       const details = this.querySelector("details");
+      const summary = this.querySelector("summary");
       const display = this.querySelector<HTMLSpanElement>(".display-current");
       const links = [...this.querySelectorAll<HTMLAnchorElement>("a")];
       if (display && links[0]) display.textContent = links[0].textContent;
-      if (!details) return;
+      if (!details || !summary) return;
+
+      let closeTimer = 0;
+      let openFrame = 0;
+
+      const shouldReduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const setOpen = (open: boolean) => {
+        window.clearTimeout(closeTimer);
+        window.cancelAnimationFrame(openFrame);
+
+        if (open) {
+          details.open = true;
+          if (shouldReduceMotion()) {
+            details.removeAttribute("data-closing");
+            return;
+          }
+
+          details.setAttribute("data-closing", "");
+          openFrame = window.requestAnimationFrame(() => {
+            details.removeAttribute("data-closing");
+          });
+          return;
+        }
+
+        if (!details.open) return;
+
+        if (shouldReduceMotion()) {
+          details.removeAttribute("data-closing");
+          details.open = false;
+          return;
+        }
+
+        details.setAttribute("data-closing", "");
+        closeTimer = window.setTimeout(() => {
+          details.open = false;
+          details.removeAttribute("data-closing");
+        }, 260);
+      };
 
       const closeToC = () => {
-        details.open = false;
+        setOpen(false);
       };
+
+      summary.addEventListener("click", (event) => {
+        event.preventDefault();
+        setOpen(!details.open || details.hasAttribute("data-closing"));
+      });
 
       links.forEach((link) => {
         link.addEventListener("click", () => {

@@ -19,7 +19,7 @@ export const FRIENDS: FriendLink[] = [
     link: "https://ex-tasty.com/",
     title: "開源 lib",
     avatar: "/friends/chisato.avif",
-    desc: "邪惡與極限伴您一生……🥰\n我要帶領尊貴的您前往極限的旅程和極限的時光",
+    desc: "邪惡與極限伴您一生……🥰",
     note: "博客内容都非常优质，推荐鉴赏",
   },
   {
@@ -33,14 +33,14 @@ export const FRIENDS: FriendLink[] = [
     link: "https://blog.cloudti.de/",
     title: "云楼汐",
     avatar: "/friends/xi.avif",
-    desc: '"Hinc itur ad astra"\nAlgorithm, Computer and Math',
+    desc: "Hinc itur ad astra",
     note: "快更新 Neovim 那篇",
   },
   {
     link: "https://blog.cloverta.top/",
     title: "Cloverta's Blog",
     avatar: "/friends/clover.avif",
-    desc: "带学牲 | 计算机本科在读 | 死宅 | I use Arch btw",
+    desc: "带学牲 | 计算机本科在读 | 死宅",
     note: "用衬线体的都是好人",
   },
   {

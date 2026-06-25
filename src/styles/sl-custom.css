@@ -93,7 +93,7 @@
 
   [data-small-img] .sl-markdown-content :where(figure:has(img), p:has(> img:only-child)) {
     max-width: var(--kokosa-media-width);
-    margin-inline: auto;
+    margin-inline: 0 auto;
   }
 
   [data-small-img] .sl-markdown-content img:not(a img) {

@@ -9,6 +9,12 @@ figure img {
   margin-inline: auto;
 }
 
+figure:has(img) {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
 figure img {
   border-color: rgba(177, 171, 190, 0.4);
   border-style: solid;
@@ -23,6 +29,23 @@ figcaption {
   font-size: 0.9rem;
   line-height: 1.4;
   opacity: 0.7;
+}
+
+[data-dl-wrapper][data-dl-block] {
+  margin-inline: auto;
+}
+
+@media (min-width: 50rem) {
+  article img:not(a img),
+  .sl-markdown-content img:not(a img),
+  figure img {
+    margin-inline: 0 auto;
+  }
+
+  figure:has(img),
+  [data-dl-wrapper][data-dl-block] {
+    margin-inline: 0 auto;
+  }
 }
 
 /* Image zoom styles */

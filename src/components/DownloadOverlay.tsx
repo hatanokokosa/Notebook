@@ -9,6 +9,7 @@ const IMG_SELECTOR = [
 ].join(", ");
 
 const WRAPPER_ATTR = "data-dl-wrapper";
+const BLOCK_ATTR = "data-dl-block";
 const OWNER_ATTR = "data-dl-owner";
 let nextOwnerId = 0;
 
@@ -46,26 +47,18 @@ function css(el: HTMLElement, styles: Record<string, string>) {
   Object.assign(el.style, styles);
 }
 
-function isImgCentered(img: HTMLImageElement): boolean {
-  const parent = img.parentElement;
-  if (!parent) return false;
-  const imgRect = img.getBoundingClientRect();
-  const parentRect = parent.getBoundingClientRect();
-  return Math.abs(imgRect.left + imgRect.width / 2 - parentRect.left - parentRect.width / 2) < 1.5;
-}
-
 function wrapImage(img: HTMLImageElement, ownerId: string): HTMLButtonElement {
   const parent = img.parentNode as HTMLElement;
-  const centered = isImgCentered(img);
-  const block = centered || getComputedStyle(img).display === "block";
+  const block = getComputedStyle(img).display === "block";
 
   const wrapper = document.createElement("div");
   wrapper.setAttribute(WRAPPER_ATTR, "");
   wrapper.setAttribute(OWNER_ATTR, ownerId);
+  if (block) wrapper.setAttribute(BLOCK_ATTR, "");
   css(wrapper, {
     position: "relative",
     display: block ? "block" : "inline-block",
-    ...(centered ? { width: "fit-content", margin: "0 auto" } : {}),
+    ...(block ? { width: "fit-content", maxWidth: "100%" } : {}),
   });
 
   const btn = document.createElement("button");
