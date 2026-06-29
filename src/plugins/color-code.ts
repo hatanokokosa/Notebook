@@ -1,93 +1,57 @@
-const colorCodeCopyCleanupKey = "__kokosaColorCodeCopyCleanup";
-const copiedClassName = "is-copied";
+import type { Element, Root } from "hast";
+import { visit } from "unist-util-visit";
 
-type WindowWithColorCodeCopyCleanup = Window & {
-  [colorCodeCopyCleanupKey]?: () => void;
-};
+const colorCodePattern = /^#(?:[\da-f]{3,4}|[\da-f]{6}|[\da-f]{8})$/i;
 
-const resetTimers = new WeakMap<HTMLButtonElement, number>();
+export default function rehypeColorCode() {
+  return (tree: Root) => {
+    visit(tree, "element", (node, index, parent) => {
+      if (node.tagName !== "code" || index === undefined || !parent) return;
+      if (parent.type === "element" && parent.tagName === "pre") return;
 
-function setupColorCodeCopy() {
-  const colorCodeWindow = window as WindowWithColorCodeCopyCleanup;
+      const colorCode = getInlineCodeText(node)?.trim();
+      if (!colorCode || !colorCodePattern.test(colorCode)) return;
 
-  colorCodeWindow[colorCodeCopyCleanupKey]?.();
-
-  const onDocumentClick = async (event: MouseEvent) => {
-    const button = getColorCodeButton(event.target);
-    if (!button) return;
-
-    const colorCode = button.dataset.colorCode;
-    if (!colorCode) return;
-
-    const copied = await copyText(colorCode);
-    if (!copied) return;
-
-    showCopiedState(button, colorCode);
-  };
-
-  document.addEventListener("click", onDocumentClick);
-
-  colorCodeWindow[colorCodeCopyCleanupKey] = () => {
-    document.removeEventListener("click", onDocumentClick);
+      parent.children[index] = createColorCodeButton(colorCode);
+    });
   };
 }
 
-function getColorCodeButton(target: EventTarget | null): HTMLButtonElement | null {
-  if (!(target instanceof Element)) return null;
-  return target.closest<HTMLButtonElement>(".kokosa-color-code");
+function getInlineCodeText(node: Element): string | null {
+  if (node.children.length !== 1) return null;
+
+  const child = node.children[0];
+  return child?.type === "text" ? child.value : null;
 }
 
-async function copyText(text: string): Promise<boolean> {
-  if (navigator.clipboard?.writeText && window.isSecureContext) {
-    try {
-      await navigator.clipboard.writeText(text);
-      return true;
-    } catch {
-      // Fall back to execCommand below.
-    }
-  }
-
-  return copyTextWithTextarea(text);
+function createColorCodeButton(colorCode: string): Element {
+  return {
+    type: "element",
+    tagName: "button",
+    properties: {
+      type: "button",
+      className: ["kokosa-color-code"],
+      dataColorCode: colorCode,
+      ariaLabel: `Copy color ${colorCode}`,
+      title: `Copy ${colorCode}`,
+      style: `--kokosa-color-code: ${colorCode}`,
+    },
+    children: [
+      {
+        type: "element",
+        tagName: "span",
+        properties: {
+          ariaHidden: "true",
+          className: ["kokosa-color-code__swatch"],
+        },
+        children: [],
+      },
+      {
+        type: "element",
+        tagName: "code",
+        properties: {},
+        children: [{ type: "text", value: colorCode }],
+      },
+    ],
+  };
 }
-
-function copyTextWithTextarea(text: string): boolean {
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  textarea.readOnly = true;
-  textarea.style.position = "fixed";
-  textarea.style.inset = "0 auto auto -9999px";
-
-  document.body.appendChild(textarea);
-  textarea.select();
-  textarea.setSelectionRange(0, text.length);
-
-  try {
-    return document.execCommand("copy");
-  } finally {
-    textarea.remove();
-  }
-}
-
-function showCopiedState(button: HTMLButtonElement, colorCode: string) {
-  const existingTimer = resetTimers.get(button);
-  if (existingTimer !== undefined) window.clearTimeout(existingTimer);
-
-  button.classList.add(copiedClassName);
-  button.ariaLabel = `Copied ${colorCode}`;
-
-  const resetTimer = window.setTimeout(() => {
-    button.classList.remove(copiedClassName);
-    button.ariaLabel = `Copy color ${colorCode}`;
-    resetTimers.delete(button);
-  }, 1200);
-
-  resetTimers.set(button, resetTimer);
-}
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", setupColorCodeCopy, { once: true });
-} else {
-  setupColorCodeCopy();
-}
-
-document.addEventListener("astro:page-load", setupColorCodeCopy);

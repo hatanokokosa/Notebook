@@ -5,7 +5,8 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import react from "@astrojs/react";
 import kokosaBlog from "./src/plugins/kokosa-blog";
-import rehypeColorCode from "./src/plugins/rehype-color-code";
+import rehypeColorCode from "./src/plugins/color-code";
+import remarkFoldImg from "./src/plugins/fold-img";
 import "katex/contrib/mhchem";
 
 export default defineConfig({
@@ -19,7 +20,7 @@ export default defineConfig({
 
   markdown: {
     rehypePlugins: [rehypeFigure, rehypeKatex, rehypeColorCode],
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [remarkMath, remarkFoldImg],
   },
 
   integrations: [

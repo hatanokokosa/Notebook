@@ -60,6 +60,7 @@ The shoes do not have a strict design yet. Usually they are black **_platform le
 
 ### Full-Body Artworks
 
+:::fold-img[Full-Body Artworks]
 ![Artist: 夢子不骡](/create/01-kokosa/74eac2952588cf9c.avif)
 
 ![Artist: SANKI三木](/create/01-kokosa/e73c848cb93f0d69.avif)
@@ -69,14 +70,17 @@ The shoes do not have a strict design yet. Usually they are black **_platform le
 ![Artist: 阿影又迷路了](/create/01-kokosa/0689f0f177019b4e.avif)
 
 ![Artist: 琅狐](/create/01-kokosa/b6c6516c668d4790.avif)
+:::
 
 ---
 
 ### Non-Full-Body Artworks
 
+:::fold-img[Non-Full-Body Artworks]
 ![Artist: 阿影又迷路了](/create/01-kokosa/78e306083f5658a7.avif)
 
 ![Artist: 激辣三文鱼米米饭团](/create/01-kokosa/d652b5eb48dbd731.avif)
+:::
 
 ---
 

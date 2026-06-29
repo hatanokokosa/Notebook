@@ -70,26 +70,6 @@
   border-top: 3px dashed var(--sl-color-hairline);
 }
 
-.content-panel + .content-panel {
-  border-top: 0;
-}
-
-.content-panel + .content-panel > .sl-container {
-  border-top: 3px solid var(--sl-color-hairline);
-  position: relative;
-  padding-top: 1.5rem;
-}
-
-.content-panel + .content-panel > .sl-container::before {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: -5px;
-  width: 50px;
-  height: 7px;
-  background: var(--sl-color-text-accent);
-}
-
 .sl-markdown-content {
   line-height: calc(var(--sl-line-height) * 1.1);
 }

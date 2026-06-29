@@ -60,23 +60,22 @@ _其他元素的配色同样可以参考 [Catppuccin](https://catppuccin.com/pal
 
 ### 正比稿件
 
+:::fold-img[正比稿件合集]
 ![画师：夢子不骡](/create/01-kokosa/74eac2952588cf9c.avif)
-
 ![画师：SANKI三木](/create/01-kokosa/e73c848cb93f0d69.avif)
-
 ![画师：溪叶](/create/01-kokosa/322800afee3c593e.avif)
-
 ![画师：阿影又迷路了](/create/01-kokosa/0689f0f177019b4e.avif)
-
 ![画师：琅狐](/create/01-kokosa/b6c6516c668d4790.avif)
+:::
 
 ---
 
 ### 非正比
 
+:::fold-img[非正比合集]
 ![画师：阿影又迷路了](/create/01-kokosa/78e306083f5658a7.avif)
-
 ![画师：激辣三文鱼米米饭团](/create/01-kokosa/d652b5eb48dbd731.avif)
+:::
 
 ---
 
