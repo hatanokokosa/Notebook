@@ -1,5 +1,23 @@
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
+/* ── Theme toggle clip-path reveal ──
+   Driven by document.startViewTransition() in theme-transition.ts */
+
+::view-transition {
+  background: var(--sl-color-bg);
+}
+
+::view-transition-old(theme-root) {
+  animation: none;
+}
+
+::view-transition-new(theme-root) {
+  animation: theme-reveal 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: inset(var(--theme-reveal-from, 0 0 100% 0));
+  }
+  to {
+    clip-path: inset(0 0 0 0);
   }
 }
