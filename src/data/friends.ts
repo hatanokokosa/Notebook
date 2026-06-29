@@ -64,4 +64,11 @@ export const FRIENDS: FriendLink[] = [
     desc: "一目洞察网中险，一策化解千般难",
     note: "林檎老师好（不是",
   },
+  {
+    link: "https://blog.nywerya.xyz/",
+    title: "Nywerya's Blog",
+    avatar: "/friends/nywerya.avif",
+    desc: "喜欢音乐，绘画，ACG，编程，硬件，设计，建模，东方Project",
+    note: "是画画非常好看的老师！",
+  },
 ];
