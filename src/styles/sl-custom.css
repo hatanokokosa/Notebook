@@ -54,7 +54,7 @@
 }
 
 :where(.PhotoView-Slider__toolbarIcon, .scroll-to-top-button, starlight-menu-button > button) {
-  border-radius: 50% !important;
+  border-radius: 0 !important;
 }
 
 .sl-markdown-content em {
@@ -101,4 +101,45 @@
   color: var(--kokosa-strong-color);
   font-weight: 800;
   font-style: normal;
+}
+
+/* ── Mobile sidebar slide-in animation ── */
+@media (max-width: 49.999rem) {
+  .sidebar-pane {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(100%);
+    transition:
+      visibility 0s linear 0.25s,
+      opacity 0.25s ease,
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  [aria-expanded="true"] ~ .sidebar-pane {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+      visibility 0s linear 0s,
+      opacity 0.25s ease,
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-pane {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ── Blog post list dividers ── */
+.posts {
+  gap: 3rem;
+}
+
+.preview + .preview {
+  border-top: 2px dashed var(--sl-color-hairline);
+  padding-top: 2rem;
 }
