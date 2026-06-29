@@ -13,7 +13,6 @@ export const collections = {
             comments: z.boolean().optional().default(true),
             watermark: z.boolean().optional().default(false),
             download: z.boolean().optional().default(false),
-            "small-img": z.boolean().optional().default(false),
           })
           .merge(blogSchema(context)),
     }),

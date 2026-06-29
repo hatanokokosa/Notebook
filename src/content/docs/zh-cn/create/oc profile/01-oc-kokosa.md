@@ -3,7 +3,6 @@ title: Kokosa
 download: true
 comments: false
 watermark: true
-small-img: true
 ---
 
 写在前面：我的 OC 和本站标题没有关系，她并不是医生护士什么的。至于为什么网站标题是 “重症监护室” 呢？因为 ICU 域名第一年很便宜（虽然已经运营几年了而且续费很贵），这是唯一的原因，我暂时不打算换域名（）

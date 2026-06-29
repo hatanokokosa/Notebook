@@ -3,7 +3,6 @@ title: Kokosa
 download: true
 comments: false
 watermark: true
-small-img: true
 ---
 
 Preface: My OC has nothing to do with this site's title. She is not a doctor, nurse, or anything like that. So why is the site called an "Intensive Care Unit"? Because the ICU domain was very cheap for the first year. That is the only reason, even though the site has been running for years and renewals are expensive now. I do not plan to change the domain for the time being ()

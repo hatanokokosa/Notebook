@@ -12,7 +12,6 @@ const pathname = Astro.url.pathname;
 const contentHtml = await Astro.slots.render("default");
 const hasWatermarkEnabled = starlightRoute?.entry?.data?.watermark === true;
 const hasDownloadEnabled = starlightRoute?.entry?.data?.download === true;
-const hasSmallImages = starlightRoute?.entry?.data?.["small-img"] === true;
 const renderedContentHtml = hasWatermarkEnabled ? await applyStaticWatermarks(contentHtml) : contentHtml;
 const articleTocMarker = /<!--\s*toc\s*-->|<p>\s*(?:\[toc\]|::toc)\s*<\/p>/i;
 const contentParts = renderedContentHtml.split(articleTocMarker);
@@ -27,38 +26,36 @@ const isGeneratedBlogPage =
 const shouldEnhanceImages = !isGeneratedBlogPage && /<img[\s>]/i.test(renderedContentHtml);
 ---
 
-<div data-small-img={hasSmallImages ? "" : undefined}>
-  {shouldEnhanceImages && <ImageZoomer client:only="react" />}
-  {shouldEnhanceImages && <DownloadOverlay enabled={hasDownloadEnabled} client:only="react" />}
-  {
-    isBlogPostPage ? (
-      <BlogMarkdownContent>
-        {shouldInsertArticleToc ? (
-          contentParts.map((part, index) => (
-            <>
-              {part && <Fragment set:html={part} />}
-              {index < contentParts.length - 1 && <ArticleToc />}
-            </>
-          ))
-        ) : (
-          <Fragment set:html={renderedContentHtml} />
-        )}
-      </BlogMarkdownContent>
-    ) : (
-      <Default>
-        {shouldInsertArticleToc ? (
-          contentParts.map((part, index) => (
-            <>
-              {part && <Fragment set:html={part} />}
-              {index < contentParts.length - 1 && <ArticleToc />}
-            </>
-          ))
-        ) : (
-          <Fragment set:html={renderedContentHtml} />
-        )}
-      </Default>
-    )
-  }
-</div>
+{shouldEnhanceImages && <ImageZoomer client:only="react" />}
+{shouldEnhanceImages && <DownloadOverlay enabled={hasDownloadEnabled} client:only="react" />}
+{
+  isBlogPostPage ? (
+    <BlogMarkdownContent>
+      {shouldInsertArticleToc ? (
+        contentParts.map((part, index) => (
+          <>
+            {part && <Fragment set:html={part} />}
+            {index < contentParts.length - 1 && <ArticleToc />}
+          </>
+        ))
+      ) : (
+        <Fragment set:html={renderedContentHtml} />
+      )}
+    </BlogMarkdownContent>
+  ) : (
+    <Default>
+      {shouldInsertArticleToc ? (
+        contentParts.map((part, index) => (
+          <>
+            {part && <Fragment set:html={part} />}
+            {index < contentParts.length - 1 && <ArticleToc />}
+          </>
+        ))
+      ) : (
+        <Fragment set:html={renderedContentHtml} />
+      )}
+    </Default>
+  )
+}
 
 <Giscus {...Astro.props} />
