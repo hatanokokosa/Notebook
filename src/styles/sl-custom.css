@@ -68,6 +68,12 @@
 .sl-markdown-content hr:not(:where(.not-content *)) {
   border: 0;
   border-top: 3px dashed var(--sl-color-hairline);
+  margin: 2rem 0;
+}
+
+/* Cancel auto margin on element after <hr> so the divider sits centered */
+.sl-markdown-content hr:not(:where(.not-content *)) + :not(a, strong, em, del, span, input, code, br, :where(.not-content *)) {
+  margin-top: 0;
 }
 
 .sl-markdown-content {

@@ -174,6 +174,7 @@ function init() {
 }
 
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateGiscusTheme);
+window.addEventListener("theme-updated", updateGiscusTheme);
 
 init();
 document.addEventListener("astro:page-load", init);

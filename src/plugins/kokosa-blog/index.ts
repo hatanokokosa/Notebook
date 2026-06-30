@@ -35,7 +35,6 @@ export default function kokosaBlogPlugin(userConfig?: StarlightBlogUserConfig): 
         const configIncludesRSSSocial = starlightConfig.social?.some((social) => social.icon === "rss") ?? false;
 
         const components: StarlightUserConfig["components"] = { ...starlightConfig.components };
-        overrideComponent(components, "MarkdownContent");
         if (config.navigation === "header-start") overrideComponent(components, "SiteTitle");
         if (config.navigation === "header-end") overrideComponent(components, "ThemeSelect");
 

@@ -93,6 +93,11 @@ export default function ImageZoomer() {
       maskOpacity={0.6}
       bannerVisible={false}
       photoClassName="photo-view__photo"
+      overlayRender={(props) => {
+        const caption = images[props.index]?.caption;
+        if (!caption) return null;
+        return <div className="photo-view-caption">{caption}</div>;
+      }}
     />
   );
 }

@@ -40,6 +40,7 @@ if (!document.startViewTransition || window.__themeVT) {
           attributes: true,
           attributeFilter: ["data-theme"],
         });
+        window.dispatchEvent(new Event("theme-updated"));
       };
 
       vt.finished.then(done, done);

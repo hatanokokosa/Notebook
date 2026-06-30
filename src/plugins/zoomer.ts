@@ -1,6 +1,7 @@
 export interface ImageData {
   src: string;
   key: string;
+  caption?: string;
 }
 
 interface ContentImageScan {
@@ -34,9 +35,13 @@ export function scanContentImages(onOpen: OpenImageHandler): ContentImageScan {
   filtered.forEach((img, index) => {
     stripNoWatermarkMarker(img);
 
+    const figcaption = img.closest("figure")?.querySelector("figcaption");
+    const caption = figcaption?.textContent?.trim() || undefined;
+
     images.push({
       src: getViewerSrc(img),
       key: `${getViewerSrc(img)}-${index}`,
+      caption,
     });
 
     img.style.cursor = "zoom-in";

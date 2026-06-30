@@ -1,5 +1,5 @@
 :root {
-  --photo-view-backdrop: color-mix(in srgb, var(--sl-color-bg) 46%, transparent);
+  --photo-view-backdrop: color-mix(in srgb, var(--sl-color-bg) 78%, transparent);
   --photo-view-banner-bg: color-mix(in srgb, var(--sl-color-bg-nav) 72%, transparent);
   --photo-view-banner-border: color-mix(in srgb, var(--sl-color-gray-5) 72%, transparent);
   --photo-view-text: var(--sl-color-text);
@@ -10,11 +10,7 @@
 }
 
 html[data-theme="light"] {
-  --photo-view-backdrop: color-mix(in srgb, var(--sl-color-gray-7) 42%, transparent);
-}
-
-html[data-theme="dark"] {
-  --photo-view-backdrop: color-mix(in srgb, var(--sl-color-bg) 50%, transparent);
+  --photo-view-backdrop: color-mix(in srgb, var(--sl-color-gray-7) 74%, transparent);
 }
 
 .PhotoView-Slider__Backdrop {
@@ -36,7 +32,6 @@ html[data-theme="dark"] {
 }
 
 .PhotoView-Slider__toolbarIcon {
-  border-radius: 999px;
   color: var(--photo-view-text);
   fill: currentColor;
   opacity: 0.92;
@@ -58,6 +53,21 @@ html[data-theme="dark"] {
 }
 
 .photo-view__photo {
-  scale: 0.9;
+  scale: 0.8;
   transform-origin: center center;
+}
+
+/* ── Photo viewer caption ── */
+.photo-view-caption {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100vw - 4rem);
+  color: var(--caption-color);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: center;
+  opacity: 0.7;
+  pointer-events: none;
 }
