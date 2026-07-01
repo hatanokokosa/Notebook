@@ -55,3 +55,35 @@ function createColorCodeButton(colorCode: string): Element {
     ],
   };
 }
+
+// --- client-side: click-to-copy ---
+
+function setupColorCodeCopy() {
+  const onButtonClick = (event: Event) => {
+    const button = (event.target as Element).closest<HTMLButtonElement>(".kokosa-color-code");
+    if (!button) return;
+
+    const colorCode = button.dataset.colorCode;
+    if (!colorCode) return;
+
+    navigator.clipboard.writeText(colorCode).then(() => {
+      button.classList.add("is-copied");
+      button.ariaLabel = `Copied ${colorCode}`;
+      setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.ariaLabel = `Copy color ${colorCode}`;
+      }, 1500);
+    });
+  };
+
+  document.addEventListener("click", onButtonClick);
+}
+
+if (typeof document !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupColorCodeCopy, { once: true });
+  } else {
+    setupColorCodeCopy();
+  }
+  document.addEventListener("astro:page-load", setupColorCodeCopy);
+}
