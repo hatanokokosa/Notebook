@@ -5,12 +5,25 @@ import { fromHtml } from "hast-util-from-html";
 import { toHtml } from "hast-util-to-html";
 import { visit } from "unist-util-visit";
 
+// watermark text and layout
 const WATERMARK_TEXT = "kokosa.icu";
-const ROTATION_DEG = -30;
-const TEXT_COLOR = "rgba(128, 128, 128, 0.05)";
-const FONT_SIZE_RATIO = 0.04;
-const LINE_SPACING_RATIO = 0.15;
-const COL_SPACING_RATIO = 0.35;
+const FONT_SIZE_RATIO = 0.14;
+const WATERMARK_ROWS = 3;
+
+// halftone dot pattern
+const HALFTONE_CELL = 10;
+const HALFTONE_R = 3;
+const HALFTONE_ANGLE = 22;
+const HALFTONE_COLOR = "#777777";
+const HALFTONE_OPACITY = 0.25;
+
+// glass emboss edge effect
+const EMBOSS_HL_OFFSET = 1.0;
+const EMBOSS_SD_OFFSET = 1.0;
+const EMBOSS_HL_OPACITY = 0.3;
+const EMBOSS_SD_OPACITY = 0.12;
+
+// output settings
 const NO_WATERMARK_MARKER = "|no-watermark";
 const OUTPUT_FORMAT = "avif";
 const OUTPUT_QUALITY = 80;
@@ -103,14 +116,21 @@ type ImageDimensions = {
   height: number;
 };
 
+// cache key changes when any watermark param is tweaked
 function getWatermarkCacheVersion(): string {
   return [
     WATERMARK_TEXT,
-    ROTATION_DEG,
-    TEXT_COLOR,
     FONT_SIZE_RATIO,
-    LINE_SPACING_RATIO,
-    COL_SPACING_RATIO,
+    WATERMARK_ROWS,
+    HALFTONE_CELL,
+    HALFTONE_R,
+    HALFTONE_ANGLE,
+    HALFTONE_COLOR,
+    HALFTONE_OPACITY,
+    EMBOSS_HL_OFFSET,
+    EMBOSS_SD_OFFSET,
+    EMBOSS_HL_OPACITY,
+    EMBOSS_SD_OPACITY,
     OUTPUT_FORMAT,
     OUTPUT_QUALITY,
   ].join(":");
@@ -204,25 +224,53 @@ async function mirrorGeneratedFile(outputPath: string, outputName: string): Prom
 }
 
 function createWatermarkSvg(width: number, height: number): string {
+  // font size from the shorter image edge
   const shortEdge = Math.min(width, height);
-  const fontSize = Math.max(1, Math.round(shortEdge * FONT_SIZE_RATIO));
-  const lineSpacing = Math.max(fontSize * 2, Math.round(shortEdge * LINE_SPACING_RATIO));
-  const colSpacing = Math.max(fontSize * 5, Math.round(shortEdge * COL_SPACING_RATIO));
-  const diagonal = Math.ceil(Math.sqrt(width * width + height * height));
-  const start = -Math.ceil(diagonal / 2);
-  const end = Math.ceil(diagonal / 2);
-  const texts: string[] = [];
+  const fontSize = Math.round(shortEdge * FONT_SIZE_RATIO);
+  const cx = width / 2;
+  const cy = height / 2;
 
-  for (let y = start; y <= end; y += lineSpacing) {
-    for (let x = start; x <= end; x += colSpacing) {
-      texts.push(`<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle">${WATERMARK_TEXT}</text>`);
-    }
+  // row spacing for stacked watermark lines
+  const rows = WATERMARK_ROWS;
+  const gap = Math.round(height / (rows + 1));
+  const halfSpan = ((rows - 1) / 2) * gap;
+
+  // halftone pattern params
+  const c = HALFTONE_CELL;
+  const hc = c / 2;
+  const r = HALFTONE_R;
+  const angle = HALFTONE_ANGLE;
+  const color = HALFTONE_COLOR;
+  const opacity = HALFTONE_OPACITY;
+
+  // emboss filter params
+  const ehl = EMBOSS_HL_OFFSET;
+  const esd = EMBOSS_SD_OFFSET;
+  const eho = EMBOSS_HL_OPACITY;
+  const eso = EMBOSS_SD_OPACITY;
+
+  // 3 rows: top, center, bottom
+  const textLines: string[] = [];
+  for (let i = 0; i < rows; i++) {
+    const y = Math.round(cy - halfSpan + i * gap);
+    textLines.push(
+      `<text x="${cx}" y="${y}" text-anchor="middle" dominant-baseline="central" font-family="Noto Serif, serif" font-weight="700" font-size="${fontSize}" fill="url(#ht)">${WATERMARK_TEXT}</text>`,
+    );
   }
 
+  // svg: stacked text, halftone fill + glass emboss + soft-light blend in sharp
   return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
-  <style>text{font-family:serif;font-size:${fontSize}px;fill:${TEXT_COLOR};}</style>
-  <g transform="translate(${width / 2} ${height / 2}) rotate(${ROTATION_DEG})">
-    ${texts.join("\n    ")}
+  <defs>
+    <pattern id="ht" width="${c}" height="${c}" patternUnits="userSpaceOnUse" patternTransform="rotate(${angle})">
+      <circle cx="${hc}" cy="${hc}" r="${r}" fill="${color}" opacity="${opacity}"/>
+    </pattern>
+    <filter id="glass" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="-${ehl}" dy="-${ehl}" stdDeviation="${ehl * 0.5}" flood-color="white" flood-opacity="${eho}"/>
+      <feDropShadow dx="${esd}" dy="${esd}" stdDeviation="${esd * 0.5}" flood-color="black" flood-opacity="${eso}"/>
+    </filter>
+  </defs>
+  <g filter="url(#glass)">
+    ${textLines.join("\n    ")}
   </g>
 </svg>`;
 }
@@ -261,12 +309,13 @@ async function getWatermarkedSrc(src: string): Promise<string | null> {
     const rasterOutputStat = await stat(rasterOutputPath).catch(() => null);
     if (!rasterOutputStat?.isFile()) {
       const { default: sharp } = await import("sharp");
+      // composite halftone svg with overlay blend, then encode avif
       await sharp(inputPath)
         .rotate()
         .composite([
           {
             input: Buffer.from(createWatermarkSvg(dimensions.width, dimensions.height)),
-            blend: "over",
+            blend: "overlay",
           },
         ])
         .avif({ quality: OUTPUT_QUALITY })
