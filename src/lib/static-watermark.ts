@@ -11,10 +11,10 @@ const FONT_SIZE_RATIO = 0.14;
 const WATERMARK_ROWS = 3;
 
 // halftone dot pattern
-const HALFTONE_CELL = 10;
+const HALFTONE_CELL = 12;
 const HALFTONE_R = 3;
-const HALFTONE_ANGLE = 22;
-const HALFTONE_COLOR = "#777777";
+const HALFTONE_ANGLE = 0;
+const HALFTONE_COLOR = "#999999";
 const HALFTONE_OPACITY = 0.25;
 
 // glass emboss edge effect
@@ -26,7 +26,7 @@ const EMBOSS_SD_OPACITY = 0.12;
 // output settings
 const NO_WATERMARK_MARKER = "|no-watermark";
 const OUTPUT_FORMAT = "avif";
-const OUTPUT_QUALITY = 80;
+const OUTPUT_LOSSLESS = true;
 const OUTPUT_ID_LENGTH = 16;
 
 const projectRoot = process.cwd();
@@ -132,7 +132,7 @@ function getWatermarkCacheVersion(): string {
     EMBOSS_HL_OPACITY,
     EMBOSS_SD_OPACITY,
     OUTPUT_FORMAT,
-    OUTPUT_QUALITY,
+    OUTPUT_LOSSLESS,
   ].join(":");
 }
 
@@ -318,7 +318,7 @@ async function getWatermarkedSrc(src: string): Promise<string | null> {
             blend: "overlay",
           },
         ])
-        .avif({ quality: OUTPUT_QUALITY })
+        .avif({ lossless: OUTPUT_LOSSLESS })
         .toFile(rasterOutputPath);
     }
 
