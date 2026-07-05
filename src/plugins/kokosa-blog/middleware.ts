@@ -8,7 +8,7 @@ import { renderBlogEntryToString } from "./libs/container";
 import { getBlogEntries, getSidebarBlogEntries } from "./libs/content";
 import type { Locale } from "./libs/i18n";
 import { getMetrics } from "./libs/metrics";
-import { isNavigationWithSidebarLink } from "./libs/navigation";
+import { isNavigationInHeader } from "./libs/navigation";
 import {
   getPathWithLocale,
   getRelativeBlogUrl,
@@ -27,12 +27,8 @@ export const onRequest = defineRouteMiddleware(async (context) => {
   const { starlightRoute } = context.locals;
   const { id, locale } = starlightRoute;
 
-  context.locals.kokosaBlog = await getBlogData(starlightRoute, context.locals.t);
-
-  const isBlog = isAnyBlogPage(id);
-
-  if (!isBlog) {
-    if (isNavigationWithSidebarLink(config)) {
+  if (!isAnyBlogPage(id)) {
+    if (isNavigationInHeader(config)) {
       starlightRoute.sidebar.unshift(
         makeSidebarLink(getBlogTitle(locale), getRelativeBlogUrl("/", locale), false, { class: "sl-blog-mobile-link" }),
       );
@@ -40,6 +36,7 @@ export const onRequest = defineRouteMiddleware(async (context) => {
     return;
   }
 
+  context.locals.kokosaBlog = await getBlogData(starlightRoute, context.locals.t);
   starlightRoute.sidebar = await getBlogSidebar(context);
 });
 
@@ -66,11 +63,8 @@ async function getBlogPostsData(locale: Locale, t: App.Locals["t"]): Promise<Sta
       const metrics = getMetrics(html, locale, entry.data.metrics);
 
       const postsData: StarlightBlogData["posts"][number] = {
-        cover: entry.data.cover,
         createdAt: entry.data.date,
-        draft: entry.data.draft,
         entry: entry,
-        featured: entry.data.featured === true,
         href: getRelativeUrl(`/${getPathWithLocale(entry.id, locale)}`),
         metrics,
         tags: tags.map(({ label, slug }) => ({
@@ -80,6 +74,7 @@ async function getBlogPostsData(locale: Locale, t: App.Locals["t"]): Promise<Sta
         title: entry.data.title,
       };
 
+      // Defensive: lastUpdated is typed as Date but runtime data may be malformed.
       if (entry.data.lastUpdated && typeof entry.data.lastUpdated !== "boolean") {
         postsData.updatedAt = entry.data.lastUpdated;
       }
@@ -93,15 +88,11 @@ async function getBlogSidebar(context: APIContext): Promise<StarlightRouteData["
   const { starlightRoute, t } = context.locals;
   const { id, locale } = starlightRoute;
 
-  const { featured, recent } = await getSidebarBlogEntries(locale);
+  const { recent } = await getSidebarBlogEntries(locale);
 
   const sidebar: StarlightRouteData["sidebar"] = [
     makeSidebarLink(t("kokosaBlog.sidebar.all"), getRelativeBlogUrl("/", locale), isBlogRoot(id)),
   ];
-
-  if (featured.length > 0) {
-    sidebar.push(makeSidebarGroup(t("kokosaBlog.sidebar.featured"), getSidebarProps(id, featured, locale)));
-  }
 
   sidebar.push(makeSidebarGroup(t("kokosaBlog.sidebar.recent"), getSidebarProps(id, recent, locale)));
 

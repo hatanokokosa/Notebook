@@ -3,7 +3,6 @@ import Default from "@astrojs/starlight/components/MarkdownContent.astro";
 
 import { getBlogEntry } from "../../libs/content";
 import { isAnyBlogPostPage } from "../../libs/page";
-import Cover from "../Cover.astro";
 import Metadata from "../Metadata.astro";
 import PostTags from "../PostTags.astro";
 import PrevNextLinks from "../PrevNextLinks.astro";
@@ -18,8 +17,7 @@ const { entry, nextLink, prevLink } = await getBlogEntry(id, locale);
 ---
 
 <Default>
-  {entry.data.cover && <Cover cover={entry.data.cover} />}
-  <Metadata entry={entry} {locale} showBadges={false} />
+  <Metadata entry={entry} {locale} />
   <slot />
   <div class="post-footer">
     <PostTags entry={entry} {locale} />

@@ -3,9 +3,8 @@
 import type { StarlightPlugin, StarlightUserConfig } from "@astrojs/starlight/types";
 
 import { type StarlightBlogConfig, validateConfig, type StarlightBlogUserConfig } from "./libs/config";
-import { isNavigationWithCustomCss } from "./libs/navigation";
+import { isNavigationInHeader } from "./libs/navigation";
 import { stripLeadingSlash, stripTrailingSlash } from "./libs/path";
-import { remarkKokosaBlog } from "./libs/remark";
 import { vitePluginKokosaBlogConfig } from "./libs/vite";
 import { Translations } from "./translations";
 
@@ -39,7 +38,7 @@ export default function kokosaBlogPlugin(userConfig?: StarlightBlogUserConfig): 
         if (config.navigation === "header-end") overrideComponent(components, "ThemeSelect");
 
         const customCss: StarlightUserConfig["customCss"] = [...(starlightConfig.customCss ?? [])];
-        if (isNavigationWithCustomCss(config)) customCss.push(`${pluginRoot}/styles.css`);
+        if (isNavigationInHeader(config)) customCss.push(`${pluginRoot}/styles.css`);
 
         const head: StarlightUserConfig["head"] = [...(starlightConfig.head ?? [])];
         if (rssLink) {
@@ -90,9 +89,6 @@ export default function kokosaBlogPlugin(userConfig?: StarlightBlogUserConfig): 
               }
 
               updateConfig({
-                markdown: {
-                  remarkPlugins: [[remarkKokosaBlog]],
-                },
                 vite: {
                   plugins: [
                     vitePluginKokosaBlogConfig(config, {

@@ -35,8 +35,9 @@ export async function getRSSResponse(site: URL | undefined, locale: Locale) {
 }
 
 async function getRSSString(site: URL | undefined, locale: Locale) {
+  const MAX_RSS_ITEMS = 20;
   let entries = await getBlogEntries(locale);
-  entries = entries.slice(0, 20);
+  entries = entries.slice(0, MAX_RSS_ITEMS);
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- The route is only injected if `site` is defined in the user Astro config.
   const feedSite = site!;

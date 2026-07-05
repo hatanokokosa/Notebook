@@ -52,7 +52,9 @@ function normalizeTerm(value: string): string {
 
   try {
     pathname = new URL(pathname).pathname;
-  } catch {}
+  } catch {
+    console.warn("Failed to parse giscus term URL:", pathname);
+  }
 
   pathname = pathname.replace(/^\/(zh-cn|en-us|ja-jp)(?=\/|$)/, "");
   if (!pathname.startsWith("/")) pathname = `/${pathname}`;
@@ -77,7 +79,9 @@ function readCachedDiscussions() {
   try {
     const cached = JSON.parse(localStorage.getItem(discussionCacheKey) ?? "") as CachedDiscussions;
     if (cached.expiresAt > Date.now()) return cached.discussions;
-  } catch {}
+  } catch {
+    console.warn("Failed to read cached discussions from localStorage");
+  }
 }
 
 function writeCachedDiscussions(discussions: GitHubDiscussion[]) {
@@ -86,7 +90,9 @@ function writeCachedDiscussions(discussions: GitHubDiscussion[]) {
       discussionCacheKey,
       JSON.stringify({ expiresAt: Date.now() + discussionCacheTtl, discussions } satisfies CachedDiscussions),
     );
-  } catch {}
+  } catch {
+    console.warn("Failed to write discussions cache to localStorage");
+  }
 }
 
 async function fetchDiscussions() {
@@ -113,7 +119,9 @@ async function getGiscusDiscussionConfig() {
     if (discussion?.number) {
       return { mapping: "number", term: String(discussion.number) };
     }
-  } catch {}
+  } catch {
+    console.warn("Failed to fetch or match giscus discussions");
+  }
 
   return { mapping: "specific", term: `${uniqueTermPrefix}${term}` };
 }
@@ -171,10 +179,23 @@ function init() {
     attributes: true,
     attributeFilter: ["data-theme"],
   });
+
+  // Re-register media/theme listeners (with cleanup from prior init calls in SPA)
+  if (mediaQueryListener) {
+    window.matchMedia("(prefers-color-scheme: dark)").removeEventListener("change", mediaQueryListener);
+  }
+  mediaQueryListener = updateGiscusTheme;
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateGiscusTheme);
+
+  if (themeUpdatedListener) {
+    window.removeEventListener("theme-updated", themeUpdatedListener);
+  }
+  themeUpdatedListener = updateGiscusTheme;
+  window.addEventListener("theme-updated", updateGiscusTheme);
 }
 
-window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateGiscusTheme);
-window.addEventListener("theme-updated", updateGiscusTheme);
+let mediaQueryListener: ((e: MediaQueryListEvent) => void) | null = null;
+let themeUpdatedListener: (() => void) | null = null;
 
 init();
 document.addEventListener("astro:page-load", init);

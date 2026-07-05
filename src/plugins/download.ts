@@ -41,7 +41,7 @@ export async function downloadImage(img: HTMLImageElement): Promise<void> {
       return;
     }
   } catch {
-    // fall through
+    console.warn("CORS load failed:", src);
   }
 
   openInTab(src);
@@ -57,11 +57,8 @@ function waitForImage(img: HTMLImageElement): Promise<boolean> {
 }
 
 function isSameOrigin(src: string): boolean {
-  try {
-    return new URL(src, location.origin).origin === location.origin;
-  } catch {
-    return true;
-  }
+  if (!src.startsWith("http://") && !src.startsWith("https://")) return true;
+  return src.startsWith(location.origin);
 }
 
 function loadCrossOriginImg(src: string): Promise<HTMLImageElement> {
@@ -97,7 +94,8 @@ function canvasToPngDownload(source: CanvasImageSource, filename: string): void 
 
   try {
     ctx.drawImage(source, 0, 0);
-  } catch {
+  } catch (error) {
+    console.warn("Canvas drawImage failed:", error);
     return;
   }
 
@@ -125,11 +123,14 @@ function getDownloadFilename(src: string, fallbackExt: string, forceExt = false)
 }
 
 function getSrcPathname(src: string): string {
-  try {
-    return new URL(src, location.href).pathname;
-  } catch {
-    return src.split(/[?#]/, 1)[0] ?? src;
+  if (src.startsWith("http://") || src.startsWith("https://")) {
+    try {
+      return new URL(src, location.href).pathname;
+    } catch {
+      console.warn("Failed to parse URL for pathname:", src);
+    }
   }
+  return src.split(/[?#]/, 1)[0] ?? src;
 }
 
 function getSrcExtension(pathname: string): string {
@@ -140,6 +141,7 @@ function safeDecodeURIComponent(value: string): string {
   try {
     return decodeURIComponent(value);
   } catch {
+    console.warn("Failed to decode URI component:", value);
     return value;
   }
 }

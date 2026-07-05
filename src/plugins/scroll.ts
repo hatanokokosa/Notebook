@@ -1,6 +1,5 @@
 const cleanupKey = "__kokosaScrollToTopCleanup";
 const anchorCleanupKey = "__kokosaSmoothAnchorCleanup";
-const styleId = "kokosa-scroll-to-top-style";
 const buttonId = "kokosa-scroll-to-top-button";
 const tooltipText = "Back to top";
 
@@ -14,11 +13,15 @@ function setupSmoothAnchorScroll() {
 
   scrollWindow[anchorCleanupKey]?.();
 
-  const getSamePageHashLink = (target: EventTarget | null) => {
-    if (!(target instanceof Element)) return null;
+  const onDocumentClick = (event: MouseEvent) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
 
-    const link = target.closest<HTMLAnchorElement>('a[href*="#"]');
-    if (!link) return null;
+    if (!(event.target instanceof Element)) return;
+
+    const link = event.target.closest<HTMLAnchorElement>('a[href*="#"]');
+    if (!link) return;
 
     const url = new URL(link.href, window.location.href);
     if (
@@ -27,35 +30,17 @@ function setupSmoothAnchorScroll() {
       url.search !== window.location.search ||
       !url.hash
     ) {
-      return null;
-    }
-
-    return { link, hash: url.hash };
-  };
-
-  const onDocumentClick = (event: MouseEvent) => {
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
       return;
     }
 
-    const hashLink = getSamePageHashLink(event.target);
-    if (!hashLink) return;
-
-    const target =
-      hashLink.hash === "#_top" ? document.documentElement : document.getElementById(decodeURIComponent(hashLink.hash.slice(1)));
-
+    const target = url.hash === "#_top" ? document.documentElement : document.getElementById(decodeURIComponent(url.hash.slice(1)));
     if (!target) return;
 
     event.preventDefault();
 
     const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    target.scrollIntoView({
-      behavior: shouldReduceMotion ? "auto" : "smooth",
-      block: "start",
-    });
-
-    history.pushState(null, "", hashLink.hash);
+    target.scrollIntoView({ behavior: shouldReduceMotion ? "auto" : "smooth", block: "start" });
+    history.pushState(null, "", url.hash);
   };
 
   document.addEventListener("click", onDocumentClick);
@@ -70,103 +55,6 @@ function setupScrollToTop() {
 
   scrollWindow[cleanupKey]?.();
   document.getElementById(buttonId)?.remove();
-  document.getElementById(styleId)?.remove();
-
-  const style = document.createElement("style");
-  style.id = styleId;
-  style.textContent = `
-    .scroll-to-top-button {
-      position: fixed;
-      right: 35px;
-      bottom: 40px;
-      width: 47px;
-      height: 47px;
-      border-radius: 50%;
-      background-color: var(--sl-color-bg-sidebar);
-      border: 1px solid var(--sl-color-gray-5);
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      color: var(--sl-color-text-accent);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition:
-        opacity 0.3s ease,
-        visibility 0.3s ease,
-        background-color 0.3s ease,
-        color 0.3s ease;
-      z-index: 100;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-
-    .scroll-to-top-button.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .scroll-to-top-button:hover {
-      background-color: var(--sl-color-accent);
-      border-color: transparent;
-      color: var(--sl-color-white);
-    }
-
-    .scroll-to-top-button:active {
-      background-color: var(--sl-color-accent-high);
-      color: var(--sl-color-white);
-    }
-
-    .scroll-to-top-button.keyboard-focus {
-      outline: 2px solid var(--sl-color-text);
-      outline-offset: 2px;
-    }
-
-    .scroll-to-top-tooltip {
-      position: absolute;
-      right: -22px;
-      top: -47px;
-      background-color: var(--sl-color-gray-6);
-      color: var(--sl-color-text);
-      padding: 5px 10px;
-      border-radius: 0;
-      font-weight: 400;
-      font-size: 14px;
-      white-space: nowrap;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.2s, visibility 0.3s;
-      pointer-events: none;
-    }
-
-    html[data-theme="light"] .scroll-to-top-tooltip {
-      background-color: var(--sl-color-gray-5);
-    }
-
-    .scroll-to-top-tooltip::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 6px solid var(--sl-color-gray-6);
-    }
-
-    html[data-theme="light"] .scroll-to-top-tooltip::after {
-      border-top-color: var(--sl-color-gray-5);
-    }
-
-    .scroll-to-top-tooltip.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-  `;
-  document.head.appendChild(style);
 
   const button = document.createElement("button");
   button.id = buttonId;
@@ -264,7 +152,6 @@ function setupScrollToTop() {
     window.removeEventListener("scroll", toggleVisibility);
     window.removeEventListener("resize", checkZoomLevel);
     button.remove();
-    style.remove();
   };
 }
 

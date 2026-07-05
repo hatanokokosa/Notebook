@@ -61,6 +61,7 @@ export default defineConfig({
         "./src/styles/color-code.css",
         "./src/styles/font.css",
         "./src/styles/catppuccin.css",
+        "./src/styles/scroll-to-top.css",
       ],
 
       components: {

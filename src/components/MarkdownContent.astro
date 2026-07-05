@@ -2,7 +2,7 @@
 import Default from "@astrojs/starlight/components/MarkdownContent.astro";
 import BlogMarkdownContent from "../plugins/kokosa-blog/components/starlight/MarkdownContent.astro";
 import ImageZoomer from "./ImageZoomer";
-import DownloadOverlay from "./DownloadOverlay";
+import DownloadOverlay from "./DownloadOverlay.astro";
 import Giscus from "./Giscus.astro";
 import ArticleToc from "./ArticleToc.astro";
 import { applyStaticWatermarks } from "../lib/static-watermark";
@@ -11,7 +11,6 @@ const { starlightRoute } = Astro.locals;
 const pathname = Astro.url.pathname;
 const contentHtml = await Astro.slots.render("default");
 const hasWatermarkEnabled = starlightRoute?.entry?.data?.watermark === true;
-const hasDownloadEnabled = starlightRoute?.entry?.data?.download === true;
 const renderedContentHtml = hasWatermarkEnabled ? await applyStaticWatermarks(contentHtml) : contentHtml;
 const articleTocMarker = /<!--\s*toc\s*-->|<p>\s*(?:\[toc\]|::toc)\s*<\/p>/i;
 const contentParts = renderedContentHtml.split(articleTocMarker);
@@ -27,16 +26,16 @@ const shouldEnhanceImages = !isGeneratedBlogPage && /<img[\s>]/i.test(renderedCo
 ---
 
 {shouldEnhanceImages && <ImageZoomer client:only="react" />}
-{shouldEnhanceImages && <DownloadOverlay enabled={hasDownloadEnabled} client:only="react" />}
+{shouldEnhanceImages && <DownloadOverlay />}
 {
   isBlogPostPage ? (
     <BlogMarkdownContent>
       {shouldInsertArticleToc ? (
         contentParts.map((part, index) => (
-          <>
+          <Fragment key={index}>
             {part && <Fragment set:html={part} />}
             {index < contentParts.length - 1 && <ArticleToc />}
-          </>
+          </Fragment>
         ))
       ) : (
         <Fragment set:html={renderedContentHtml} />
@@ -46,10 +45,10 @@ const shouldEnhanceImages = !isGeneratedBlogPage && /<img[\s>]/i.test(renderedCo
     <Default>
       {shouldInsertArticleToc ? (
         contentParts.map((part, index) => (
-          <>
+          <Fragment key={index}>
             {part && <Fragment set:html={part} />}
             {index < contentParts.length - 1 && <ArticleToc />}
-          </>
+          </Fragment>
         ))
       ) : (
         <Fragment set:html={renderedContentHtml} />
@@ -145,6 +144,8 @@ const shouldEnhanceImages = !isGeneratedBlogPage && /<img[\s>]/i.test(renderedCo
 </style>
 
 <script>
+  import { createToggleAnimation } from "../lib/details-animation";
+
   const foldImgAnimationMs = 420;
   const foldImgBoundAttr = "data-fold-img-bound";
 
@@ -155,36 +156,20 @@ const shouldEnhanceImages = !isGeneratedBlogPage && /<img[\s>]/i.test(renderedCo
 
       el.setAttribute(foldImgBoundAttr, "");
 
-      const shouldReduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      const setSpread = (spread: boolean) => {
-        if (spread) {
+      const toggle = createToggleAnimation(
+        el,
+        () => {
           el.setAttribute("data-spread", "true");
-          if (shouldReduceMotion()) {
-            el.removeAttribute("data-closing");
-            return;
-          }
-          el.setAttribute("data-closing", "");
-          requestAnimationFrame(() => {
-            el.removeAttribute("data-closing");
-          });
-        } else {
-          if (shouldReduceMotion()) {
-            el.setAttribute("data-spread", "false");
-            el.removeAttribute("data-closing");
-            return;
-          }
-          el.setAttribute("data-closing", "");
-          setTimeout(() => {
-            el.setAttribute("data-spread", "false");
-            el.removeAttribute("data-closing");
-          }, foldImgAnimationMs);
-        }
-      };
+        },
+        () => {
+          el.setAttribute("data-spread", "false");
+        },
+        foldImgAnimationMs,
+      );
 
       desc.addEventListener("click", (event) => {
         event.preventDefault();
-        setSpread(el.getAttribute("data-spread") === "false");
+        toggle(el.getAttribute("data-spread") === "false");
       });
     });
   }

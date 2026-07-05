@@ -6,6 +6,9 @@ import { getLangFromLocale, type Locale } from "./i18n";
 // https://iovs.arvojournals.org/article.aspx?articleid=2166061
 // 184 ± 29 words/min → 213 words/min
 const wordsPerMinute = 213;
+const wordCountRoundTo = 100;
+const maxImageTime = 12;
+const minImageTime = 3;
 
 export function getMetrics(html: string, locale: Locale, userMetrics: StarlightBlogUserMetrics): Metrics {
   const { content, images } = transformHTMLForMetrics(html);
@@ -21,7 +24,7 @@ export function getMetrics(html: string, locale: Locale, userMetrics: StarlightB
       seconds: Math.ceil(seconds),
     },
     words: {
-      rounded: Math.ceil(words / 100) * 100,
+      rounded: Math.ceil(words / wordCountRoundTo) * wordCountRoundTo,
       total: words,
     },
   };
@@ -48,7 +51,7 @@ function addImagesTime(seconds: number, images: number): number {
 
 function getImageTime(index: number): number {
   // https://blog.medium.com/read-time-and-you-bc2048ab620c
-  return Math.max(3, 12 - index);
+  return Math.max(minImageTime, maxImageTime - index);
 }
 
 export interface Metrics {

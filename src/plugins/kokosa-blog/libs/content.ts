@@ -38,19 +38,7 @@ export async function getBlogStaticPaths() {
 
 export async function getSidebarBlogEntries(locale: Locale) {
   const entries = await getBlogEntries(locale);
-
-  const featured: StarlightBlogEntry[] = [];
-  const recent: StarlightBlogEntry[] = [];
-
-  for (const entry of entries) {
-    if (entry.data.featured) {
-      featured.push(entry);
-    } else {
-      recent.push(entry);
-    }
-  }
-
-  return { featured, recent: recent.slice(0, config.recentPostCount) };
+  return { recent: entries.slice(0, 10) };
 }
 
 export async function getBlogEntry(slug: string, locale: Locale): Promise<StarlightBlogEntryPaginated> {
@@ -81,8 +69,8 @@ export async function getBlogEntry(slug: string, locale: Locale): Promise<Starli
 
   return {
     entry,
-    nextLink: config.prevNextLinksOrder === "reverse-chronological" ? nextLink : prevLink,
-    prevLink: config.prevNextLinksOrder === "reverse-chronological" ? prevLink : nextLink,
+    nextLink,
+    prevLink,
   };
 }
 
@@ -97,8 +85,6 @@ export async function getBlogEntries(locale: Locale): Promise<StarlightBlogEntry
   const contentRelativePath = `${context.srcDir.replace(context.rootDir, "")}content/docs/`;
 
   for (const entry of docEntries) {
-    if (import.meta.env.MODE === "production" && entry.data.draft === true) continue;
-
     const fileRelativePath = entry.filePath?.replace(contentRelativePath, "");
 
     const isDefaultLocaleEntry =
@@ -119,14 +105,12 @@ export async function getBlogEntries(locale: Locale): Promise<StarlightBlogEntry
       try {
         const localizedEntry = await getEntry("docs", getPathWithLocale(entry.id, locale));
         if (!localizedEntry) throw new Error("Unavailable localized entry.");
-        if (localizedEntry.data.draft === true) throw new Error("Draft localized entry.");
         blogEntries.push(localizedEntry);
       } catch {
         blogEntries.push(entry);
+      } finally {
+        console.warn = warn;
       }
-
-      // Restore the original `console.warn()` implementation.
-      console.warn = warn;
     }
   }
 
@@ -166,8 +150,8 @@ function getBlogStaticPath(pages: StarlightBlogEntry[][], entries: StarlightBlog
     props: {
       entries,
       locale,
-      nextLink: config.prevNextLinksOrder === "reverse-chronological" ? nextLink : prevLink,
-      prevLink: config.prevNextLinksOrder === "reverse-chronological" ? prevLink : nextLink,
+      nextLink,
+      prevLink,
     } satisfies StarlightBlogStaticProps,
   };
 }
@@ -201,6 +185,8 @@ function validateBlogEntries(entries: StarlightEntry[]): asserts entries is Star
 }
 
 function validateBlogEntry(entry: StarlightEntry): asserts entry is StarlightBlogEntry {
+  // Schema uses .partial() for compatibility with non-blog docs, so date is only optional in the type.
+  // This runtime assertion enforces that blog entries actually provide a date.
   if (entry.data.date === undefined) {
     throw new Error(`Missing date for blog entry '${entry.id}'.`);
   }

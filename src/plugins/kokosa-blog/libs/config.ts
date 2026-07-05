@@ -29,15 +29,6 @@ const configSchema = z
         words: z.union([z.literal(false), z.literal("total"), z.literal("rounded")]).default(false),
       })
       .default({ readingTime: false, words: false }),
-    /**
-     * The type of navigation links to display on a page.
-     *
-     * - `header-start` adds a link to the blog after the site title or logo in the header on large viewports.
-     * - `header-end` adds a link to the blog before the theme switcher in the header on large viewports.
-     * - `none` does not add any links to the blog.
-     *
-     * @default 'header-end'
-     */
     navigation: z.union([z.literal("header-start"), z.literal("header-end"), z.literal("none")]).default("header-end"),
     /**
      * The base prefix for all blog routes.
@@ -48,33 +39,10 @@ const configSchema = z
       .string()
       .default("blog")
       .transform((value) => stripTrailingSlash(stripLeadingSlash(value))),
-    /**
-     * The order of the previous and next links in the blog.
-     *
-     * By default, next links will point to the next blog post towards the past (`reverse-chronological`).
-     * Setting this option to `chronological` will make next links point to the next blog post towards the future.
-     */
-    prevNextLinksOrder: z.union([z.literal("chronological"), z.literal("reverse-chronological")]).default("reverse-chronological"),
-    /**
-     * The number of blog posts to display per page in the blog post list.
-     */
     postCount: z
       .union([z.number().min(1), z.literal(Infinity)])
       .default(5)
       .transform(infinityToMax),
-    /**
-     * The number of recent blog posts to display in the sidebar.
-     */
-    recentPostCount: z
-      .union([z.number().min(1), z.literal(Infinity)])
-      .default(10)
-      .transform(infinityToMax),
-    /**
-     * Defines whether or not an RSS feed should be generated for the blog.
-     *
-     * By default, an RSS feed is automatically generated for your blog when the Astro `site` option is set.
-     * Setting this option to `false` will disable the RSS feed even if the Astro `site` option is set.
-     */
     rss: z.boolean().default(true),
     /**
      * The title of the blog.
@@ -84,7 +52,7 @@ const configSchema = z
      */
     title: z.union([z.string(), z.record(z.string(), z.string())]).default("Blog"),
   })
-  .prefault({});
+  .default({});
 
 export function validateConfig(userConfig: unknown): StarlightBlogConfig {
   const config = configSchema.safeParse(userConfig);

@@ -1,0 +1,94 @@
+.scroll-to-top-button {
+  position: fixed;
+  right: 35px;
+  bottom: 40px;
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  background-color: var(--sl-color-bg-sidebar);
+  border: 1px solid var(--sl-color-gray-5);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  color: var(--sl-color-text-accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
+  z-index: 100;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.scroll-to-top-button.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-to-top-button:hover {
+  background-color: var(--sl-color-accent);
+  border-color: transparent;
+  color: var(--sl-color-white);
+}
+
+.scroll-to-top-button:active {
+  background-color: var(--sl-color-accent-high);
+  color: var(--sl-color-white);
+}
+
+.scroll-to-top-button.keyboard-focus {
+  outline: 2px solid var(--sl-color-text);
+  outline-offset: 2px;
+}
+
+.scroll-to-top-tooltip {
+  position: absolute;
+  right: -22px;
+  top: -47px;
+  background-color: var(--sl-color-gray-6);
+  color: var(--sl-color-text);
+  padding: 5px 10px;
+  border-radius: 0;
+  font-weight: 400;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.2s,
+    visibility 0.3s;
+  pointer-events: none;
+}
+
+html[data-theme="light"] .scroll-to-top-tooltip {
+  background-color: var(--sl-color-gray-5);
+}
+
+.scroll-to-top-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--sl-color-gray-6);
+}
+
+html[data-theme="light"] .scroll-to-top-tooltip::after {
+  border-top-color: var(--sl-color-gray-5);
+}
+
+.scroll-to-top-tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+}

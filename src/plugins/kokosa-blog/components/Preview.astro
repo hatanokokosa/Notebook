@@ -1,9 +1,8 @@
 ---
 import type { StarlightBlogEntry } from "../libs/content";
 import type { Locale } from "../libs/i18n";
-import { getPathWithLocale, getRelativeUrl } from "../libs/page";
+import { getLocaleFromPath, getPathWithLocale, getRelativeUrl } from "../libs/page";
 
-import Cover from "./Cover.astro";
 import Excerpt from "./Excerpt.astro";
 import Metadata from "./Metadata.astro";
 import PostTags from "./PostTags.astro";
@@ -16,7 +15,8 @@ interface Props {
 const { entry, locale } = Astro.props;
 const entryPath = `/${getPathWithLocale(entry.id, locale)}`;
 const href = getRelativeUrl(entryPath);
-const giscusTerm = href.replace(/^\/(zh-cn|en-us|ja-jp)(?=\/|$)/, "") || "/";
+const localeSegment = getLocaleFromPath(href);
+const giscusTerm = localeSegment ? href.replace(new RegExp(`^/${localeSegment}(?=/|$)`), "") || "/" : href;
 const commentCountLabels = {
   "data-comment-one": Astro.locals.t("kokosaBlog.comments.comment_one"),
   "data-comment-other": Astro.locals.t("kokosaBlog.comments.comment_other"),
@@ -31,7 +31,6 @@ const commentCountLabels = {
     <h2>
       <a class="preview-link" {href}>{entry.data.title}</a>
     </h2>
-    {entry.data.cover && <Cover cover={entry.data.cover} />}
     <Metadata entry={entry} {locale} />
     <PostTags {entry} {locale}>
       <span

@@ -66,14 +66,19 @@ function setupColorCodeCopy() {
     const colorCode = button.dataset.colorCode;
     if (!colorCode) return;
 
-    navigator.clipboard.writeText(colorCode).then(() => {
-      button.classList.add("is-copied");
-      button.ariaLabel = `Copied ${colorCode}`;
-      setTimeout(() => {
-        button.classList.remove("is-copied");
-        button.ariaLabel = `Copy color ${colorCode}`;
-      }, 1500);
-    });
+    navigator.clipboard
+      .writeText(colorCode)
+      .then(() => {
+        button.classList.add("is-copied");
+        button.ariaLabel = `Copied ${colorCode}`;
+        setTimeout(() => {
+          button.classList.remove("is-copied");
+          button.ariaLabel = `Copy color ${colorCode}`;
+        }, 1500);
+      })
+      .catch((error) => {
+        console.warn("Clipboard write failed:", error);
+      });
   };
 
   document.addEventListener("click", onButtonClick);

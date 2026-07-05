@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { copyFile, mkdir, readFile, stat } from "node:fs/promises";
+import { copyFile, mkdir, stat } from "node:fs/promises";
 import path from "node:path";
 import { fromHtml } from "hast-util-from-html";
 import { toHtml } from "hast-util-to-html";
@@ -30,6 +30,7 @@ const OUTPUT_QUALITY = 95;
 const OUTPUT_ID_LENGTH = 16;
 
 const projectRoot = process.cwd();
+// set cache home for sharp/libvips to use the project's .cache directory
 process.env.XDG_CACHE_HOME ??= path.join(projectRoot, ".cache");
 
 const publicDir = path.join(projectRoot, "public");
@@ -65,12 +66,9 @@ function stripNoWatermarkMarker(text: string): string {
   return text.endsWith(NO_WATERMARK_MARKER) ? text.slice(0, -NO_WATERMARK_MARKER.length).trimEnd() : text;
 }
 
-function hasNoWatermarkMarker(node: HastNode): boolean {
-  return getStringProperty(node.properties?.alt).endsWith(NO_WATERMARK_MARKER);
-}
-
-function stripFigureCaptionMarker(node: HastNode): void {
-  if (!node.children) return;
+function stripFigureCaptionMarker(node: HastNode): boolean {
+  let found = false;
+  if (!node.children) return found;
 
   visit(node as never, "element", (child: HastNode) => {
     if (child.tagName !== "figcaption" || !child.children?.length) return;
@@ -80,18 +78,23 @@ function stripFigureCaptionMarker(node: HastNode): void {
     if (!lastText?.value?.endsWith(NO_WATERMARK_MARKER)) return;
 
     lastText.value = stripNoWatermarkMarker(lastText.value);
+    found = true;
   });
+
+  return found;
 }
 
 function isLocalPublicImage(src: string): boolean {
   const { pathname: srcPathname } = splitSrc(src);
+  const lowerPathname = srcPathname.toLowerCase();
 
   return (
     srcPathname.startsWith("/") &&
     !srcPathname.startsWith("//") &&
+    !srcPathname.startsWith("/_watermarked/") &&
     !srcPathname.includes("/../") &&
-    !srcPathname.endsWith(".svg") &&
-    !srcPathname.endsWith(".gif")
+    !lowerPathname.endsWith(".svg") &&
+    !lowerPathname.endsWith(".gif")
   );
 }
 
@@ -104,17 +107,18 @@ function splitSrc(src: string): { pathname: string; suffix: string } {
 }
 
 function resolvePublicPath(srcPathname: string): string | null {
-  const decoded = decodeURIComponent(srcPathname);
+  let decoded: string;
+  try {
+    decoded = decodeURIComponent(srcPathname);
+  } catch {
+    return null;
+  }
+
   const filePath = path.resolve(publicDir, decoded.slice(1));
 
   if (!filePath.startsWith(`${publicDir}${path.sep}`)) return null;
   return filePath;
 }
-
-type ImageDimensions = {
-  width: number;
-  height: number;
-};
 
 // cache key changes when any watermark param is tweaked
 function getWatermarkCacheVersion(): string {
@@ -136,85 +140,6 @@ function getWatermarkCacheVersion(): string {
   ].join(":");
 }
 
-function getAvifDimensions(buffer: Buffer): ImageDimensions | null {
-  const ispeIndex = buffer.indexOf("ispe", 0, "ascii");
-  if (ispeIndex < 4 || ispeIndex + 16 > buffer.length) return null;
-
-  return {
-    width: buffer.readUInt32BE(ispeIndex + 8),
-    height: buffer.readUInt32BE(ispeIndex + 12),
-  };
-}
-
-function getPngDimensions(buffer: Buffer): ImageDimensions | null {
-  if (buffer.length < 24 || buffer.toString("ascii", 1, 4) !== "PNG") return null;
-
-  return {
-    width: buffer.readUInt32BE(16),
-    height: buffer.readUInt32BE(20),
-  };
-}
-
-function getJpegDimensions(buffer: Buffer): ImageDimensions | null {
-  if (buffer[0] !== 0xff || buffer[1] !== 0xd8) return null;
-
-  let offset = 2;
-  while (offset + 9 < buffer.length) {
-    if (buffer[offset] !== 0xff) return null;
-
-    const marker = buffer[offset + 1];
-    const length = buffer.readUInt16BE(offset + 2);
-    if (length < 2) return null;
-
-    if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) {
-      return {
-        height: buffer.readUInt16BE(offset + 5),
-        width: buffer.readUInt16BE(offset + 7),
-      };
-    }
-
-    offset += 2 + length;
-  }
-
-  return null;
-}
-
-function getWebpDimensions(buffer: Buffer): ImageDimensions | null {
-  if (buffer.length < 30 || buffer.toString("ascii", 0, 4) !== "RIFF" || buffer.toString("ascii", 8, 12) !== "WEBP") {
-    return null;
-  }
-
-  const chunkType = buffer.toString("ascii", 12, 16);
-  if (chunkType === "VP8X" && buffer.length >= 30) {
-    return {
-      width: 1 + buffer.readUIntLE(24, 3),
-      height: 1 + buffer.readUIntLE(27, 3),
-    };
-  }
-
-  if (chunkType === "VP8 " && buffer.length >= 30) {
-    return {
-      width: buffer.readUInt16LE(26) & 0x3fff,
-      height: buffer.readUInt16LE(28) & 0x3fff,
-    };
-  }
-
-  if (chunkType === "VP8L" && buffer.length >= 25) {
-    const bits = buffer.readUInt32LE(21);
-    return {
-      width: (bits & 0x3fff) + 1,
-      height: ((bits >> 14) & 0x3fff) + 1,
-    };
-  }
-
-  return null;
-}
-
-async function getImageDimensions(inputPath: string): Promise<ImageDimensions | null> {
-  const buffer = await readFile(inputPath);
-  return getPngDimensions(buffer) ?? getJpegDimensions(buffer) ?? getWebpDimensions(buffer) ?? getAvifDimensions(buffer);
-}
-
 async function mirrorGeneratedFile(outputPath: string, outputName: string): Promise<void> {
   const distDirStat = await stat(path.dirname(distOutputDir)).catch(() => null);
   if (!distDirStat?.isDirectory()) return;
@@ -226,7 +151,7 @@ async function mirrorGeneratedFile(outputPath: string, outputName: string): Prom
 function createWatermarkSvg(width: number, height: number): string {
   // font size from the shorter image edge
   const shortEdge = Math.min(width, height);
-  const fontSize = Math.round(shortEdge * FONT_SIZE_RATIO);
+  const fontSize = Math.max(1, Math.round(shortEdge * FONT_SIZE_RATIO));
   const cx = width / 2;
   const cy = height / 2;
 
@@ -291,9 +216,6 @@ async function getWatermarkedSrc(src: string): Promise<string | null> {
   if (existing) return existing;
 
   const task = (async () => {
-    const dimensions = await getImageDimensions(inputPath);
-    if (!dimensions) return null;
-
     const hash = createHash("sha256")
       .update(inputPath)
       .update(String(inputStat.mtimeMs))
@@ -309,12 +231,22 @@ async function getWatermarkedSrc(src: string): Promise<string | null> {
     const rasterOutputStat = await stat(rasterOutputPath).catch(() => null);
     if (!rasterOutputStat?.isFile()) {
       const { default: sharp } = await import("sharp");
-      // composite halftone svg with overlay blend, then encode avif
+
+      const metadata = await sharp(inputPath).metadata();
+      let imgWidth = metadata.width;
+      let imgHeight = metadata.height;
+      if (!imgWidth || !imgHeight) return null;
+
+      const orientation = metadata.orientation ?? 1;
+      if (orientation >= 5) {
+        [imgWidth, imgHeight] = [imgHeight, imgWidth];
+      }
+
       await sharp(inputPath)
         .rotate()
         .composite([
           {
-            input: Buffer.from(createWatermarkSvg(dimensions.width, dimensions.height)),
+            input: Buffer.from(createWatermarkSvg(imgWidth, imgHeight)),
             blend: "overlay",
           },
         ])
@@ -340,7 +272,9 @@ export async function applyStaticWatermarks(html: string): Promise<string> {
 
   visit(tree as never, "element", (node: HastNode, _index, parent: HastNode) => {
     if (node.tagName === "figure") {
-      stripFigureCaptionMarker(node);
+      if (stripFigureCaptionMarker(node)) {
+        setStringProperty(node, "dataNoWatermark", "true");
+      }
       return;
     }
 
@@ -353,7 +287,8 @@ export async function applyStaticWatermarks(html: string): Promise<string> {
       return;
     }
 
-    if (parent?.tagName === "a" || hasNoWatermarkMarker(node)) return;
+    if (parent?.tagName === "a") return;
+    if (parent?.tagName === "figure" && parent?.properties?.dataNoWatermark === "true") return;
 
     const src = getStringProperty(node.properties?.src);
     if (!src) return;

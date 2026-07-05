@@ -2,7 +2,7 @@ export interface TocItem {
   depth: number;
   slug: string;
   text: string;
-  children: TocItem[];
+  children?: TocItem[];
 }
 
 export function getUserTocItems(items: TocItem[]): TocItem[] {

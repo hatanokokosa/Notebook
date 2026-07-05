@@ -119,6 +119,8 @@ const shouldOpen = tocItemCount <= 5;
 </style>
 
 <script>
+  import { createToggleAnimation } from "../lib/details-animation";
+
   const articleTocAnimationMs = 260;
   const articleTocBoundAttr = "data-article-toc-bound";
 
@@ -128,47 +130,21 @@ const shouldOpen = tocItemCount <= 5;
       if (!summary) return;
 
       details.setAttribute(articleTocBoundAttr, "");
-      let closeTimer = 0;
-      let openFrame = 0;
 
-      const shouldReduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      const setOpen = (open: boolean) => {
-        window.clearTimeout(closeTimer);
-        window.cancelAnimationFrame(openFrame);
-
-        if (open) {
+      const toggle = createToggleAnimation(
+        details,
+        () => {
           details.open = true;
-          if (shouldReduceMotion()) {
-            details.removeAttribute("data-closing");
-            return;
-          }
-
-          details.setAttribute("data-closing", "");
-          openFrame = window.requestAnimationFrame(() => {
-            details.removeAttribute("data-closing");
-          });
-          return;
-        }
-
-        if (!details.open) return;
-
-        if (shouldReduceMotion()) {
-          details.removeAttribute("data-closing");
+        },
+        () => {
           details.open = false;
-          return;
-        }
-
-        details.setAttribute("data-closing", "");
-        closeTimer = window.setTimeout(() => {
-          details.open = false;
-          details.removeAttribute("data-closing");
-        }, articleTocAnimationMs);
-      };
+        },
+        articleTocAnimationMs,
+      );
 
       summary.addEventListener("click", (event) => {
         event.preventDefault();
-        setOpen(!details.open || details.hasAttribute("data-closing"));
+        toggle(!details.open || details.hasAttribute("data-closing"));
       });
     });
   }

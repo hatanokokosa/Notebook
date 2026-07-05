@@ -1,5 +1,4 @@
 ---
-import { Badge } from "@astrojs/starlight/components";
 import config from "virtual:kokosa-blog/config";
 
 import { renderBlogEntryToString } from "../libs/container";
@@ -10,10 +9,9 @@ import { getMetrics, type Metrics } from "../libs/metrics";
 interface Props {
   entry: StarlightBlogEntry;
   locale: Locale;
-  showBadges?: boolean;
 }
 
-const { entry, showBadges = true } = Astro.props;
+const { entry } = Astro.props;
 
 let metrics: Metrics | undefined;
 
@@ -56,14 +54,6 @@ if (config.metrics.readingTime !== false || config.metrics.words !== false) {
       )
     }
   </div>
-  {
-    showBadges && (entry.data?.draft || entry.data.featured) && (
-      <div class="badges">
-        {entry.data.draft && <Badge size="medium" text={Astro.locals.t("kokosaBlog.post.draft")} variant="caution" />}
-        {entry.data.featured && <Badge size="medium" text={Astro.locals.t("kokosaBlog.post.featured")} variant="note" />}
-      </div>
-    )
-  }
 </div>
 
 <style>

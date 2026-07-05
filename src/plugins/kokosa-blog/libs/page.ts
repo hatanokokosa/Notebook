@@ -48,13 +48,17 @@ export function getPathWithLocale(path: string, locale: Locale): string {
 }
 
 export function isAnyBlogPage(slug: string) {
-  return new RegExp(`^${getPathWithLocale(config.prefix, getLocaleFromPath(slug))}(/?$|/.+/?$)`).exec(slug) !== null;
+  const prefix = getPathWithLocale(config.prefix, getLocaleFromPath(slug));
+  return slug === prefix || slug.startsWith(prefix + "/");
 }
 
 export function isAnyBlogPostPage(slug: string) {
-  return (
-    new RegExp(`^${getPathWithLocale(config.prefix, getLocaleFromPath(slug))}/(?!(\\d+/?|tags/.+|authors/.+)$).+$`).exec(slug) !== null
-  );
+  const prefix = getPathWithLocale(config.prefix, getLocaleFromPath(slug));
+  if (!slug.startsWith(prefix + "/")) return false;
+  const rest = slug.slice(prefix.length + 1);
+  if (rest === "") return false;
+  if (rest.startsWith("tags/") || rest.startsWith("authors/")) return false;
+  return !/^\d+(\/.*)?$/.test(rest);
 }
 
 export function isBlogRoot(slug: string) {
