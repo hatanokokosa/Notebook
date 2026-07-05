@@ -11,6 +11,7 @@ const { starlightRoute } = Astro.locals;
 const pathname = Astro.url.pathname;
 const contentHtml = await Astro.slots.render("default");
 const hasWatermarkEnabled = starlightRoute?.entry?.data?.watermark === true;
+const hasDownloadEnabled = starlightRoute?.entry?.data?.download === true;
 const renderedContentHtml = hasWatermarkEnabled ? await applyStaticWatermarks(contentHtml) : contentHtml;
 const articleTocMarker = /<!--\s*toc\s*-->|<p>\s*(?:\[toc\]|::toc)\s*<\/p>/i;
 const contentParts = renderedContentHtml.split(articleTocMarker);
@@ -26,7 +27,7 @@ const shouldEnhanceImages = !isGeneratedBlogPage && /<img[\s>]/i.test(renderedCo
 ---
 
 {shouldEnhanceImages && <ImageZoomer client:only="react" />}
-{shouldEnhanceImages && <DownloadOverlay />}
+{shouldEnhanceImages && hasDownloadEnabled && <DownloadOverlay />}
 {
   isBlogPostPage ? (
     <BlogMarkdownContent>
