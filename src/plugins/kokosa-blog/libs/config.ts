@@ -51,8 +51,17 @@ const configSchema = z
      * When using the object form, the keys must be BCP-47 tags (e.g. `en`, `ar`, or `zh-CN`).
      */
     title: z.union([z.string(), z.record(z.string(), z.string())]).default("Blog"),
+    prevNextLinksOrder: z.union([z.literal("chronological"), z.literal("reverse-chronological")]).default("chronological"),
   })
-  .default({});
+  .default({
+    metrics: { readingTime: false, words: false },
+    navigation: "header-end",
+    prefix: "blog",
+    postCount: 5,
+    rss: true,
+    title: "Blog",
+    prevNextLinksOrder: "chronological",
+  });
 
 export function validateConfig(userConfig: unknown): StarlightBlogConfig {
   const config = configSchema.safeParse(userConfig);

@@ -40,12 +40,14 @@
     return svg;
   }
 
-  function css(el, styles) {
+  function css(el: HTMLElement, styles: Partial<CSSStyleDeclaration>) {
     Object.assign(el.style, styles);
   }
 
-  function wrapImage(img) {
+  function wrapImage(img: Element) {
+    if (!(img instanceof HTMLImageElement)) return;
     const parent = img.parentNode;
+    if (!parent) return;
     const block = getComputedStyle(img).display === "block";
 
     const wrapper = document.createElement("div");

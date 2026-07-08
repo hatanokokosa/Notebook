@@ -1,10 +1,9 @@
-export {};
+declare module "@microflash/rehype-figure" {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const rehypeFigure: any;
+  export default rehypeFigure;
+}
 
-// types/@microflash__rehype-figure.d.ts
-declare module "@microflash/rehype-figure";
-
-declare global {
-  interface Window {
-    __themeVT?: boolean;
-  }
+interface Window {
+  __themeVT?: boolean;
 }

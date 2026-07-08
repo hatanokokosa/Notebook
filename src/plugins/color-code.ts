@@ -60,7 +60,9 @@ function createColorCodeButton(colorCode: string): Element {
 
 function setupColorCodeCopy() {
   const onButtonClick = (event: Event) => {
-    const button = (event.target as Element).closest<HTMLButtonElement>(".kokosa-color-code");
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    const button = target.closest<HTMLButtonElement>(".kokosa-color-code");
     if (!button) return;
 
     const colorCode = button.dataset.colorCode;

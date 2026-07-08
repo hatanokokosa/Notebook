@@ -13,11 +13,11 @@ const { toc, depth = 0, isMobile = false } = Astro.props;
 <ul class:list={{ isMobile }} style={`--depth: ${depth}`}>
   {
     toc.map((heading) => (
-      <li key={heading.slug}>
+      <li>
         <a href={`#${heading.slug}`}>
           <span>{heading.text}</span>
         </a>
-        {heading.children.length > 0 && <Astro.self toc={heading.children} depth={depth + 1} {isMobile} />}
+        {heading.children && heading.children.length > 0 && <Astro.self toc={heading.children} depth={depth + 1} {isMobile} />}
       </li>
     ))
   }
