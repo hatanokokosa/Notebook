@@ -26,10 +26,10 @@ Choose verification based on the task:
 
 - Components, plugins, TypeScript, config, or schemas:
   run `bunx astro check` and `bun run build`.
-- Markdown rendering, routes, or localization wiring:
+- Markdown rendering, routes, or localization wiring;
+  Markdown frontmatter, components, links, or media references.
   run `bun run build`.
-- Ordinary article edits and image additions:
-  verify frontmatter, file placement, and media references; no build required.
+- Plain md text edits do not require a build.
 - Content schema changes:
   run `bun run astro sync`, `bunx astro check`, and `bun run build`.
 
@@ -66,6 +66,17 @@ UI translation files use `zh-CN`, `en-US`, and `ja-JP`.
 - Run `just rename-images` when adding images.
 - Update and verify all references after renaming.
 - Use GIF instead when animation requires it.
+
+## Article Conventions
+
+- Chinese articles are canonical. I18n translate all text naturally.
+- Do not add, remove, or change factual content unless explicitly requested.
+- Do not add sentence-ending periods (`。`) to Japanese translations.
+- Format commands, paths, filenames, and code identifiers as inline code.
+- Do not add an H1 to the body. Use `###` for primary sections.
+- Pangu: Add spaces between Chinese text and English technical terms.
+- Code blocks: Use `txt` for directory trees and plain text.
+- Add `::toc` (table of contents) to longer articles.
 
 ## Project-Specific Guidance
 
