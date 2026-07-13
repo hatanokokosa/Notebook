@@ -1,0 +1,20 @@
+---
+interface Props {
+  date: Date;
+}
+
+const { date } = Astro.props;
+---
+
+<div class="article-date not-content">
+  <time datetime={date.toISOString()}>
+    {Astro.locals.t("kokosaBlog.post.date", { date })}
+  </time>
+</div>
+
+<style>
+  .article-date {
+    transform: translateY(-1rem);
+    font-size: var(--sl-text-sm);
+  }
+</style>

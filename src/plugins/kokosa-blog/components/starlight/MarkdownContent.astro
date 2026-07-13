@@ -17,7 +17,7 @@ const { entry, nextLink, prevLink } = await getBlogEntry(id, locale);
 ---
 
 <Default>
-  <Metadata entry={entry} {locale} />
+  <Metadata entry={entry} isPost {locale} />
   <slot />
   <div class="post-footer">
     <PostTags entry={entry} {locale} />

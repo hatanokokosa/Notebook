@@ -6,6 +6,8 @@ import DownloadOverlay from "./DownloadOverlay.astro";
 import Giscus from "./Giscus.astro";
 import ArticleToc from "./ArticleToc.astro";
 import { applyStaticWatermarks } from "../lib/static-watermark";
+import { isAnyBlogPostPage } from "../plugins/kokosa-blog/libs/page";
+import ArticleDate from "./ArticleDate.astro";
 
 const { starlightRoute } = Astro.locals;
 const pathname = Astro.url.pathname;
@@ -16,7 +18,8 @@ const renderedContentHtml = hasWatermarkEnabled ? await applyStaticWatermarks(co
 const articleTocMarker = /<!--\s*toc\s*-->|<p>\s*(?:\[toc\]|::toc)\s*<\/p>/i;
 const contentParts = renderedContentHtml.split(articleTocMarker);
 const shouldInsertArticleToc = Boolean(starlightRoute?.toc) && contentParts.length > 1;
-const isBlogPostPage = starlightRoute?.entry?.data?.date instanceof Date;
+const isBlogPostPage = starlightRoute ? isAnyBlogPostPage(starlightRoute.id) : false;
+const articleDate = !isBlogPostPage && starlightRoute?.entry?.data?.date instanceof Date ? starlightRoute.entry.data.date : undefined;
 const isGeneratedBlogPage =
   pathname === "/" ||
   pathname.endsWith("/blog") ||
@@ -44,6 +47,7 @@ const shouldEnhanceImages = !isGeneratedBlogPage && /<img[\s>]/i.test(renderedCo
     </BlogMarkdownContent>
   ) : (
     <Default>
+      {articleDate && <ArticleDate date={articleDate} />}
       {shouldInsertArticleToc ? (
         contentParts.map((part, index) => (
           <Fragment key={index}>

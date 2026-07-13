@@ -8,10 +8,11 @@ import { getMetrics, type Metrics } from "../libs/metrics";
 
 interface Props {
   entry: StarlightBlogEntry;
+  isPost?: boolean;
   locale: Locale;
 }
 
-const { entry } = Astro.props;
+const { entry, isPost = false } = Astro.props;
 
 let metrics: Metrics | undefined;
 
@@ -21,7 +22,7 @@ if (config.metrics.readingTime !== false || config.metrics.words !== false) {
 }
 ---
 
-<div class="metadata not-content">
+<div class:list={["metadata", "not-content", { "metadata-post": isPost }]}>
   <div class="dates">
     <time datetime={entry.data.date.toISOString()}>
       {Astro.locals.t("kokosaBlog.post.date", { date: entry.data.date })}
@@ -61,6 +62,10 @@ if (config.metrics.readingTime !== false || config.metrics.words !== false) {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+  }
+
+  .metadata-post {
+    transform: translateY(-1rem);
   }
 
   .dates {
