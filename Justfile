@@ -14,6 +14,10 @@ clean:
 rename-images *args:
     bun scripts/rename-images.ts {{args}}
 
+clean-workflow-artifacts:
+    if test -e .superpowers; then rip .superpowers; fi
+    if test -e docs/superpowers; then rip docs/superpowers; fi
+
 push:
     bunx prettier --write .
     git add .
