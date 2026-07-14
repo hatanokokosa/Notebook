@@ -14,7 +14,6 @@ clean:
 rename-images *args:
     bun scripts/rename-images.ts {{args}}
 
-# Generate or refresh contentId values for new blog entries
 content-ids-write:
     bun run content:ids:write
 
