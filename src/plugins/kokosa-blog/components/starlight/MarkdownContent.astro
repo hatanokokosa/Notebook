@@ -33,3 +33,17 @@ const { entry, nextLink, prevLink } = await getBlogEntry(id, locale);
     margin-block-start: 2rem !important;
   }
 </style>
+
+<script>
+  function applyContentSeparator() {
+    const panels = document.querySelectorAll(".content-panel + .content-panel");
+    const color = getComputedStyle(document.documentElement).getPropertyValue("--sl-color-hairline").trim() || "#ccc";
+    panels.forEach((panel) => {
+      panel.style.borderTopStyle = "dashed";
+      panel.style.borderTopWidth = "3px";
+      panel.style.borderTopColor = color;
+    });
+  }
+  applyContentSeparator();
+  document.addEventListener("astro:page-load", applyContentSeparator);
+</script>

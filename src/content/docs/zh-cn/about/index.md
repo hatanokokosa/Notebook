@@ -44,8 +44,12 @@ const friend = {
 
 ![Fastfetch Rice](/about/325c2cef754f8635.avif)
 
+---
+
 #### 结尾 / 头像
 
 如果您需要我的头像，请直接链接（或下载）此图片：http://kokosa.icu/about/3799034338525854.avif
 
 以下是评论区，仓库在 [hatanokokosa/hatanokokosa](https://github.com/hatanokokosa/hatanokokosa)：
+
+---

@@ -109,15 +109,15 @@ export default defineConfig({
 
       sidebar: [
         {
-          label: "about",
+          label: "About",
           autogenerate: { directory: "about" },
         },
         {
-          label: "notes",
-          autogenerate: { directory: "note" },
+          label: "Study",
+          autogenerate: { directory: "study" },
         },
         {
-          label: "create",
+          label: "Create",
           autogenerate: { directory: "create" },
         },
       ],
