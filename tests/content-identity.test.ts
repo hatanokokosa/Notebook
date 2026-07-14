@@ -7,8 +7,8 @@ const secondContentId = "f47ac10b-58cc-4372-a567-0e02b2c3d479";
 
 test("creates exact immutable terms for UUID v4 content IDs", () => {
   // Given
-  const expectedFirstTerm = "kokosa:550e8400-e29b-41d4-a716-446655440000";
-  const expectedSecondTerm = "kokosa:f47ac10b-58cc-4372-a567-0e02b2c3d479";
+  const expectedFirstTerm = "kokosa: 550e8400-e29b-41d4-a716-446655440000";
+  const expectedSecondTerm = "kokosa: f47ac10b-58cc-4372-a567-0e02b2c3d479";
 
   // When
   const firstTerm = createContentTerm(firstContentId);

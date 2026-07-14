@@ -15,7 +15,7 @@ test("creates strict specific attributes from the rendered immutable term", () =
   // Then
   expect(attributes).toEqual({
     "data-mapping": "specific",
-    "data-term": "kokosa:550e8400-e29b-41d4-a716-446655440000",
+    "data-term": "kokosa: 550e8400-e29b-41d4-a716-446655440000",
     "data-strict": "1",
   });
 });

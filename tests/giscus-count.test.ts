@@ -10,9 +10,9 @@ import {
   type StorageAdapter,
 } from "../src/plugins/kokosa-blog/client/giscus-counts";
 
-const firstTerm = "kokosa:550e8400-e29b-41d4-a716-446655440000";
-const secondTerm = "kokosa:6ba7b810-9dad-41d1-80b4-00c04fd430c8";
-const ignoredTerm = "kokosa:123e4567-e89b-42d3-a456-426614174000";
+const firstTerm = "kokosa: 550e8400-e29b-41d4-a716-446655440000";
+const secondTerm = "kokosa: 6ba7b810-9dad-41d1-80b4-00c04fd430c8";
+const ignoredTerm = "kokosa: 123e4567-e89b-42d3-a456-426614174000";
 const discussionsUrl = "https://api.github.com/repos/hatanokokosa/hatanokokosa/discussions?per_page=100";
 const secondPageUrl = "https://api.github.com/repos/hatanokokosa/hatanokokosa/discussions?per_page=100&page=2";
 
