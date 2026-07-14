@@ -6,8 +6,9 @@
 2. Keep changes limited to the requested task.
 3. Preserve existing project patterns and user changes.
 4. Apply the smallest correct change.
-5. Verify according to the change type.
-6. Report changed files, verification results, and unresolved issues.
+5. When adding content, run `just content-ids-write` to generate its `contentId`.
+6. Verify according to the change type.
+7. Report changed files, verification results, and unresolved issues.
 
 ## Commands
 
