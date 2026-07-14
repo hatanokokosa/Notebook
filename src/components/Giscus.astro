@@ -1,4 +1,6 @@
 ---
+import { createContentTerm } from "../lib/content-identity";
+
 const { starlightRoute } = Astro.locals;
 const pathname = Astro.url.pathname;
 
@@ -16,13 +18,16 @@ const isBlogGeneratedPage =
   pathname.includes("/authors/");
 
 // render!
-const shouldRender = hasCommentsEnabled && !isBlogGeneratedPage;
+const canRenderComments = hasCommentsEnabled && !isBlogGeneratedPage;
+const contentId = starlightRoute?.entry?.data?.contentId;
+const contentTerm = canRenderComments && contentId ? createContentTerm(contentId) : undefined;
+const shouldRender = contentTerm !== undefined;
 ---
 
 {
   shouldRender && (
     <>
-      <div class="giscus-container" style="margin-top: 3rem;" />
+      <div class="giscus-container" data-giscus-term={contentTerm} style="margin-top: 3rem;" />
       <script src="../plugins/giscus.ts" />
     </>
   )

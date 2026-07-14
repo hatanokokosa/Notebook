@@ -5,6 +5,7 @@ lastUpdated: 2026-02-08
 tags:
   - Gaming
 excerpt: Wine 上でデフォルト表示が UTC+0 になる問題を修正する
+contentId: 42c2c228-0f32-40ff-a1ec-64512a1ea65f
 ---
 
 ::toc

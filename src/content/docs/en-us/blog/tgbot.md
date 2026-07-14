@@ -6,6 +6,7 @@ tags:
   - Bot
   - Coding
 excerpt: Replace NFD with a forwarding bot I wrote myself
+contentId: c3bfdb80-3c26-4b00-8a4e-3be36effdff7
 ---
 
 ::toc

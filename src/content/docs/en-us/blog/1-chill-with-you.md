@@ -5,6 +5,7 @@ lastUpdated: 2026-02-08
 tags:
   - Gaming
 excerpt: Fix the issue where the game defaults to the UTC+0 timezone under Wine
+contentId: 42c2c228-0f32-40ff-a1ec-64512a1ea65f
 ---
 
 ::toc

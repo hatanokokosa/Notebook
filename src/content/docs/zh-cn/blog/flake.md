@@ -6,6 +6,7 @@ tags:
   - 电脑
   - 编码
 excerpt: 将 NixOS 的配置文件迁移为 Flake
+contentId: adbc7bc4-a038-4880-97d3-d7ad9998b56e
 ---
 
 ::toc

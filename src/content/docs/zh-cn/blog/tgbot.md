@@ -6,6 +6,7 @@ tags:
   - 机器人
   - 编码
 excerpt: 将转发机器人从 NFD 换为自己搓的
+contentId: c3bfdb80-3c26-4b00-8a4e-3be36effdff7
 ---
 
 ::toc

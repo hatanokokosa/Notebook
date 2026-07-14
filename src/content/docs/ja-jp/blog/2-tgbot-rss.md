@@ -6,6 +6,7 @@ tags:
   - Bot
   - Coding
 excerpt: メッセージ転送 Bot に RSS 購読転送機能を追加する
+contentId: 56d23b6b-3485-4931-b0a5-b5dc5c7d8743
 ---
 
 ::toc

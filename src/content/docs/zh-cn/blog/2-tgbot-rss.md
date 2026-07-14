@@ -6,6 +6,7 @@ tags:
   - 机器人
   - 编码
 excerpt: 为消息转发 Bot 添加 RSS 订阅转发功能
+contentId: 56d23b6b-3485-4931-b0a5-b5dc5c7d8743
 ---
 
 ::toc

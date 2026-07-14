@@ -1,7 +1,8 @@
 ---
 import type { StarlightBlogEntry } from "../libs/content";
 import type { Locale } from "../libs/i18n";
-import { getLocaleFromPath, getPathWithLocale, getRelativeUrl } from "../libs/page";
+import { getPreviewContentTerm } from "../../../lib/content-preview";
+import { getPathWithLocale, getRelativeUrl } from "../libs/page";
 
 import Excerpt from "./Excerpt.astro";
 import Metadata from "./Metadata.astro";
@@ -15,8 +16,7 @@ interface Props {
 const { entry, locale } = Astro.props;
 const entryPath = `/${getPathWithLocale(entry.id, locale)}`;
 const href = getRelativeUrl(entryPath);
-const localeSegment = getLocaleFromPath(href);
-const giscusTerm = localeSegment ? href.replace(new RegExp(`^/${localeSegment}(?=/|$)`), "") || "/" : href;
+const giscusTerm = getPreviewContentTerm(entry.data);
 const commentCountLabels = {
   "data-comment-one": Astro.locals.t("kokosaBlog.comments.comment_one"),
   "data-comment-other": Astro.locals.t("kokosaBlog.comments.comment_other"),
@@ -33,14 +33,18 @@ const commentCountLabels = {
     </h2>
     <Metadata entry={entry} {locale} />
     <PostTags {entry} {locale}>
-      <span
-        class="comment-count"
-        data-giscus-term={giscusTerm}
-        aria-label={Astro.locals.t("kokosaBlog.comments.ariaLabel")}
-        {...commentCountLabels}
-      >
-        {Astro.locals.t("kokosaBlog.comments.placeholder")}
-      </span>
+      {
+        giscusTerm && (
+          <span
+            class="comment-count"
+            data-giscus-term={giscusTerm}
+            aria-label={Astro.locals.t("kokosaBlog.comments.ariaLabel")}
+            {...commentCountLabels}
+          >
+            {Astro.locals.t("kokosaBlog.comments.placeholder")}
+          </span>
+        )
+      }
     </PostTags>
   </header>
   <div class="sl-markdown-content">

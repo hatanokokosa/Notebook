@@ -4,9 +4,12 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "bun run content:ids:check && astro build",
+    "content:ids:check": "bun scripts/content-ids.ts --check",
+    "content:ids:write": "bun scripts/content-ids.ts --write",
     "preview": "astro preview",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "bun test"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
@@ -38,6 +41,7 @@
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
+    "@types/bun": "^1.3.14",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "prettier": "^3.8.3",

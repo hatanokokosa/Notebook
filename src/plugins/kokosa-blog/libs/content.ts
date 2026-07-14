@@ -190,12 +190,17 @@ function validateBlogEntry(entry: StarlightEntry): asserts entry is StarlightBlo
   if (entry.data.date === undefined) {
     throw new Error(`Missing date for blog entry '${entry.id}'.`);
   }
+
+  if (entry.data.contentId === undefined) {
+    throw new Error(`Missing content ID for blog entry '${entry.id}'.`);
+  }
 }
 
 type StarlightEntry = CollectionEntry<"docs">;
 
 export type StarlightBlogEntry = StarlightEntry & {
   data: {
+    contentId: string;
     date: Date;
   };
 };

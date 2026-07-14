@@ -6,6 +6,7 @@ tags:
   - Computer
   - Coding
 excerpt: NixOS の設定ファイルを Flake に移行する
+contentId: adbc7bc4-a038-4880-97d3-d7ad9998b56e
 ---
 
 ::toc

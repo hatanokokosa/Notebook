@@ -11,6 +11,7 @@ export const collections = {
         z
           .object({
             comments: z.boolean().optional().default(true),
+            contentId: z.uuidv4().optional(),
             watermark: z.boolean().optional().default(false),
             download: z.boolean().optional().default(false),
           })

@@ -6,6 +6,7 @@ tags:
   - Bot
   - Coding
 excerpt: Add RSS subscription forwarding to the message forwarding bot
+contentId: 56d23b6b-3485-4931-b0a5-b5dc5c7d8743
 ---
 
 ::toc

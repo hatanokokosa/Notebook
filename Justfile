@@ -8,18 +8,19 @@ deploy:
     bunx vercel --prod
 
 clean:
-    rm -rf dist public/_watermarked .cache .astro
+    rm -rf dist public/_watermarked .cache .astro .omo
     bun run astro sync
 
 rename-images *args:
     bun scripts/rename-images.ts {{args}}
 
-clean-workflow-artifacts:
-    if test -e .superpowers; then rip .superpowers; fi
-    if test -e docs/superpowers; then rip docs/superpowers; fi
+# Generate or refresh contentId values for new blog entries
+content-ids-write:
+    bun run content:ids:write
 
 push:
     bunx prettier --write .
+    bun run content:ids:check
     git add .
     git commit -m "$(curl -s https://whatthecommit.com/index.txt)"
     git push -f origin main

@@ -6,6 +6,7 @@ tags:
   - Bot
   - Coding
 excerpt: 転送 Bot を NFD から自作のものへ置き換える
+contentId: c3bfdb80-3c26-4b00-8a4e-3be36effdff7
 ---
 
 ::toc

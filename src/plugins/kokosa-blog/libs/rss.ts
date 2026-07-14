@@ -3,6 +3,7 @@ import starlightConfig from "virtual:starlight/user-config";
 import config from "virtual:kokosa-blog/config";
 import context from "virtual:kokosa-blog/context";
 
+import { createContentGuid } from "../../../lib/content-identity";
 import { getBlogEntries, type StarlightBlogEntry } from "./content";
 import { DefaultLocale, getLangFromLocale, type Locale } from "./i18n";
 import { stripMarkdown } from "./markdown";
@@ -39,8 +40,11 @@ async function getRSSString(site: URL | undefined, locale: Locale) {
   let entries = await getBlogEntries(locale);
   entries = entries.slice(0, MAX_RSS_ITEMS);
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- The route is only injected if `site` is defined in the user Astro config.
-  const feedSite = site!;
+  if (!site) {
+    throw new Error("RSS requires a configured Astro site.");
+  }
+
+  const feedSite = site;
   const items = await Promise.all(entries.map((entry) => getRSSItem(entry, locale, feedSite)));
 
   return [
@@ -97,13 +101,14 @@ function getRSSDescription(entry: StarlightBlogEntry): Promise<string> | undefin
 
 async function getRSSItem(entry: StarlightBlogEntry, locale: Locale, site: URL) {
   const link = new URL(getRelativeUrl(`/${getPathWithLocale(entry.id, locale)}`), site).href;
+  const guid = createContentGuid(entry.data.contentId);
   const description = await getRSSDescription(entry);
 
   return [
     "<item>",
     `<title>${escapeXml(entry.data.title)}</title>`,
     `<link>${escapeXml(link)}</link>`,
-    `<guid isPermaLink="true">${escapeXml(link)}</guid>`,
+    `<guid isPermaLink="false">${escapeXml(guid)}</guid>`,
     description ? `<description>${escapeXml(normalizeDescription(description))}</description>` : undefined,
     `<pubDate>${entry.data.date.toUTCString()}</pubDate>`,
     "</item>",

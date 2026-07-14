@@ -6,6 +6,7 @@ tags:
   - Computer
   - Coding
 excerpt: Migrating a NixOS configuration file to Flake
+contentId: adbc7bc4-a038-4880-97d3-d7ad9998b56e
 ---
 
 ::toc
