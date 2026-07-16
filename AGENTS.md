@@ -40,12 +40,12 @@ Report skipped verification and the reason.
 ## Content Tasks
 
 - Canonical articles live under `src/content/docs/zh-cn/`.
-- Except for `create/practice/`, new articles require matching files under
+- Except for `study/practice/`, new articles require matching files under
   `en-us/` and `ja-jp/` at the same relative path.
 - Translate title, description, tags, and article text naturally.
 - Preserve frontmatter keys, media URLs, commands, code, and technical names.
 - Blog entries must include a valid `date`.
-- Daily practice entries under `create/practice/` are Chinese-only.
+- Daily practice entries under `study/practice/` are Chinese-only.
 
 ## UI Localization
 
