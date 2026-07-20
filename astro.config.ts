@@ -1,12 +1,13 @@
+import rehypeColorCode from "./src/plugins/color-code";
+import rehypeTriDollar from "./src/plugins/tri-dollar";
 import rehypeFigure from "@microflash/rehype-figure";
+import kokosaBlog from "./src/plugins/kokosa-blog";
+import remarkFoldImg from "./src/plugins/fold-img";
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import react from "@astrojs/react";
-import kokosaBlog from "./src/plugins/kokosa-blog";
-import rehypeColorCode from "./src/plugins/color-code";
-import remarkFoldImg from "./src/plugins/fold-img";
 import "katex/contrib/mhchem";
 
 export default defineConfig({
@@ -19,7 +20,7 @@ export default defineConfig({
   site: "https://kokosa.icu",
 
   markdown: {
-    rehypePlugins: [rehypeFigure, rehypeKatex, rehypeColorCode],
+    rehypePlugins: [rehypeFigure, rehypeTriDollar, rehypeKatex, rehypeColorCode],
     remarkPlugins: [remarkMath, remarkFoldImg],
   },
 
@@ -54,23 +55,24 @@ export default defineConfig({
         "@fontsource/fraunces/400.css",
         "@fontsource/iosevka/400.css",
         "./src/styles/view-transition.css",
+        "./src/styles/scroll-to-top.css",
+        "./src/styles/catppuccin.css",
+        "./src/styles/color-code.css",
         "./src/styles/photo-view.css",
+        "./src/styles/tri-dollar.css",
         "./src/styles/sl-custom.css",
         "./src/styles/friends.css",
         "./src/styles/figure.css",
-        "./src/styles/color-code.css",
         "./src/styles/font.css",
-        "./src/styles/catppuccin.css",
-        "./src/styles/scroll-to-top.css",
       ],
 
       components: {
-        Head: "./src/components/Head.astro",
-        LanguageSelect: "./src/components/LanguageSelect.astro",
         MarkdownContent: "./src/components/MarkdownContent.astro",
-        PageTitle: "./src/components/PageTitle.astro",
+        LanguageSelect: "./src/components/LanguageSelect.astro",
         PageSidebar: "./src/components/PageSidebar.astro",
         SocialIcons: "./src/components/SocialIcons.astro",
+        PageTitle: "./src/components/PageTitle.astro",
+        Head: "./src/components/Head.astro",
       },
 
       social: [

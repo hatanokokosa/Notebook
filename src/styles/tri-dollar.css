@@ -1,0 +1,11 @@
+.sl-markdown-content .tri-dollar {
+  color: var(--kokosa-strong-color, #d20f39) !important;
+  font-size: 1.5em !important;
+  font-weight: 800 !important;
+}
+
+.sl-markdown-content .tri-dollar :where(.katex, .katex *) {
+  font-weight: inherit !important;
+  color: inherit !important;
+  font-size: inherit;
+}
