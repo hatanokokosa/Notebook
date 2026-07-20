@@ -9,3 +9,7 @@
   color: inherit !important;
   font-size: inherit;
 }
+
+.sl-markdown-content .tri-dollar .cjk_fallback {
+  font-family: var(--sl-font) !important;
+}
