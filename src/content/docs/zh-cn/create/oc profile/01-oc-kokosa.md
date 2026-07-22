@@ -13,7 +13,7 @@ watermark: true
 
 ### 设定图
 
-![请参考！画师：伊予蜜柑](/notebook/create/01-kokosa/99d58bfe8da63b52.avif)
+![请参考！画师：伊予蜜柑](/notebook/create/kokosa/99d58bfe8da63b52.avif)
 
 ---
 
@@ -23,13 +23,13 @@ watermark: true
 
 _世界观：是一个早期计算机发展、黑客文化较为盛行的时代，具体的等我慢慢想慢慢写（）_
 
-![可参考 Nikon F2 等相机（橙色请当成黑色|no-watermark](/notebook/create/01-kokosa/0daa9a258d4f678e.avif)
+![可参考 Nikon F2 等相机（橙色请当成黑色|no-watermark](/notebook/create/kokosa/0daa9a258d4f678e.avif)
 
 **发型：** 黑色的 **_中长、齐肩_** 散发
 
 **面部：** 戴着 **_银色细圆框_** 眼镜（这个是本体！），眼睛是红色，平眼型
 
-![可参考这样，图源为 SANKI三木 老师的例图|no-watermark](/notebook/create/01-kokosa/1eebc04e2b9b5e10.avif)
+![可参考这样，图源为 SANKI三木 老师的例图|no-watermark](/notebook/create/kokosa/1eebc04e2b9b5e10.avif)
 
 **体型：** 156CM / 42KG，胸围 A~B，比较小只
 
@@ -45,7 +45,7 @@ _自己设计的感觉不是很满意，下面的图可以看到_
 使用的颜色（请直接复制 Hex 颜色码）：  
 Lavender：`#babbf1` Mantle：`#e6e9ef`
 
-![设计：Nix 社区（CC-BY-4.0）配色方案：Catppuccin |no-watermark](/notebook/create/01-kokosa/3cbd5ec96ee96b2a.avif)
+![设计：Nix 社区（CC-BY-4.0）配色方案：Catppuccin |no-watermark](/notebook/create/kokosa/3cbd5ec96ee96b2a.avif)
 
 下半身是黑色短裤，被连帽衫盖住大部分，如果没有事先说明的话，请默认连帽衫的帽子是放下来的
 
@@ -53,7 +53,7 @@ _其他元素的配色同样可以参考 [Catppuccin](https://catppuccin.com/pal
 
 ### 鞋袜等
 
-![PID：82771236（有点松松皱皱的微泡泡袜）|no-watermark](/notebook/create/01-kokosa/cbd833383374aa0c.avif)
+![PID：82771236（有点松松皱皱的微泡泡袜）|no-watermark](/notebook/create/kokosa/cbd833383374aa0c.avif)
 
 袜子可以参照上图 ⬆  
 鞋子则没有具体设定，一般是黑色的 **_厚底皮鞋_**
@@ -63,11 +63,11 @@ _其他元素的配色同样可以参考 [Catppuccin](https://catppuccin.com/pal
 ### 正比稿件
 
 :::fold-img[正比稿件合集]
-![画师：夢子不骡](/notebook/create/01-kokosa/74eac2952588cf9c.avif)
-![画师：SANKI三木](/notebook/create/01-kokosa/e73c848cb93f0d69.avif)
-![画师：溪叶](/notebook/create/01-kokosa/322800afee3c593e.avif)
-![画师：阿影又迷路了](/notebook/create/01-kokosa/0689f0f177019b4e.avif)
-![画师：琅狐](/notebook/create/01-kokosa/b6c6516c668d4790.avif)
+![画师：夢子不骡](/notebook/create/kokosa/74eac2952588cf9c.avif)
+![画师：SANKI三木](/notebook/create/kokosa/e73c848cb93f0d69.avif)
+![画师：溪叶](/notebook/create/kokosa/322800afee3c593e.avif)
+![画师：阿影又迷路了](/notebook/create/kokosa/0689f0f177019b4e.avif)
+![画师：琅狐](/notebook/create/kokosa/b6c6516c668d4790.avif)
 :::
 
 ---
@@ -75,8 +75,8 @@ _其他元素的配色同样可以参考 [Catppuccin](https://catppuccin.com/pal
 ### 非正比
 
 :::fold-img[非正比合集]
-![画师：阿影又迷路了](/notebook/create/01-kokosa/78e306083f5658a7.avif)
-![画师：激辣三文鱼米米饭团](/notebook/create/01-kokosa/d652b5eb48dbd731.avif)
+![画师：阿影又迷路了](/notebook/create/kokosa/78e306083f5658a7.avif)
+![画师：激辣三文鱼米米饭团](/notebook/create/kokosa/d652b5eb48dbd731.avif)
 :::
 
 ---
