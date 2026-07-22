@@ -32,7 +32,7 @@ A：因为域名第一年很便宜（但是后面好贵，我后悔了，，）
 const friend = {
   link: "https://你的网站.com/",
   title: "你的名字",
-  avatar: "/friends/你的名字.avif",
+  avatar: "/main/friends/你的名字.avif",
   desc: "随便说两句",
   note: "我会写点东西",
 };
@@ -42,13 +42,13 @@ const friend = {
 
 #### 看看我的 Fetch！
 
-![Fastfetch Rice](/about/325c2cef754f8635.avif)
+![Fastfetch Rice](/main/about/325c2cef754f8635.avif)
 
 ---
 
 #### 结尾 / 头像
 
-如果您需要我的头像，请直接链接（或下载）此图片：http://kokosa.icu/about/3799034338525854.avif
+如果您需要我的头像，请直接链接（或下载）此图片：http://kokosa.icu/main/about/3799034338525854.avif
 
 以下是评论区，仓库在 [hatanokokosa/hatanokokosa](https://github.com/hatanokokosa/hatanokokosa)：
 

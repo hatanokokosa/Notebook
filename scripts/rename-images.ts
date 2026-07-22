@@ -12,7 +12,6 @@ const force = args.has("--force");
 const dryRun = args.has("--dry-run");
 
 const excludedPublicPaths = new Set(["favicon.svg"]);
-const excludedPublicDirs = new Set(["_watermarked", "friends"]);
 
 type RenameMapping = {
   sourcePath: string;
@@ -42,12 +41,16 @@ function toPublicUrl(filePath: string): string {
   return `/${toPublicRelative(filePath)}`;
 }
 
+const excludedDirPrefixes = new Set(["_watermarked/", "main/friends/"]);
+
 function isExcludedPublicFile(filePath: string): boolean {
   const relativePath = toPublicRelative(filePath);
   if (excludedPublicPaths.has(relativePath)) return true;
 
-  const [topLevelDir] = relativePath.split("/");
-  return excludedPublicDirs.has(topLevelDir);
+  for (const prefix of excludedDirPrefixes) {
+    if (relativePath.startsWith(prefix)) return true;
+  }
+  return false;
 }
 
 function createHexId(): string {

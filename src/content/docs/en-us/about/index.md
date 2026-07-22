@@ -32,7 +32,7 @@ Add to `src/data/friends.ts`:
 const friend = {
   link: "https://your-site.com/",
   title: "Your Name",
-  avatar: "/friends/your-name.avif",
+  avatar: "/main/friends/your-name.avif",
   desc: "Say something random",
   note: "I'll write something",
 };
@@ -42,12 +42,12 @@ const friend = {
 
 #### Look at my Fetch!
 
-![Fastfetch Rice](/about/325c2cef754f8635.avif)
+![Fastfetch Rice](/main/about/325c2cef754f8635.avif)
 
 ---
 
 #### Ending / Avatar
 
-If you need my avatar, please link directly to (or download) this image: http://kokosa.icu/about/3799034338525854.avif
+If you need my avatar, please link directly to (or download) this image: http://kokosa.icu/main/about/3799034338525854.avif
 
 Below is the comment section, repository at [hatanokokosa/hatanokokosa](https://github.com/hatanokokosa/hatanokokosa):

@@ -14,11 +14,11 @@ contentId: c7b97b39-a06d-40ee-a194-ef33e816c9b9
 
 想象这里有一个球体和一张平整的布，**_球非常地球，布也非常地布_**
 
-![一张布和一个球](/create/notes/2026-07-18-draw-pleat/2ba80ae040fe12c7.avif)
+![一张布和一个球](/notebook/notes/2026-07-18-draw-pleat/2ba80ae040fe12c7.avif)
 
 接下来让布落到球体上，布会被球体顶住，同时受到向下的重力
 
-![布被一个支点和两个支点固定](/create/notes/2026-07-18-draw-pleat/24b1c8ffacae2b1b.avif)
+![布被一个支点和两个支点固定](/notebook/notes/2026-07-18-draw-pleat/24b1c8ffacae2b1b.avif)
 
 球体可以看作是布料的一个 **支点**，布料不能再向下移动，只能从支点附近向外垂落，于是形成了一组从支点向外发散的褶皱
 
@@ -30,11 +30,11 @@ contentId: c7b97b39-a06d-40ee-a194-ef33e816c9b9
 
 专门找了褶皱比较明显的衣服：下面这张照片中，人物保持坐姿，裤子在膝盖附近转折，卫衣在手肘、腰腹等位置受到挤压和牵拉
 
-![我喜欢卫衣，卫衣就是这个世界的主宰...](/create/notes/2026-07-18-draw-pleat/acb7ec9fe4f50061.avif)
+![我喜欢卫衣，卫衣就是这个世界的主宰...](/notebook/notes/2026-07-18-draw-pleat/acb7ec9fe4f50061.avif)
 
 让我们把膝盖视作那个球，大腿和小腿上的多条褶皱都从膝部附近出发，分别向髋部、裤脚方向延伸，同时，由于髋部的拉扯，上半部分的褶皱看起来非常地直
 
-![裤子的褶皱走向](/create/notes/2026-07-18-draw-pleat/ff113b5c3c8ccda7.avif)
+![裤子的褶皱走向](/notebook/notes/2026-07-18-draw-pleat/ff113b5c3c8ccda7.avif)
 
 ---
 
@@ -44,7 +44,7 @@ contentId: c7b97b39-a06d-40ee-a194-ef33e816c9b9
 
 卫衣袖子上的褶皱同理（我喜欢这个）
 
-![挤压形成的褶皱](/create/notes/2026-07-18-draw-pleat/2f1b60c7f47cf4b8.avif)
+![挤压形成的褶皱](/notebook/notes/2026-07-18-draw-pleat/2f1b60c7f47cf4b8.avif)
 
 ---
 

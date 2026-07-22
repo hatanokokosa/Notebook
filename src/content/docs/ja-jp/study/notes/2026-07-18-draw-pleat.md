@@ -14,11 +14,11 @@ contentId: c7b97b39-a06d-40ee-a194-ef33e816c9b9
 
 ここに球体と平らな一枚の布があると想像する、**_球はとても球らしく、布もとても布らしい_**
 
-![一枚の布と一つの球](/create/notes/2026-07-18-draw-pleat/2ba80ae040fe12c7.avif)
+![一枚の布と一つの球](/notebook/notes/2026-07-18-draw-pleat/2ba80ae040fe12c7.avif)
 
 次に、布を球体の上に落とす、布は球体に持ち上げられながら、下向きの重力を受ける
 
-![一つの支点と二つの支点で固定された布](/create/notes/2026-07-18-draw-pleat/24b1c8ffacae2b1b.avif)
+![一つの支点と二つの支点で固定された布](/notebook/notes/2026-07-18-draw-pleat/24b1c8ffacae2b1b.avif)
 
 球体は布の **支点** と考えられる、布はそれ以上まっすぐ下へ動けないため、支点の周りから外側へ垂れ下がり、支点から放射状に広がる一組のしわができる
 
@@ -30,11 +30,11 @@ contentId: c7b97b39-a06d-40ee-a194-ef33e816c9b9
 
 しわがはっきり見える服をわざわざ探した、下の写真では人物が座っているため、ズボンは膝の辺りで折れ、パーカーは肘や腰回りなどで押されたり引かれたりしている
 
-![パーカーが好き、パーカーこそこの世界の支配者……](/create/notes/2026-07-18-draw-pleat/acb7ec9fe4f50061.avif)
+![パーカーが好き、パーカーこそこの世界の支配者……](/notebook/notes/2026-07-18-draw-pleat/acb7ec9fe4f50061.avif)
 
 膝を先ほどの球だと考えてみる、太ももとすねにある複数のしわは膝の近くから始まり、それぞれ腰と裾の方向へ伸びている、同時に、腰側から引っ張られることで、上半分のしわはとても直線的に見える
 
-![ズボンのしわの流れ](/create/notes/2026-07-18-draw-pleat/ff113b5c3c8ccda7.avif)
+![ズボンのしわの流れ](/notebook/notes/2026-07-18-draw-pleat/ff113b5c3c8ccda7.avif)
 
 ---
 
@@ -44,7 +44,7 @@ contentId: c7b97b39-a06d-40ee-a194-ef33e816c9b9
 
 パーカーの袖にあるしわも同じ（これ好き）
 
-![圧縮によってできたしわ](/create/notes/2026-07-18-draw-pleat/2f1b60c7f47cf4b8.avif)
+![圧縮によってできたしわ](/notebook/notes/2026-07-18-draw-pleat/2f1b60c7f47cf4b8.avif)
 
 ---
 

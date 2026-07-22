@@ -11,7 +11,7 @@ function getGiscusTheme(): string {
   }
 
   const base = "https://www.kokosa.icu";
-  return isDark ? `${base}/giscus/frappe.css` : `${base}/giscus/latte.css`;
+  return isDark ? `${base}/main/css/frappe.css` : `${base}/main/css/latte.css`;
 }
 
 function getGiscusLang(): string {

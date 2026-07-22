@@ -14,11 +14,11 @@ An idea for drawing folds suddenly came to me while watching a gesture drawing v
 
 Imagine a sphere and a flat piece of cloth here. **_The sphere is extremely sphere-like, and the cloth is extremely cloth-like._**
 
-![A piece of cloth and a sphere](/create/notes/2026-07-18-draw-pleat/2ba80ae040fe12c7.avif)
+![A piece of cloth and a sphere](/notebook/notes/2026-07-18-draw-pleat/2ba80ae040fe12c7.avif)
 
 Next, let the cloth fall onto the sphere. The sphere props it up while gravity pulls it downward.
 
-![Cloth fixed at one support point and at two support points](/create/notes/2026-07-18-draw-pleat/24b1c8ffacae2b1b.avif)
+![Cloth fixed at one support point and at two support points](/notebook/notes/2026-07-18-draw-pleat/24b1c8ffacae2b1b.avif)
 
 The sphere can be treated as a **support point** for the fabric. The fabric can no longer move straight down, so it hangs outward from around that point and forms a group of folds radiating away from it.
 
@@ -30,11 +30,11 @@ Looking only at their direction, the folds resemble **_rays_** coming from a sin
 
 I deliberately found an outfit with clearly visible folds. In the photo below, the person is sitting, so the trousers bend around the knees while the hoodie is compressed and pulled around the elbows and waist.
 
-![I like hoodies. Hoodies rule this world...](/create/notes/2026-07-18-draw-pleat/acb7ec9fe4f50061.avif)
+![I like hoodies. Hoodies rule this world...](/notebook/notes/2026-07-18-draw-pleat/acb7ec9fe4f50061.avif)
 
 Treat the knees as those spheres. Several folds on the thighs and lower legs start near the knees and extend toward the hips and trouser hems. At the same time, the pull from the hips makes the upper folds look very straight.
 
-![The direction of the folds in the trousers](/create/notes/2026-07-18-draw-pleat/ff113b5c3c8ccda7.avif)
+![The direction of the folds in the trousers](/notebook/notes/2026-07-18-draw-pleat/ff113b5c3c8ccda7.avif)
 
 ---
 
@@ -44,7 +44,7 @@ There is another kind of fold that cannot be explained by “pulling.” Sitting
 
 The folds on the hoodie sleeves work the same way (I like this).
 
-![Folds created by compression](/create/notes/2026-07-18-draw-pleat/2f1b60c7f47cf4b8.avif)
+![Folds created by compression](/notebook/notes/2026-07-18-draw-pleat/2f1b60c7f47cf4b8.avif)
 
 ---
 
