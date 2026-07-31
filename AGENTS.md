@@ -12,27 +12,29 @@
 
 ## Commands
 
-- Install dependencies: `bun install`
+- Install dependencies: `bun install --frozen-lockfile`
 - Development server: `just dev` or `bun run dev`
-- Astro diagnostics: `bunx astro check`
+- Astro diagnostics: `bun run check`
 - Production build: `bun run build`
+- Tests: `bun test`
 - Format: `bun run format`
-- Regenerate Astro types: `bun run astro sync`
+- Check formatting: `bun run format:check`
+- Regenerate Astro types: `bun run sync`
 
-Prefer Bun. Do not use npm unless explicitly requested.
+Bun is the only JavaScript runtime and package manager. Do not use Node.js, npm, npx, or bunx.
 
 ## Verification
 
 Choose verification based on the task:
 
 - Components, plugins, TypeScript, config, or schemas:
-  run `bunx astro check` and `bun run build`.
+  run `bun run check` and `bun run build`.
 - Markdown rendering, routes, or localization wiring;
   Markdown frontmatter, components, links, or media references.
   run `bun run build`.
 - Plain md text edits do not require a build.
 - Content schema changes:
-  run `bun run astro sync`, `bunx astro check`, and `bun run build`.
+  run `bun run sync`, `bun run check`, and `bun run build`.
 
 Do not claim completion if required verification failed or was not run.
 Report skipped verification and the reason.

@@ -12,6 +12,7 @@
     "preview": "bun node_modules/astro/bin/astro.mjs preview",
     "format": "bun node_modules/prettier/bin/prettier.cjs --write .",
     "format:check": "bun node_modules/prettier/bin/prettier.cjs --check .",
+    "sync": "bun node_modules/astro/bin/astro.mjs sync",
     "test": "bun test"
   },
   "dependencies": {
