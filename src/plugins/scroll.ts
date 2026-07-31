@@ -33,7 +33,14 @@ function setupSmoothAnchorScroll() {
       return;
     }
 
-    const target = url.hash === "#_top" ? document.documentElement : document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    let targetId: string;
+    try {
+      targetId = decodeURIComponent(url.hash.slice(1));
+    } catch {
+      return;
+    }
+
+    const target = url.hash === "#_top" ? document.documentElement : document.getElementById(targetId);
     if (!target) return;
 
     event.preventDefault();

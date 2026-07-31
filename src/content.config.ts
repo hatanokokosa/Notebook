@@ -1,6 +1,7 @@
 import { docsLoader, i18nLoader } from "@astrojs/starlight/loaders";
 import { docsSchema, i18nSchema } from "@astrojs/starlight/schema";
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { blogSchema } from "./plugins/kokosa-blog/schema";
 
 export const collections = {
@@ -14,8 +15,9 @@ export const collections = {
             contentId: z.uuidv4().optional(),
             watermark: z.boolean().optional().default(false),
             download: z.boolean().optional().default(false),
+            draft: z.boolean().optional().default(false),
           })
-          .merge(blogSchema(context)),
+          .extend(blogSchema(context).shape),
     }),
   }),
   i18n: defineCollection({

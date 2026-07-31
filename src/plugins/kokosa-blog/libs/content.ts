@@ -1,5 +1,5 @@
 import type { GetStaticPathsResult } from "astro";
-import { type CollectionEntry, getCollection, getEntry, render } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import starlightConfig from "virtual:starlight/user-config";
 import config from "virtual:kokosa-blog/config";
 import context from "virtual:kokosa-blog/context";
@@ -80,6 +80,7 @@ export async function getBlogEntries(locale: Locale): Promise<StarlightBlogEntry
   }
 
   const docEntries = await getCollection("docs");
+  const docEntriesById = new Map(docEntries.map((entry) => [entry.id, entry]));
   const blogEntries: StarlightEntry[] = [];
 
   const contentRelativePath = `${context.srcDir.replace(context.rootDir, "")}content/docs/`;
@@ -97,32 +98,25 @@ export async function getBlogEntries(locale: Locale): Promise<StarlightBlogEntry
         continue;
       }
 
-      // Briefly override `console.warn()` to silence logging when a localized entry is not found.
-      const warn = console.warn;
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      console.warn = () => {};
-
-      try {
-        const localizedEntry = await getEntry("docs", getPathWithLocale(entry.id, locale));
-        if (!localizedEntry) throw new Error("Unavailable localized entry.");
-        blogEntries.push(localizedEntry);
-      } catch {
-        blogEntries.push(entry);
-      } finally {
-        console.warn = warn;
-      }
+      const localizedEntry = docEntriesById.get(getPathWithLocale(entry.id, locale));
+      blogEntries.push(localizedEntry ?? entry);
     }
   }
 
-  validateBlogEntries(blogEntries);
+  // Astro's content layer no longer filters `draft: true` entries automatically.
+  // Keep drafts visible in dev (matching Astro's legacy behavior) but exclude them from the production build,
+  // which covers RSS, blog listing, tags, and sidebar pages since they all read from this function.
+  const publishedEntries = import.meta.env.PROD ? blogEntries.filter((entry) => entry.data.draft !== true) : blogEntries;
 
-  blogEntries.sort((a, b) => {
+  validateBlogEntries(publishedEntries);
+
+  publishedEntries.sort((a, b) => {
     return b.data.date.getTime() - a.data.date.getTime() || a.data.title.localeCompare(b.data.title);
   });
 
-  blogEntriesPerLocale.set(locale, blogEntries);
+  blogEntriesPerLocale.set(locale, publishedEntries);
 
-  return blogEntries;
+  return publishedEntries;
 }
 
 export async function getBlogEntryExcerpt(entry: StarlightBlogEntry) {

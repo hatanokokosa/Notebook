@@ -3,6 +3,7 @@ import rehypeTriDollar from "./src/plugins/tri-dollar";
 import rehypeFigure from "@microflash/rehype-figure";
 import kokosaBlog from "./src/plugins/kokosa-blog";
 import remarkFoldImg from "./src/plugins/fold-img";
+import { unified } from "@astrojs/markdown-remark";
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import rehypeKatex from "rehype-katex";
@@ -20,8 +21,15 @@ export default defineConfig({
   site: "https://kokosa.icu",
 
   markdown: {
-    rehypePlugins: [rehypeFigure, rehypeTriDollar, rehypeKatex, rehypeColorCode],
-    remarkPlugins: [remarkMath, remarkFoldImg],
+    processor: unified({
+      rehypePlugins: [
+        rehypeFigure,
+        rehypeTriDollar,
+        [rehypeKatex, { strict: (errorCode: string) => (errorCode === "unicodeTextInMathMode" ? "ignore" : "warn") }],
+        rehypeColorCode,
+      ],
+      remarkPlugins: [remarkMath, remarkFoldImg],
+    }),
   },
 
   integrations: [
@@ -54,6 +62,7 @@ export default defineConfig({
         "@fontsource/noto-serif-sc/800.css",
         "@fontsource/fraunces/400.css",
         "@fontsource/iosevka/400.css",
+        "katex/dist/katex.min.css",
         "./src/styles/view-transition.css",
         "./src/styles/scroll-to-top.css",
         "./src/styles/catppuccin.css",
@@ -83,16 +92,6 @@ export default defineConfig({
         },
       ],
 
-      head: [
-        {
-          tag: "link",
-          attrs: {
-            href: "https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css",
-            rel: "stylesheet",
-          },
-        },
-      ],
-
       plugins: [
         kokosaBlog({
           metrics: {
@@ -112,15 +111,15 @@ export default defineConfig({
       sidebar: [
         {
           label: "About",
-          autogenerate: { directory: "about" },
+          items: [{ autogenerate: { directory: "about" } }],
         },
         {
           label: "Study",
-          autogenerate: { directory: "study" },
+          items: [{ autogenerate: { directory: "study" } }],
         },
         {
           label: "Create",
-          autogenerate: { directory: "create" },
+          items: [{ autogenerate: { directory: "create" } }],
         },
       ],
     }),
