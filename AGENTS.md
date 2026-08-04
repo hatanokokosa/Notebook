@@ -23,6 +23,13 @@
 
 Bun is the only JavaScript runtime and package manager. Do not use Node.js, npm, npx, or bunx.
 
+## Scripts
+
+- `just rename-images`: assigns a random 16-hex name to every image under `public/` whose basename is not already 16-hex, and rewrites all them to the new names.
+  - Write the image reference in the article with its temporary filename BEFORE running, so the reference gets rewritten too.
+  - `--dry-run` previews the mapping; `--force` also renames already-hex-named images.
+- `just content-ids-write`: generates a UUID v4 `contentId` (Do not add empty ones!) in the frontmatter of content markdown files that lack one.
+
 ## Verification
 
 Choose verification based on the task:
