@@ -25,10 +25,17 @@ Bun is the only JavaScript runtime and package manager. Do not use Node.js, npm,
 
 ## Scripts
 
-- `just rename-images`: assigns a random 16-hex name to every image under `public/` whose basename is not already 16-hex, and rewrites all them to the new names.
-  - Write the image reference in the article with its temporary filename BEFORE running, so the reference gets rewritten too.
+- `just rename-images`: assigns a random 16-hex name to every image under `public/`
+  whose basename is not already 16-hex, and rewrites all them to the new names.
+  - Write the image reference in the article with its temporary filename BEFORE running,
+    so the reference gets rewritten too.
   - `--dry-run` previews the mapping; `--force` also renames already-hex-named images.
-- `just content-ids-write`: generates a UUID v4 `contentId` (Do not add empty ones!) in the frontmatter of content markdown files that lack one.
+- `just image-add <source>... --dir <public-relative-dir>`: converts new images to AVIF
+  at quality 90 (animated sources to GIF) with a 16-hex name, and optionally inserts
+  markdown references into an article — `--article <path>`, `--after <anchor>`, and
+  repeatable `--caption <alt>` (one per image).
+- `just content-ids-write`: generates a UUID v4 `contentId` (Do not add empty ones!)
+  in the frontmatter of content markdown files that lack one.
 
 ## Verification
 
@@ -71,10 +78,7 @@ UI translation files use `zh-CN`, `en-US`, and `ja-JP`.
 
 ## Image Tasks
 
-- Put images under `public/`.
-- Convert new images to AVIF with `ffmpeg` at quality 90.
-- Run `just rename-images` when adding images.
-- Update and verify all references after renaming.
+- Add new images with `just image-add` — see Scripts for usage.
 - Use GIF instead when animation requires it.
 
 ## Article Conventions

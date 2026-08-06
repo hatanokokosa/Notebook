@@ -14,6 +14,9 @@ clean:
 rename-images *args:
     bun scripts/rename-images.ts {{args}}
 
+image-add *args:
+    bun scripts/add-image.ts {{args}}
+
 content-ids-write:
     bun run content:ids:write
 
