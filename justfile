@@ -20,6 +20,9 @@ image-add *args:
 content-ids-write:
     bun run content:ids:write
 
+new-practice:
+    omp -p "Read past practice; Read new imgs; Proc it; Gen desc(zh_CN) & Link to new practice, del originals"
+
 push:
     bun run format
     bun run content:ids:check
