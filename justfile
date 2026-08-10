@@ -8,7 +8,7 @@ deploy:
     bun node_modules/vercel/dist/vc.js --prod
 
 clean:
-    rm -rf dist public/_watermarked .cache .astro .omo
+    rm -rf dist public/_watermarked .cache .astro
     bun node_modules/astro/bin/astro.mjs sync
 
 rename-images *args:
