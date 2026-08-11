@@ -40,16 +40,22 @@ const friend = {
 
 ---
 
-#### 看看我的 Fetch！
+#### 联系我：
 
-![Fastfetch Rice](/main/about/325c2cef754f8635.avif)
+Telegram：[@BSD2Clause](https://t.me/BSD2Clause) / 频道：[@KokosaChannel](https://t.me/KokosaChannel)  
+Motrix：[@kokosa:mozilla.org](https://matrix.to/#/@kokosa:mozilla.org)（不怎么用x）  
+Gmail：kokosaarisu@gmail.com  
+GPG：[0xf2f0444444444444](https://keys.openpgp.org/vks/v1/by-fingerprint/283BB9FA975FB4E3A70383DFF2F0444444444444)  
+*嘻嘻跑了半天GPG就是为了摆这，会不会用到我怎么知道x*
+
+Discord、QQ 之类的平台就不写在这里了，你大概会在乱七八糟的群里看到我（  
 
 ---
 
 #### 结尾 / 头像
 
-如果您需要我的头像，请直接链接（或下载）此图片：http://kokosa.icu/main/about/3799034338525854.avif
-
-以下是评论区，仓库在 [hatanokokosa/hatanokokosa](https://github.com/hatanokokosa/hatanokokosa)：
+如果您需要我的头像，请直接链接（或下载）[此图片](http://kokosa.icu/main/about/3799034338525854.avif)
 
 ---
+
+以下是由 [Giscus](https://giscus.app/) 驱动的评论区，仓库在 [hatanokokosa/hatanokokosa](https://github.com/hatanokokosa/hatanokokosa)：
