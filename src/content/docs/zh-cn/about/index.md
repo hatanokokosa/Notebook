@@ -46,7 +46,7 @@ Telegram：[@BSD2Clause](https://t.me/BSD2Clause) / 频道：[@KokosaChannel](ht
 Matrix：[@kokosa:mozilla.org](https://matrix.to/#/@kokosa:mozilla.org)（不怎么用x）  
 Gmail：kokosaarisu@gmail.com  
 GPG：[0xf2f0444444444444](https://keys.openpgp.org/vks/v1/by-fingerprint/283BB9FA975FB4E3A70383DFF2F0444444444444)  
-_嘻嘻跑了半天GPG就是为了摆这，会不会用到我怎么知道x_
+_嘻嘻跑了半天就是为了摆这，会不会用我怎么知道x_
 
 Discord、QQ 之类的平台就不写在这里了，你大概会在乱七八糟的群里看到我（
 
@@ -54,7 +54,7 @@ Discord、QQ 之类的平台就不写在这里了，你大概会在乱七八糟�
 
 #### 结尾 / 头像
 
-如果您需要我的头像，请直接链接（或下载）[此图片](http://kokosa.icu/main/about/3799034338525854.avif)
+如果需要我的头像，请直接链接（或下载）[此图片](http://kokosa.icu/main/about/3799034338525854.avif)
 
 ---
 
