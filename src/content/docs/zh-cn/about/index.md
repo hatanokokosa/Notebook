@@ -43,7 +43,7 @@ const friend = {
 #### 联系我：
 
 Telegram：[@BSD2Clause](https://t.me/BSD2Clause) / 频道：[@KokosaChannel](https://t.me/KokosaChannel)  
-Motrix：[@kokosa:mozilla.org](https://matrix.to/#/@kokosa:mozilla.org)（不怎么用x）  
+Matrix：[@kokosa:mozilla.org](https://matrix.to/#/@kokosa:mozilla.org)（不怎么用x）  
 Gmail：kokosaarisu@gmail.com  
 GPG：[0xf2f0444444444444](https://keys.openpgp.org/vks/v1/by-fingerprint/283BB9FA975FB4E3A70383DFF2F0444444444444)  
 _嘻嘻跑了半天GPG就是为了摆这，会不会用到我怎么知道x_

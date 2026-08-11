@@ -43,7 +43,7 @@ const friend = {
 #### 連絡先：
 
 Telegram：[@BSD2Clause](https://t.me/BSD2Clause) / チャンネル：[@KokosaChannel](https://t.me/KokosaChannel)  
-Motrix：[@kokosa:mozilla.org](https://matrix.to/#/@kokosa:mozilla.org)（あんまり使ってないx）  
+Matrix：[@kokosa:mozilla.org](https://matrix.to/#/@kokosa:mozilla.org)（あんまり使ってないx）  
 Gmail：kokosaarisu@gmail.com  
 GPG：[0xf2f0444444444444](https://keys.openpgp.org/vks/v1/by-fingerprint/283BB9FA975FB4E3A70383DFF2F0444444444444)  
 _へへ、GPG を半日かけて設定したのは、これを置くためだけ。使うかどうかは神のみぞ知るx_

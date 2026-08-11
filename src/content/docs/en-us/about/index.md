@@ -43,7 +43,7 @@ const friend = {
 #### Contact Me:
 
 Telegram: [@BSD2Clause](https://t.me/BSD2Clause) / Channel: [@KokosaChannel](https://t.me/KokosaChannel)  
-Motrix: [@kokosa:mozilla.org](https://matrix.to/#/@kokosa:mozilla.org) (barely ever on it x)  
+Matrix: [@kokosa:mozilla.org](https://matrix.to/#/@kokosa:mozilla.org) (barely ever on it x)  
 Gmail: kokosaarisu@gmail.com  
 GPG: [0xf2f0444444444444](https://keys.openpgp.org/vks/v1/by-fingerprint/283BB9FA975FB4E3A70383DFF2F0444444444444)  
 _hehe, jumped through all those GPG hoops just to park this here — whether I'll ever actually use it, beats me x_
