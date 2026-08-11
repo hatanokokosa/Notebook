@@ -40,14 +40,22 @@ const friend = {
 
 ---
 
-#### Fetch を見てって！
+#### 連絡先：
 
-![Fastfetch Rice](/main/about/325c2cef754f8635.avif)
+Telegram：[@BSD2Clause](https://t.me/BSD2Clause) / チャンネル：[@KokosaChannel](https://t.me/KokosaChannel)  
+Motrix：[@kokosa:mozilla.org](https://matrix.to/#/@kokosa:mozilla.org)（あんまり使ってないx）  
+Gmail：kokosaarisu@gmail.com  
+GPG：[0xf2f0444444444444](https://keys.openpgp.org/vks/v1/by-fingerprint/283BB9FA975FB4E3A70383DFF2F0444444444444)  
+_へへ、GPG を半日かけて設定したのは、これを置くためだけ。使うかどうかは神のみぞ知るx_
+
+Discord や QQ とかは書かない。たぶんどっかのカオスなグループに生息してるから（
 
 ---
 
 #### 最後に / アイコン
 
-アイコンが必要でしたら、こちらの画像を直接リンク（またはダウンロード）してください：http://kokosa.icu/main/about/3799034338525854.avif
+アイコンが必要でしたら、こちらの[画像](http://kokosa.icu/main/about/3799034338525854.avif)を直接リンク（またはダウンロード）してください
 
-以下はコメント欄です。リポジトリは [hatanokokosa/hatanokokosa](https://github.com/hatanokokosa/hatanokokosa)：
+---
+
+以下は [Giscus](https://giscus.app/) 製のコメント欄です。リポジトリは [hatanokokosa/hatanokokosa](https://github.com/hatanokokosa/hatanokokosa)：
