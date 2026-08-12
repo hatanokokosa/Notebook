@@ -23,8 +23,6 @@ She tends to be quiet around strangers (can't be bothered to talk), but is sharp
 
 _Worldbuilding: An era where early computing is developing and hacker culture is relatively prominent. Details to be slowly thought through and written out ()_
 
-![Nikon F2 and similar cameras can be used as reference. Please treat the orange as black|no-watermark](/notebook/create/kokosa/0daa9a258d4f678e.avif)
-
 **Hairstyle:** Black, **_medium-to-shoulder-length_** loose hair
 
 **Face:** Wears **_thin silver round-frame_** glasses (these are part of her identity!), has red eyes and a flat eye shape
