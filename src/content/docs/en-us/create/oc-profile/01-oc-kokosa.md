@@ -5,7 +5,7 @@ comments: false
 watermark: true
 ---
 
-Preface: My OC has nothing to do with this site's title. She is not a doctor, nurse, or anything like that. So why is the site titled "Intensive Care Unit"? Because the ICU domain was very cheap for the first year (even though it's been running for years now and renewal is expensive). That's the only reason, and I don't plan to change the domain for now ()
+Preface: Why is the site titled "Intensive Care Unit"? Because the ICU domain was cheap, and it has nothing to do with the character setting or anything. If there are spots you can't make out in the images, they are watermarks at a very low resolution (
 
 ::toc
 
@@ -19,9 +19,11 @@ Preface: My OC has nothing to do with this site's title. She is not a doctor, nu
 
 ### Written Profile
 
-She tends to be quiet around strangers (can't be bothered to talk), but is sharp-tongued and a bit dark-humored with friends. Her thinking is rather erratic, with a cyber-cleanliness streak and mild obsessive tendencies. She dislikes socializing but isn't socially anxious. A homebody who loves almost anything computer-related. She likes reading and photography too — the latter offsets part of her shut-in genes enough that, despite being a die-hard homebody, she'll drag friends out on trips. She often uses a fully mechanical film camera. Although she wears black clothes, she actually prefers bright colors (home decor, desktop wallpaper, etc.)
+She's fairly quiet, but sharp-tongued and a bit dark-humored around friends, with a cyber-cleanliness streak and mild obsessive tendencies. She doesn't like socializing but isn't socially anxious. A homebody whose hobbies revolve around computers. Her less shut-in hobbies are reading and photography, and she often uses a fully mechanical film camera (if you need to draw the camera, you can reference the Nikon F2 and similar, black-and-white color scheme)
 
-_Worldbuilding: An era where early computing is developing and hacker culture is relatively prominent. Details to be slowly thought through and written out ()_
+She likes wearing black clothes, but she actually prefers bright colors (household items, desktop wallpapers, etc.)
+
+_Worldbuilding: An era where early computing is developing and hacker culture is relatively prominent. Haven't started writing it yet (_
 
 **Hairstyle:** Black, **_medium-to-shoulder-length_** loose hair
 
@@ -73,8 +75,9 @@ The shoes have no specific design. Typically black **_platform leather shoes_**.
 ### Non-Full-Body Artworks
 
 :::fold-img[Non-Full-Body Artworks Collection]
-![Artist: 阿影又迷路了](/notebook/create/kokosa/78e306083f5658a7.avif)
+![Artist: 血の鬼刃](/notebook/create/kokosa/cdf59ba8e8839a8f.avif)
 ![Artist: 激辣三文鱼米米饭团](/notebook/create/kokosa/d652b5eb48dbd731.avif)
+![Artist: 阿影又迷路了](/notebook/create/kokosa/78e306083f5658a7.avif)
 :::
 
 ---
